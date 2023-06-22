@@ -1,0 +1,168 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+
+    z-index: 1;
+}
+body::after {
+    content: "";
+    background: url("assets/images/body_images/fondo1.jpg") no-repeat center center fixed;
+    opacity: 0.8;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+    background-size: cover;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: black;
+    border-radius: 25px;
+    width: 1291px;
+    height: 71px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 10px 20px;
+}
+
+#logo {
+    font-size: 25px;
+    font-weight: bold;
+    color:white;
+    padding: 100px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 10px;
+    padding: 0px 35px;
+}
+
+nav a {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+#home, #signup {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+
+#home {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    width: 83px;
+    height: 34px;
+    background-color: #E34C2A;
+}
+
+#signup {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    width: 111px;
+    height: 45px;
+    background: linear-gradient(to right, #BF3E21, #EC4F2A);
+}
+
+#main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+/* Estilos para el contenido principal irían aquí */
+
+
+#main-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    text-align: center;
+
+    width: 1291px; /* Esta medida debe ser la misma que la de tu header para alineación */
+    margin: 20px auto; /* Centrado horizontal */
+}
+
+#left-content {
+    padding-left: 20px;
+}
+
+h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 64px;
+    color: #A6341A;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+h2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 48px;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 44px;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+h4 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 800;
+    font-size: 23px;
+}
+
+#get-started {
+    width: 163px;
+    height: 51px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    color: #FFFFFF;
+    background: linear-gradient(to right, #EC4F2C, #A6341A);
+    border: none;
+    border-radius: 25px;
+}
+
+
+#edif1, #edif2 {
+    width: 338px;
+    height: 627px;
+}
+
+#edif2 {
+    height: 512px;
+}
