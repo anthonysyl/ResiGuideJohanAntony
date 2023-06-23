@@ -10,9 +10,9 @@ body {
     align-items: center;
     justify-content: center;
     background-size: cover;
-
     z-index: 1;
 }
+
 body::after {
     content: "";
     background: url("assets/images/body_images/fondo1.jpg") no-repeat center center fixed;
@@ -22,9 +22,12 @@ body::after {
     bottom: 0;
     right: 0;
     position: absolute;
-    z-index: -1;   
-    background-size: cover;
+    z-index: -2;   
+    background-size: 2727px 1300px; /* Tamaño específico de la imagen de fondo */
+    background-position: center center; /* Centrar la imagen */
 }
+
+
 header {
     display: flex;
     justify-content: space-between;
@@ -35,16 +38,19 @@ header {
     height: 71px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     padding: 10px 20px;
+
 }
 
 #logo {
     font-size: 25px;
     font-weight: bold;
     color:white;
-    padding: 100px;
+    padding: 18px;
+
 }
 
 nav ul {
+    margin-bottom: 2px;
     display: flex;
     justify-content: center;
     list-style: none;
@@ -81,38 +87,39 @@ nav a {
 
 #signup {
     font-family: 'Inter', sans-serif;
-    font-weight: 900;
+    font-size: 12px;
     width: 111px;
     height: 45px;
     background: linear-gradient(to right, #BF3E21, #EC4F2A);
+ 
 }
-
-#main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    text-align: center;
-}
-
-/* Estilos para el contenido principal irían aquí */
-
 
 #main-content {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start; /* Alineación superior de los elementos */
     justify-content: space-between;
     margin-top: 20px;
-    text-align: center;
-
-    width: 1291px; /* Esta medida debe ser la misma que la de tu header para alineación */
-    margin: 20px auto; /* Centrado horizontal */
+    text-align: left;
+    width: 1291px; /* Esta medida debe ser la misma que la del encabezado para alineación */
+    margin: 200px auto 0; /* Centrado horizontal con margen superior de 200px */
 }
 
 #left-content {
-    padding-left: 20px;
+    flex-grow: 1;
+    padding: 20px;
+    margin-top: 35px;
+    text-align: left;
+}
+
+h1, h2, h3, h4 {
+    margin: 0;
+    line-height: 1;
+}
+
+h1, h2, h3, h4 {
+    margin: 0;
+    line-height: 1;
 }
 
 h1 {
@@ -121,6 +128,11 @@ h1 {
     font-size: 64px;
     color: #A6341A;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin-top: 0px; /* Ajusta la posición vertical */
+    margin-bottom: 15px; /* Ajusta el espacio inferior */
+    padding-top: 0;
+    padding-bottom: 0;
+ 
 }
 
 h2 {
@@ -129,6 +141,10 @@ h2 {
     font-size: 48px;
     color: #FFFFFF;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin-top: 0px; /* Ajusta la posición vertical */
+    margin-bottom: 10px; /* Ajusta el espacio inferior */
+    padding-top: 0;
+    padding-bottom: 0; /* Ajusta el espacio inferior */
 }
 
 h3 {
@@ -137,14 +153,18 @@ h3 {
     font-size: 44px;
     color: #FFFFFF;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin-bottom: 10px; /* Ajusta el espacio inferior */
 }
 
 h4 {
     font-family: 'Roboto', sans-serif;
-    font-weight: 800;
+    font-weight: 780;
     font-size: 23px;
+    color: white;
+    margin-bottom: 10px; /* Ajusta el espacio inferior */
+    margin-left: 40px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
-
 #get-started {
     width: 163px;
     height: 51px;
@@ -156,13 +176,65 @@ h4 {
     border: none;
     border-radius: 25px;
 }
+.right_content
+{
+    padding: 0;
+    display:inline-block;
+    justify-content: flex-start;
+    margin: 0;
 
+}
 
-#edif1, #edif2 {
+#edif1 {
     width: 338px;
     height: 627px;
+    border: 0; /* Ajusta la posición a la derecha */
+    margin-top: -85px;
+
+    position: relative;
+    z-index: 2; /* Asegura que edif1 esté en la capa superior */
+    animation: fadeUp 0.7s ease-in-out forwards; /* Animación de desvanecimiento hacia arriba */
+    filter: drop-shadow(20px 15px 10px rgba(0,0,0,0.5));
 }
 
 #edif2 {
-    height: 512px;
+    width: 338px;
+    height: 480px;
+    margin-left: -125px;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 1; /* Asegura que edif2 esté en una capa inferior */
+    animation: fadeUp 1s ease-in-out forwards; /* Animación de desvanecimiento hacia arriba */
+    filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5));
+  
+}
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(42px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes parallax {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.05);
+    }
+}
+.shape-diagonal {
+    position: absolute;
+    width: 200%;
+    height: 170%;
+    margin-top: -265px;
+    top: -26%;
+    left: -26%;
+    background: linear-gradient(41.28deg, #000000 41.22%, rgba(0, 0, 0, 0) 47.24%);
+    transform: rotate(-34.59deg);
+    z-index: -1;
 }
