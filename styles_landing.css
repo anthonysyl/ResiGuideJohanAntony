@@ -1,0 +1,66 @@
+.bottom-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+}
+.square {
+    width: 300px;
+    height: 271px;
+
+    background: linear-gradient(to bottom, #EC4F2C -10%, #2c3e5018 75%);
+
+    padding: 20px;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    margin-right: 60px;
+    margin-left: -10px;
+    position: relative;
+    box-shadow: inset 0px 0px 0px 0px #B93520, inset 0px 0px 0px 0px #fc030300;
+}
+
+
+.square h3 {
+    font-size: 17px;
+    margin-bottom: 8px;
+    font-weight: 900;
+    font-family: "Roboto", sans-serif; /* Fuente Roboto */
+    font-weight: 790; /* Peso extra bold */
+}
+
+.square p {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-top: -5px;
+    font-weight: light;
+    font-family: "Roboto", sans-serif;
+}
+
+.circle {
+    margin-left: 85px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 89px;
+    height: 95px;
+    border: 3px solid;
+    border-radius: 20px;
+    border-image: linear-gradient(to bottom, #F2F2F2 70%, #00000000) 1;
+
+}
+.circle
+{
+    border-radius: 50%;
+    background-image: linear-gradient(to bottom, #f2f2f200, #00000000);
+
+}
+
+.circle img {
+    margin-top: 14px;
+    margin-left: 1px;
+    width: 60px;
+    height: 60px;
+    filter: drop-shadow(5px 5px 8px rgba(0,0,0,0.8));
+}
+
+

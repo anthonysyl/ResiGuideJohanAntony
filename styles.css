@@ -11,6 +11,7 @@ body {
     justify-content: center;
     background-size: cover;
     z-index: 1;
+    overflow-x: hidden; 
 }
 
 body::after {
@@ -169,7 +170,9 @@ h4 {
     width: 163px;
     height: 51px;
     font-family: 'Inter', sans-serif;
-    font-weight: 900;
+    font-weight: 800;
+    margin-top: 180px;
+    margin-left: 160px;
     font-size: 14px;
     color: #FFFFFF;
     background: linear-gradient(to right, #EC4F2C, #A6341A);
@@ -238,3 +241,39 @@ h4 {
     transform: rotate(-34.59deg);
     z-index: -1;
 }
+.linea-divisoria {
+    margin-top: 200px;
+    border: 1px solid #CC4324; /* Color del contorno */
+    background-color: #BA3C20; /* Color de fondo */
+    height: 3px; /* Altura */
+    width: 124px; /* Ancho */
+  }
+  .linea-divisoria2 {
+    margin-top: 34px;
+    border: 1px solid #ffffff; /* Color del contorno */
+    background-color: #ffffff; /* Color de fondo */
+    height: 3px; /* Altura */
+    width: 85%; /* Ancho */
+  }
+  .frase-completa {
+    margin-top: 10px;
+    text-align: center; /* Alineación centrada */
+  }
+  
+  .informacion {
+    font-family: "Roboto", sans-serif; /* Fuente Roboto */
+    font-weight: 790; /* Peso extra bold */
+    font-size: 23px; /* Tamaño de fuente */
+    color: #A6341A; /* Color de texto */
+    display: inline; /* Mostrar en línea */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+  
+  .centralizada {
+    font-family: "Roboto", sans-serif; /* Fuente Roboto */
+    font-weight: 790; /* Peso extra bold */
+    font-size: 23px; /* Tamaño de fuente */
+    color: #FFFFFF; /* Color de texto blanco */
+    display: inline; /* Mostrar en línea */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
