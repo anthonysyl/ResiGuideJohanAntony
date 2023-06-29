@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;900&display=swap');
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: black;
+    border-radius: 25px;
+    width: 1291px;
+    height: 71px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 10px 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}
+
+#logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    padding: 18px;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: black;
+    border-radius: 25px;
+    width: 1291px;
+    height: 71px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 10px 20px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+}
+
+header {
+    background-color: #ff8d28;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.user-section img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.user-menu ul li {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.utility-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.utility-box {
+    text-align: center;
+}
+
+.utility-box img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.news-section {
+    margin-top: 30px;
+}
+
+.news-item {
+    margin-bottom: 20px;
+}
+
+.news-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
