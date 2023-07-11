@@ -9,6 +9,9 @@
 
 </head>
 <body>
+    <header id="navbar" class="hide">
+        <button>Get Started</button>
+      </header>
     <div class="shape-diagonal"></div>
 
     <section id="inicio">
@@ -95,28 +98,78 @@
               
           
     </section>
-         <section>
-            <hr class="linea-divisoria2">
-        
-
-
-
-
-
-
-
-
-
-          </section>
+        <hr class="linea_news">
+       
+            <div class="frase-completa2">
+                <p class="noticias">NOTICIAS</p>
+                <p class="tiemporeal">A TIEMPO REAL</p>
+            </div>
+            <hr class="linea-divisoria3">
+            <section class="news-section">
+                <div class="news-grid">
+                  <div class="news-item item1">
+                    <a href="ruta-noticia-1">
+                      <img src="assets/news/news1.jpg" alt="Descripción imagen 1">
+                      <div class="news-title">Título Noticia 1</div>
+                    </a>
+                  </div>
+                  <div class="news-item item2">
+                    <a href="ruta-noticia-2">
+                      <img src="assets/news/news2.jpg" alt="Descripción imagen 2">
+                      <div class="news-title">Título Noticia 2</div>
+                    </a>
+                  </div>
+                  <div class="news-item item3">
+                    <a href="ruta-noticia-3">
+                      <img src="assets/news/news3.jpg" alt="Descripción imagen 3">
+                      <div class="news-title">Título Noticia 3</div>
+                    </a>
+                  </div>
+                  <div class="news-item item4">
+                    <a href="ruta-noticia-4">
+                      <img src="assets/news/news4.jpg" alt="Descripción imagen 4">
+                      <div class="news-title">Título Noticia 4</div>
+                    </a>
+                  </div>
+             
+              </section>
+              <div class="news-text">
+                <h1 class="text1">NOTICIAS A TÚ ALCANCE</h1>
+                <h2 class="text2">DE LO QUE PASA A TÚ ALREDEDOR</h2>
+              </div>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              
+              <footer>
+                <div class="footer-section">
+                  <h3>Sobre nosotros</h3>
+                  <p>Somos una empresa dedicada a proporcionar las últimas noticias a nuestro público. Nuestro objetivo es mantener a nuestros lectores informados y comprometidos con el mundo que les rodea.</p>
+                </div>
+                <div class="footer-section">
+                  <h3>Contacto</h3>
+                  <p>Dirección: Calle Falsa 123, Ciudad, País</p>
+                  <p>Teléfono: (123) 456-7890</p>
+                  <p>Email: info@nuestrositio.com</p>
+                </div>
+                <div class="footer-section">
+                  <h3>Enlaces útiles</h3>
+                  <ul>
+                    <li><a href="#">Política de privacidad</a></li>
+                    <li><a href="#">Términos y condiciones</a></li>
+                    <li><a href="#">Preguntas frecuentes</a></li>
+                  </ul>
+                </div>
+              </footer>
+              
     
     <script src="javascript/script.js"></script>
 
     <script type="text/javascript">
-        window.addEventListener("scroll", function(){
-            var header = document.querySelector("header");
-            header.classList.toggle("abajo",window.scrollY>0);
 
-        })
     </script>
 </body>
 </html>

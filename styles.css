@@ -3,6 +3,50 @@
 * {
     box-sizing: border-box;
 }
+#navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #333;
+  color: white;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.151);
+  border-radius: 10px;
+  width: 1500px;
+  height: 80px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.377);
+  padding: 10px 20px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  transition: top 0.3s ease-in-out;
+  z-index: 5;
+}
+
+#navbar button {
+  margin-left: 88%;
+  margin-right: 500px;
+  font-size: 18px;
+  width: 163px;
+  height: 51px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+
+  font-size: 14px;
+  color: #FFFFFF;
+  background: linear-gradient(to right, #EC4F2C, #A6341A);
+  box-shadow: 0 0 1rem #ee5432;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0 0 1rem #ee5432;
+  transition: background-color 0.3s ease;
+}
+
+#navbar.hide {
+  top: -100px;
+}
+
 :root{
   
         --bg-color: #f8f8ff;
@@ -32,7 +76,7 @@ body {
 
 body::after {
     content: "";
-    background: url("assets/images/body_images/fondo1.jpg") no-repeat center center fixed;
+    background: url("assets/images/body_images/fondo4.jpg") no-repeat center center fixed;
     opacity: 0.8;
     top: 0;
     left: 0;
@@ -40,7 +84,7 @@ body::after {
     right: 0;
     position: absolute;
     z-index: -2;   
-    background-size: 2727px 1300px; /* Tamaño específico de la imagen de fondo */
+    background-size: 1920px 970px; /* Tamaño específico de la imagen de fondo */
     background-position: center center; /* Centrar la imagen */
 }
 
@@ -221,6 +265,7 @@ h4 {
   .frase-completa {
     margin-top: 10px;
     text-align: center; /* Alineación centrada */
+   
   }
   
   .informacion {
