@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ingreso de Administrador</title>
+    <link rel="stylesheet" href="../css/admin_style.css">
+</head>
+<body>
+
+    <form id="login-form">
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+        </div>
+        <div>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <button id="btn-ingresar" onclick="volverAdmins()">Ingresar</button>
+    </form>
+    <script src="javascript/login_admin.js"></script>
+    <script>
+        function volverAdmins() {
+            window.location.href = "control_panel.html";
+        }
+    </script>
+    <script src="/javascript/login.js"></script>
+
+      
+</body>
+</html>

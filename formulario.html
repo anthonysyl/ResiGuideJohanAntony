@@ -1,60 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Formulario de Registro</title>
-    <link rel="stylesheet" type="text/css" href="css/formulario_style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Formulario de Registro</title>
+  <link rel="stylesheet" type="text/css" href="css/formulario_style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body background="assets/register_images/body2.jpg">
-    <div>
-        <div class="rectangulo"></div>  
-        <img class="imagen-fondo" src="assets/register_images/fondito1.png" alt="">
-        <img class="imagen-superpuesta" src="assets/register_images/fondo2.png" alt="">
+  <div>
+    <div class="rectangulo"></div>  
+    <img class="imagen-fondo" src="assets/register_images/fondito1.png" alt="">
+    <img class="imagen-superpuesta" src="assets/register_images/fondo2.png" alt="">
+  </div>
+  <div class="formulario">
+    <div class="imagen-formulario" id="imagenFormulario">
+      <img src="assets/register_images/midle_photo2.png" alt="RESIGUIDE" style="width: 100%; height: 100%;">
+      <div class="nombre-empresa">RESIGUIDE</div>  
     </div>
-    <div class="formulario">
-        <div class="imagen-formulario" id="imagenFormulario">
-            <img src="assets/register_images/midle_photo2.png" alt="RESIGUIDE" style="width: 100%; height: 100%;">
-            <div class="nombre-empresa">RESIGUIDE</div>  
+    <div class="form-content">
+      <form id="registroForm">
+        <div class="cuenta-existente">
+          <span>Already have an account?</span>
+          <button id="signinButton">SIGN IN</button>
         </div>
-        <div class="form-content">
-            <form id="registroForm">
-                <div class="cuenta-existente">
-                    <span>Already have an account?</span>
-                    <button id="signinButton">SIGN IN</button>
+        <h1>Bienvenido A Resiguide!</h1>
+        <p>register your account!</p>
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre completo"> <br>
+        <input type="email" id="email" name="email" placeholder="Email" ><br>
+        <input type="password" id="password" name="password" placeholder="Contraseña" ><br>
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="Repetir Contraseña" ><br>
+        <div class="tipo-usuario">
+            <input type="radio" id="propietario" name="tipo_usuario" value="Propietario">
+            <label for="propietario">Propietario</label><br>
+            <input type="radio" id="arrendador" name="tipo_usuario" value="Arrendador">
+            <label for="arrendador">Arrendador</label><br>
+        </div>        
+        <select id="conjunto_id" name="conjunto_id">
 
-                </div>
-                <h1>Bienvenido A Resiguide!</h1>
-                <p>register your account!</p>
-                <input type="text" id="name" name="name" placeholder="Nombre completo"> <br>
-                <input type="email" id="email" name="email" placeholder="Email" ><br>
-                <input type="password" id="password" name="password" placeholder="Contraseña" ><br>
-                <input type="password" id="confirm_password" name="confirm_password" placeholder="Repetir Contraseña" ><br>
-                <div class="tipo-usuario">
-                    <input type="radio" id="propietario" name="tipo_usuario">
-                    <label for="propietario">Propietario</label><br>
-                    <input type="radio" id="arrendador" name="tipo_usuario">
-                    <label for="arrendador">Arrendador</label><br>
-                </div>
-                <input class="numero-torre" type="text" id="towerNumber" name="towerNumber" placeholder="Número de la torre" >
-                <input class="numero-apartamento" type="text" id="apartmentNumber" name="apartmentNumber" placeholder="Número del apartamento" >                
-                <select id="conjunto" name="conjunto">
-                    <option value="">Conjunto Casanare</option>
-                    <option value="">Barrio Pito</option>
-                    <!-- Añade tus opciones aquí -->
-                </select>
-                <input type="submit" value=" Registrarse">
-            </form>
-        </div>
-    </div>
-    <script src="javascript/script.js"></script>
-    <script>
-        document.getElementById('signinButton').addEventListener('click', function(event) {
-         event.preventDefault();
-         window.location.href = "login.html";
-            });
+        </select>
+        
 
-    </script>
+      <input type="submit" value="Registrarse">
 
+
+</div>
+</body>
+</html>
+  
+  <script src="javascript/script.js"></script>
+  <script  src="javascript/register.js"></script>
+  
 </body>
 </html>
