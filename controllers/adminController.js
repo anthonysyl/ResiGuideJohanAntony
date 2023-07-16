@@ -1,28 +1,21 @@
-const bcrypt = require('bcrypt');
-const Administrador = require('../models/Administrador');
+const Admin = require('../models/Admin');
+const bcrypt = require('bcryptjs');
 
-exports.login = async (req, res) => {
-    const { email, password } = req.body;
+const login = async (req, res) => {
+  const { email, password } = req.body;
 
-    try {
-        const administrador = await Administrador.findOne({ where: { email } });
+  const admin = await Admin.findOne({ where: { email } });
+  if (!admin) {
+    return res.status(400).json({ message: 'Admin no encontrado.' });
+  }
 
-        if (!administrador) {
-            return res.status(400).send('No se encontró ningún administrador con ese email.');
-        }
+  if (password !== admin.password_hash) {
+    return res.status(400).json({ message: 'Contraseña incorrecta.' });
+  }
 
-        const passwordIsValid = bcrypt.compareSync(password + administrador.salt, administrador.password_hash);
+  // Inicio de sesión exitoso
+  req.session.adminId = admin.id;
+  res.redirect('/Admin/control_panel');
+};
 
-        if (!passwordIsValid) {
-            return res.status(401).send({ auth: false, token: null, message: 'Contraseña no válida.' });
-        }
-
-        // Aquí podrías generar un token de autenticación con JWT u otro mecanismo similar
-
-        res.status(200).send({ auth: true, token: 'Tu token de autenticación', message: 'Inicio de sesión exitoso.' });
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Hubo un problema tratando de iniciar sesión.');
-    }
-}
+module.exports = { login };

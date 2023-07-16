@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;900&display=swap');
+
 _body {
-    font-family: Arial, sans-serif;
+
+    font-family: "Roboto", sans-serif;
     background-color: #f9f9f9;
     margin: 0;
     padding: 20px;
@@ -7,6 +10,19 @@ _body {
 
 h2 {
     text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+}   
+h3{
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+}
+h4
+{
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
 }
 
 form {
@@ -21,6 +37,7 @@ form {
 label {
     display: block;
     font-weight: bold;
+    font-weight: 100;
     margin-bottom: 10px;
 }
 
