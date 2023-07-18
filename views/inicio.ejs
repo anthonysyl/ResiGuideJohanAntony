@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESIGUIDE</title>
+    <link rel="stylesheet" href="css/index_style.css">
+</head>
+<body>
+    <header>
+        <div id="logo">RESIGUIDE</div>
+        <nav>
+            <ul>
+                <li><a href="#">SERVICES</a></li>
+                <li><a href="#">NEWS</a></li>
+                <li><a href="#">DESCRIPTION</a></li>
+                <li><a href="#">FORO</a></li>
+                <!-- Agrega la información del usuario aquí -->
+                <li><a id="#">Bienvenido <%= usuario.nombre %></li>
+                <li>Conectado como <%= usuario.tipo_usuario %></li>
+            </ul>
+        </nav>
+        <div id="menu-icon">☰</div>
+    </header>
+
+    <hr class="custom-hr">
+    <img src="assets/images/body_images/fondo3.jpg" alt="Descripción de la imagen" class="custom-img">
+    <!-- Este es el contenedor principal debajo de la imagen -->
+    <div id="service-status">
+    <h2>ESTADOS DE LOS SERVICIOS DE TU CONJUNTO</h2>
+
+    <!-- Aquí están las tres tarjetas -->
+    <div id="cards-container">
+        <div class="card">
+            <img class="icon" src="assets/icons/iconwater.png" alt="Icono Agua" width="91" height="83">
+            <div class="status-circle active"></div>
+        </div>
+        <div class="card">
+            <img class="icon" src="assets/icons/icongas.png" alt="Icono Gas" width="175" height="139">
+            <div class="status-circle active"></div>
+        </div>
+        <div class="card">
+            <img class="icon" src="assets/icons/iconluz.png" alt="Icono Electricidad" width="112" height="75">
+            <div class="status-circle active"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

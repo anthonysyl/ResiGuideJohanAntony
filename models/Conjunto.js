@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../server'); // Asegúrate de cambiar esta ruta a la ruta de tu archivo server.js
+const sequelize = require('../database'); // Asegúrate de cambiar esta ruta a la ruta de tu archivo server.js
 
 const Conjunto = sequelize.define('Conjunto', {
   id: {

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Panel de Control</title>
+    <link rel="stylesheet" href="../css/control_panel_styles.css">
+</head>
+<body>
+    <h2>Panel de Control</h2>
+    <h3>Bienvenido: <%= admin.nombre %></h3>
+    <h4>Conjunto: <%= admin.nombre_conjunto %></h4>
+    <button id="btn-volver" onclick="volverAdmin()">Volver</button>
+    <form>
+        <div>
+            <label for="agua">Agua:</label>
+            <select id="agua" name="agua">
+                <option value="activo">Activo</option>
+                <option value="pronto-inactivo">Pronto Inactivo</option>
+                <option value="inactivo">Inactivo</option>
+            </select>
+            <textarea id="causa-agua" name="causa-agua" placeholder="Causa de inactividad"></textarea>
+        </div>
+        <div>
+            <label for="gas">Gas:</label>
+            <select id="gas" name="gas">
+                <option value="activo">Activo</option>
+                <option value="pronto-inactivo">Pronto Inactivo</option>
+                <option value="inactivo">Inactivo</option>
+            </select>
+            <textarea id="causa-gas" name="causa-gas" placeholder="Causa de inactividad"></textarea>
+        </div>
+        <div>
+            <label for="luz">Luz:</label>
+            <select id="luz" name="luz">
+                <option value="activo">Activo</option>
+                <option value="pronto-inactivo">Pronto Inactivo</option>
+                <option value="inactivo">Inactivo</option>
+            </select>
+            <textarea id="causa-luz" name="causa-luz" placeholder="Causa de inactividad"></textarea>
+        </div>
+        <button type="submit">Actualizar</button>
+        <a href="/Admin/logout">Cerrar sesión</a>
+
+
+    </form>
+    <script src="/javascript/control_panel.js"></script>
+
+</body>
+</html>

@@ -15,10 +15,14 @@
                 <li><a href="#">NEWS</a></li>
                 <li><a href="#">DESCRIPTION</a></li>
                 <li><a href="#">FORO</a></li>
+                <!-- Agrega la información del usuario aquí -->
+                <li>Bienvenido, <%= usuario.nombre %></li>
+                <li>Conectado como <%= usuario.email %></li>
             </ul>
         </nav>
         <div id="menu-icon">☰</div>
     </header>
+
     <hr class="custom-hr">
     <img src="assets/images/body_images/fondo3.jpg" alt="Descripción de la imagen" class="custom-img">
     <!-- Este es el contenedor principal debajo de la imagen -->
@@ -41,8 +45,6 @@
         </div>
     </div>
 </div>
-
-
 
 </body>
 </html>
