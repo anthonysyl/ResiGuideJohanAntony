@@ -13,4 +13,38 @@ window.onload = function() {
     })
     .catch(error => console.error('Error:', error));
   }
-  
+  $(document).ready(function(){
+    $('form').on('submit', function(event){
+        event.preventDefault();
+
+        var aguaEstado = $('#agua').val();
+        var gasEstado = $('#gas').val();
+        var luzEstado = $('#luz').val();
+
+        $.ajax({
+            url: '/admin/control-panel', // La ruta que definiste en tu servidor para actualizar los servicios
+            type: 'POST',
+            data: JSON.stringify({
+                aguaEstado: aguaEstado,
+                gasEstado: gasEstado,
+                luzEstado: luzEstado
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(response){
+                // Aquí puedes actualizar el estado de los selectores basado en la respuesta del servidor
+                $('#agua').val(response.aguaEstado);
+                $('#gas').val(response.gasEstado);
+                $('#luz').val(response.luzEstado);
+            }
+        });
+    });
+});
+
+
+
+
+
+
+
+

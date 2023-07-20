@@ -56,3 +56,9 @@ $('#registroForm').submit(function(e) {
         }
     });
 });
+$(document).ready(function() {
+    $('#signinButton').click(function() {
+      window.location.href = '/login.html';
+    });
+  });
+  

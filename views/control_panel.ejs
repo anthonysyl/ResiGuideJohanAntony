@@ -10,12 +10,12 @@
     <h3>Bienvenido: <%= admin.nombre %></h3>
     <h4>Conjunto: <%= admin.nombre_conjunto %></h4>
     <button id="btn-volver" onclick="volverAdmin()">Volver</button>
-    <form>
+    <form method="POST" action ="/admin/control-panel">
         <div>
             <label for="agua">Agua:</label>
             <select id="agua" name="agua">
                 <option value="activo">Activo</option>
-                <option value="pronto-inactivo">Pronto Inactivo</option>
+                <option value="Pronto Inactivo">Pronto Inactivo</option>
                 <option value="inactivo">Inactivo</option>
             </select>
             <textarea id="causa-agua" name="causa-agua" placeholder="Causa de inactividad"></textarea>
@@ -43,6 +43,7 @@
 
 
     </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/javascript/control_panel.js"></script>
 
 </body>

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
 body {
     margin: 0;
     padding: 0;
@@ -27,7 +28,7 @@ nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    margin-left: 78px;
+    margin-left: 120px;
     margin-right: 360px;
     display: flex;
 }
@@ -39,7 +40,7 @@ nav ul li {
 
 nav a {
     font-family: 'Inter', sans-serif;
-    font-weight: 800;
+    font-weight: 400;
     font-size: 18px;
     color: #fff;
     text-decoration: none;
@@ -63,6 +64,15 @@ nav a {
     margin: 20px auto 0 auto;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
+    top:0;
+    bottom:0;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    top: 0;
+}
+.custom-img:hover
+{
+    transform: scale(1.01);
+   
 }
 
 #service-status {
@@ -114,8 +124,14 @@ nav a {
     margin-right: 40px;
     z-index: 3;
     background-color: white; /* añadir esta línea para asignar un color de fondo blanco */
-
- 
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    top: 0;
+}
+.card:hover
+{
+    transform: scale(1.00);
+    top: -20px;
+   
 }
 
 .card .icon {
@@ -135,8 +151,27 @@ nav a {
 }
 
 .status-circle.active {
-    background-color:#17A400;
+    background-color: #29e903;  /* Verde para 'Activo' */
 }
+
+.status-circle.soon-inactive {
+    background-color: #FFA500;  /* Naranja para 'Pronto Inactivo' */
+}
+
+.status-circle.inactive {
+    background-color: #FF0000;  /* Rojo para 'Inactivo' */
+}
+/* Status cards buttons*/
 .card img {
     filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.5));
 }
+header {
+    position: relative;
+  }
+  
+  #menu-icon {
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+ 

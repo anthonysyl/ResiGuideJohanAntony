@@ -16,13 +16,30 @@
                 <li><a href="#">DESCRIPTION</a></li>
                 <li><a href="#">FORO</a></li>
                 <!-- Agrega la información del usuario aquí -->
-                <li><a id="#">Bienvenido <%= usuario.nombre %></li>
-                <li>Conectado como <%= usuario.tipo_usuario %></li>
+               
             </ul>
         </nav>
         <div id="menu-icon">☰</div>
-    </header>
+    <div id="sidebar">
+        <div class="toogle-btn">
 
+
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul>
+
+
+            <li><%= usuario.nombre %></li>
+            <li><%= usuario.tipo_usuario %></li>
+            <li>Log Out</li>
+        </ul>
+    
+  </div>
+    </header>
     <hr class="custom-hr">
     <img src="assets/images/body_images/fondo3.jpg" alt="Descripción de la imagen" class="custom-img">
     <!-- Este es el contenedor principal debajo de la imagen -->
@@ -33,18 +50,19 @@
     <div id="cards-container">
         <div class="card">
             <img class="icon" src="assets/icons/iconwater.png" alt="Icono Agua" width="91" height="83">
-            <div class="status-circle active"></div>
+            <div class="status-circle <%= servicios.find(service => service.nombre === 'Agua').estado.toLowerCase().replace(' ', '-') %>"></div>
         </div>
         <div class="card">
             <img class="icon" src="assets/icons/icongas.png" alt="Icono Gas" width="175" height="139">
-            <div class="status-circle active"></div>
+            <div class="status-circle <%= servicios.find(service => service.nombre === 'Gas').estado.toLowerCase().replace(' ', '-') %>"></div>
         </div>
         <div class="card">
             <img class="icon" src="assets/icons/iconluz.png" alt="Icono Electricidad" width="112" height="75">
-            <div class="status-circle active"></div>
+            <div class="status-circle <%= servicios.find(service => service.nombre === 'Luz').estado.toLowerCase().replace(' ', '-') %>"></div>
         </div>
     </div>
 </div>
-
-</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/javascript/inicio.js"></script>
+</body >
 </html>

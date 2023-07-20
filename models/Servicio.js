@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Sequelize } = require('sequelize');
 const sequelize = require('../database');
+const Conjunto = require('../models/Conjunto');
 
 const Servicio = sequelize.define('Servicio', {
+    
     nombre: {
         type: DataTypes.STRING,
         allowNull: false
@@ -18,6 +20,7 @@ const Servicio = sequelize.define('Servicio', {
         type: DataTypes.DATE,
         defaultValue: Sequelize.NOW
     }
-}, {});
+}, { timestamps: false });
+
 
 module.exports = Servicio;

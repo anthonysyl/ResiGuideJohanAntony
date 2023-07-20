@@ -17,8 +17,7 @@ exports.create = async (req, res) => {
       tipo_usuario,
       conjunto_id
     });
-
-    res.redirect('/');  // Redirige al inicio (o donde prefieras) después de un registro exitoso
+    res.json({ success: true }); // Agrega esta línea
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: 'Ha ocurrido un error' });

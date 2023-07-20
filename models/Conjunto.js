@@ -1,5 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database'); // Asegúrate de cambiar esta ruta a la ruta de tu archivo server.js
+const Servicio = require('../models/Servicio');
+const Usuarios = require('../models/Usuario');
 
 const Conjunto = sequelize.define('Conjunto', {
   id: {
@@ -21,5 +23,7 @@ const Conjunto = sequelize.define('Conjunto', {
 }, {
   timestamps: false, // Esto asegura que no esperamos los campos createdAt y updatedAt
 });
+
+
 
 module.exports = Conjunto;

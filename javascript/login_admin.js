@@ -26,3 +26,12 @@ loginForm.addEventListener('submit', function(event) {
     console.error('Error:', error);
   });
 });
+
+window.onload = function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const successMessage = urlParams.get('success');
+
+  if (successMessage) {
+    document.getElementById('success-message').textContent = successMessage;
+  }
+}
