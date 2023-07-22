@@ -23,4 +23,5 @@ const Servicio = sequelize.define('Servicio', {
 }, { timestamps: false });
 
 
+
 module.exports = Servicio;

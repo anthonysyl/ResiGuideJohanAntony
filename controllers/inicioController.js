@@ -1,24 +1,24 @@
-// inicioController.js
-const Usuarios = require('../models/Usuario');
-const Conjunto = require('../models/Conjunto')
+// const Usuarios = require('../models/Usuario')
+//const Conjunto = require('../models/Conjunto');
+//const Servicio = require('../models/Servicio');
+const { Usuario, Conjunto, Servicio } = require('../models/associations');
 
 const inicioController = {
   mostrarInicio: async (req, res) => {
     try {
       // Obtén los datos del usuario desde la base de datos
-      const usuario = await Usuarios.findByPk(req.session.userId, {
-        include: ['conjunto_id'], // Asegúrate de tener este campo en tu modelo de usuario
+      const usuario = await Usuario.findByPk(req.session.userId, {
+        include: [
+          { model: Conjunto, as: 'Conjunto', include: [{ model: Servicio, as: 'Servicios' }] }
+        ],
         attributes: ['nombre', 'tipo_usuario']
       });
-      
-      // Obtenemos los servicios para el conjunto del usuario
-      const servicios = await Servicio.findAll({
-        where: {
-          conjunto_id: usuario.conjunto_id
-        }
-      });
+
+      // Verifica si el usuario tiene un conjunto y servicios asociados
+      const servicios = usuario.Conjunto ? usuario.Conjunto.Servicios : [];
   
-      // Renderiza la vista 'inicio.ejs' y pasa los datos necesarios
+      // Renderiza la vista 'inicio.ejs' y pasa los datos necesarios 
+      console.log(servicios)
       res.render('inicio', { usuario: usuario || {}, servicios });
     } catch (error) {
       console.error('Error al obtener los datos del usuario:', error);
@@ -26,6 +26,5 @@ const inicioController = {
     }
   }
 };
-  
 
 module.exports = inicioController;

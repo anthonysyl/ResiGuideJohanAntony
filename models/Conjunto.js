@@ -26,4 +26,6 @@ const Conjunto = sequelize.define('Conjunto', {
 
 
 
+
+
 module.exports = Conjunto;

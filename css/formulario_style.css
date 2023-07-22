@@ -242,3 +242,24 @@ input[type="submit"] {
   display: block;
   transform: translate(5px, 5px);  
 }
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group i {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  color: #000000;
+}
+
+.input-group input {
+  padding-left: 30px;
+}
+
+.fa {
+  color: gray;
+}
+
+

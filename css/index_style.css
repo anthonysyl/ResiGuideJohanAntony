@@ -150,16 +150,19 @@ nav a {
     right: 10px;
 }
 
-.status-circle.active {
-    background-color: #29e903;  /* Verde para 'Activo' */
+.status-circle.activo {
+    background-color: #1b8a04;  /* Verde para 'Activo' */
+    box-shadow: 0 0 1rem #1fa005;
 }
 
-.status-circle.soon-inactive {
-    background-color: #FFA500;  /* Naranja para 'Pronto Inactivo' */
+.status-circle.pronto-inactivo {
+    background-color: #FFA500; 
+    box-shadow: 0 0 1rem #df9101; /* Naranja para 'Pronto Inactivo' */
 }
 
-.status-circle.inactive {
-    background-color: #FF0000;  /* Rojo para 'Inactivo' */
+.status-circle.inactivo {
+    background-color: #FF0000;
+    box-shadow: 0 0 1rem #cc0909;  /* Rojo para 'Inactivo' */
 }
 /* Status cards buttons*/
 .card img {
@@ -172,6 +175,45 @@ header {
   #menu-icon {
     cursor: pointer;
     font-size: 24px;
+  }
+
+  .news-card {
+    margin-top: 150px;
+    width: 913px;
+    height: 225px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    margin: 0 auto;
+  }
+  
+  .news-card img {
+    width: 339px;
+    height: 222px;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+  
+  .news-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    border-radius: 20px;
+  }
+  .news-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Agrega un espacio entre las tarjetas de noticias */
+  }
+  
+  .news-card {
+    /* el resto de tus estilos */
   }
   
  
