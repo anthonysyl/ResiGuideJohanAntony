@@ -9,8 +9,11 @@ const sequelize = require('./database');
 const Conjunto = require('./models/Conjunto');
 const Usuarios = require('./models/Usuario');
 const Servicio = require('./models/Servicio');
+const RegistroPendiente = require('./models/registros_pendientes');
 const usuarioRoutes = require('./routes/usuarioRoutes');
 const inicioRoutes = require('./routes/inicioRoutes');
+const conjuntoRoutes = require('./routes/conjuntoRoutes'); 
+const emailRoutes = require('./routes/emailRoutes'); // Asegúrate de usar la ruta correcta al archivo
 require('./models/associations');
 
 
@@ -31,9 +34,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/', inicioRoutes);
 app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/', conjuntoRoutes); // Cambiado el nombre de la ruta
 app.use('/admin', adminRoutes);
 app.use('/api/servicios', require('./routes/serviciosRoutes'));
+app.use('/email', emailRoutes);
 app.get('/', (req, res) => {
   
   res.render('home');

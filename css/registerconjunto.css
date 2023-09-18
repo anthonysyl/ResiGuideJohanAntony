@@ -1,0 +1,63 @@
+body {
+    font-family: 'Arial, sans-serif';
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#conjunto-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    transition: transform 0.3s;
+}
+
+#conjunto-form:hover {
+    transform: scale(1.01);
+}
+
+#conjunto-form form div {
+    margin-bottom: 15px;
+}
+
+#conjunto-form form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#conjunto-form form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+#conjunto-form form input:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+#conjunto-form form button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#conjunto-form form button:hover {
+    background-color: #0056b3;
+}
