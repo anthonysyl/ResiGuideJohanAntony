@@ -26,6 +26,7 @@ const login = async (req, res) => {
   req.session.adminId = admin.id;
   res.render('control_panel', { admin: adminResponse });
 };
+
 const getPanelControl = async (req, res) => {
   // Obtener el admin de la sesión
   const admin = await Admin.findOne({ where: { id: req.session.adminId } });
@@ -68,5 +69,18 @@ const postPanelControl = async (req, res) => {
   res.redirect('/admin/control-panel');
 };
 
+const getServicesPanel = async (req, res) => {
+  const admin = await Admin.findOne({ where: { id: req.session.adminId } });
+  if (!admin) return res.render('error', { message: 'Admin no encontrado.' });
+  
+  const conjunto = await Conjunto.findOne({ where: { id: admin.conjunto_id } });
+  if (!conjunto) return res.render('error', { message: 'Conjunto no encontrado.' });
 
-module.exports = { login, getPanelControl, postPanelControl };
+  const servicios = await Servicio.findAll({ where: { conjunto_id: conjunto.id } });
+  
+  const adminResponse = { ...admin.toJSON(), nombre_conjunto: conjunto.nombre };
+  
+  res.render('services_panel', { admin: adminResponse, servicios });
+};
+
+module.exports = { login, getPanelControl, postPanelControl, getServicesPanel };

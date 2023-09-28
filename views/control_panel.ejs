@@ -6,45 +6,54 @@
     <link rel="stylesheet" href="../css/control_panel_styles.css">
 </head>
 <body>
-    <h2>Panel de Control</h2>
-    <h3>Bienvenido: <%= admin.nombre %></h3>
-    <h4>Conjunto: <%= admin.nombre_conjunto %></h4>
-    <button id="btn-volver" onclick="volverAdmin()">Volver</button>
-    <form method="POST" action ="/admin/control-panel">
-        <div>
-            <label for="agua">Agua:</label>
-            <select id="agua" name="agua">
-                <option value="activo">Activo</option>
-                <option value="Pronto Inactivo">Pronto Inactivo</option>
-                <option value="inactivo">Inactivo</option>
-            </select>
-            <textarea id="causa-agua" name="causa-agua" placeholder="Causa de inactividad"></textarea>
+    <header>
+        <div id="logo-container">
+            <h1>RESIGUIDE</h1>
         </div>
-        <div>
-            <label for="gas">Gas:</label>
-            <select id="gas" name="gas">
-                <option value="activo">Activo</option>
-                <option value="Pronto Inactivo">Pronto Inactivo</option>
-                <option value="inactivo">Inactivo</option>
-            </select>
-            <textarea id="causa-gas" name="causa-gas" placeholder="Causa de inactividad"></textarea>
-        </div>
-        <div>
-            <label for="luz">Luz:</label>
-            <select id="luz" name="luz">
-                <option value="activo">Activo</option>
-                <option value="Pronto Inactivo">Pronto Inactivo</option>
-                <option value="inactivo">Inactivo</option>
-            </select>
-            <textarea id="causa-luz" name="causa-luz" placeholder="Causa de inactividad"></textarea>
-        </div>
-        <button type="submit">Actualizar</button>
-        <a href="/Admin/logout">Cerrar sesión</a>
+        <!-- Aquí irán otros elementos del header si los necesitas -->
+    </header>
+    <div id="panel-label">
+        <p>Panel de Control</p>
+      </div>
+      <h1 id="control-panel-text">Control Panel</h1>
+
+<!-- Texto Bienvenido y Nombre -->
+<p id="welcome-text">
+    Bienvenido <span id="admin-name"><%= admin.nombre %></span>
+</p>
+
+<!-- Texto Conjunto y Nombre del Conjunto -->
+<p id="conjunto-text">
+    Conjunto <span id="conjunto-name"><%= admin.nombre_conjunto %></span>
+</p>
+<div class="shape">
+    <a href="/services-panel">
+    <div class="card" style="--card-color: #AF6251; --border-start: #FE1010; --border-end: #AF6251;">
+      <div class="icon icon-services"></div>
+      <p class="card-text">MANEJO DE SERVICIOS</p>
+    </div>
+    </a>
+    <div class="card" style="--card-color: #55A47E; --border-start: #95FFC6; --border-end: #55A47E;">
+      <div class="icon icon-news"></div>
+      <p class="card-text">NOTICIAS MANUALES</p>
+    </div>
+    <div class="card" style="--card-color: #818181; --border-start: #D9D9D9; --border-end: #818181;">
+      <div class="icon icon-settings"></div>
+      <p class="card-text">AJUSTES DE LA CUENTA</p>
+    </div>
+</div>
+    <!-- Aquí irán las Card Views -->
+  </div>
+
+  
 
 
     </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/javascript/control_panel.js"></script>
+    <footer>
+    <p>Panel Administrativo</p>
+</footer>
 
 </body>
 </html>

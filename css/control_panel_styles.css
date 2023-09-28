@@ -1,11 +1,163 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
-_body {
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+header {
+    background-color: #000;
+    height: 85px;
+    width: 100%;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    padding-left: 50px; /* Este valor define el margen a la izquierda del logo, ajusta según necesites */
+}
+
+#logo-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+#panel-label {
+    background-color: #D9D9D9;
+    width: 180px;
+    height: 39px;
+    position: relative;
+    color: #f5f5f5;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px; /* Ajusta este valor para cambiar la distancia desde la barra de navegación */
+    margin-left: 220px; /* Ajusta este valor para cambiar la distancia desde el lado izquierdo de la pantalla */
+  }
+  #control-panel-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    margin-top: 60px;
+    margin-left: 250px; /* Ajusta según necesidad */
+    color: #000; /* Ajusta el color si es necesario */
+}
+
+#welcome-text
+{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500; /* Semi-bold */
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 270px;
+    color: #D9D9D9;
+    margin-top: 10px; /* Ajusta según necesidad */
+
+}
+#conjunto-text {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500; /* Semi-bold */
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 300px;
+    color: #D9D9D9;
+    margin-top: 10px; /* Ajusta según necesidad */
+}
+
+#admin-name,
+#conjunto-name {
+    color: #000; /* Ajusta el color si es necesario */
+}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+
+.shape {
+  background-color: #EEEBEB;
+  height: 428px;
+  border-top: 1px solid #B7B7B7;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+
+  gap: 30px;
+
+  align-items: center;
+}
+
+.card {
+  background-color: var(--card-color);
+  height: 271px;
+  width: 336px;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada
+  border: 2px solid; /* grosor del borde */
+  border-image: linear-gradient(to bottom, var(--border-start), var(--border-end)) 1;
+  text-decoration: none;
+
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  top: 0;
+}
+.card:hover
+{
+    transform: scale(1.03);
+   
+}
+
+.icon {
+    width: 109px;
+    height: 125px;
+    background-size: cover;
+    background-position: center;
+    filter: drop-shadow(0px 3px 2px rgba(0, 0, 0, 0.5));
+    /* Aquí puedes agregar otros estilos que se aplicarán a todos los iconos */
+  }
+  
+  .icon-services {
+    background-image: url('../assets/icons/services.png');
+    width: 120px; /* Nueva anchura */
+    height: 120px; /
+
+  }
+  
+  .icon-news {
+    background-image: url('../assets/icons/noticon.png');
+    width: 90px; /* Nueva anchura */
+    height: 90px; 
+    margin-top: 20px;
+  }
+  
+  .icon-settings {
+    background-image: url('../assets/icons/tuerca.png');
+    width: 90px; /* Nueva anchura */
+    height: 90px; 
+    margin-top: 20px;
+  }
+
+.card-text {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: #ffffff; /* Ajusta el color de texto según tu preferencia */
+  text-align: center;
+  margin-top: 20px;
+  filter: drop-shadow(0px 3px 2px rgba(0, 0, 0, 0.5));
+}
+
+
+
+body {
 
     font-family: "Roboto", sans-serif;
     background-color: #f9f9f9;
     margin: 0;
-    padding: 20px;
+    padding: 0px;
 }
 
 h2 {
@@ -57,4 +209,16 @@ button[type="submit"] {
     border: none;
     border-radius: 3px;
     cursor: pointer;
+}
+footer {
+    background-color: #000;
+    color: #fff;
+    height: 98px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700; /* Bold */
+    font-size: 24px;
+    margin-top: 90px;
 }

@@ -13,6 +13,9 @@ const RegistroPendiente = require('./models/registros_pendientes');
 const usuarioRoutes = require('./routes/usuarioRoutes');
 const inicioRoutes = require('./routes/inicioRoutes');
 const conjuntoRoutes = require('./routes/conjuntoRoutes'); 
+const noticiasRoutes = require('./routes/noticiasRoutes');
+const servicesPanelRoute = require('./routes/servicesPanelRoute');
+
 const emailRoutes = require('./routes/emailRoutes'); // Asegúrate de usar la ruta correcta al archivo
 require('./models/associations');
 
@@ -38,6 +41,8 @@ app.use('/', conjuntoRoutes); // Cambiado el nombre de la ruta
 app.use('/admin', adminRoutes);
 app.use('/api/servicios', require('./routes/serviciosRoutes'));
 app.use('/email', emailRoutes);
+app.use('/noticias', noticiasRoutes);
+app.use('/', servicesPanelRoute);
 app.get('/', (req, res) => {
   
   res.render('home');

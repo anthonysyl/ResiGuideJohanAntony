@@ -84,31 +84,17 @@
 
 <br>
 
-
 <section class="news-section">
+  <% noticias.forEach(noticia => { %>
     <div class="news-card">
-      <img src="/assets/login_images/noticia1.jpg" alt="Noticia 1">
+      <img src="<%= noticia.urlToImage || '/path/a/imagen/default.png' %>" alt="<%= noticia.title %>">
       <div class="news-text">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque placerat metus quis ex pretium...</p>
-        <button>Saber más</button>
+        <p><%= noticia.description || noticia.contenido %></p>
+        <button><a href="<%= noticia.url || '#' %>">Saber más</a></button>
       </div>
     </div>
-  
-    <div class="news-card">
-      <img src="/assets/login_images/noticia1.jpg" alt="Noticia 2">
-      <div class="news-text">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque placerat metus quis ex pretium...</p>
-        <button>Saber más</button>
-      </div>
-    </div>
-  
-    <div class="news-card">
-      <img src="/assets/login_images/noticia1.jpg" alt="Noticia 3">
-      <div class="news-text">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque placerat metus quis ex pretium...</p>
-        <button>Saber más</button>
-      </div>
-    </div>
+  <% }); %>
+</section>
 
   </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

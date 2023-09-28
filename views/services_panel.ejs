@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Servicios</title>
+    <link rel="stylesheet" href="../css/services_panel.css"> <!-- Asegúrate de poner la ruta correcta a tu hoja de estilos -->
+</head>
+<body>
+    <header>
+        <div id="logo-container">
+            <h1>RESIGUIDE</h1>
+        </div>
+        <!-- Aquí irán otros elementos del header si los necesitas -->
+    </header>
+    <section id="service-management">
+        <h1 class="service-title">Manejo de servicios del conjunto</h1>
+        <p class="conjunto-text">conjunto <span class="conjunto-name"><%= admin.nombre_conjunto %></span></p>
+        
+        <form method="POST" action="/admin/control-panel">
+            <div class="circle-container">
+                <div class="service">
+                    <div class="circle" id="circle-agua">
+                        <img src="../assets/icons/iconwater.png" alt="Servicio Agua">
+                    </div>
+                
+                    <div>
+                        <select id="agua" name="agua">
+                            <option value="activo" <%= servicios.agua === 'activo' ? 'selected' : '' %>>Activo</option>
+                            <option value="Pronto Inactivo" <%= servicios.agua === 'Pronto Inactivo' ? 'selected' : '' %>>Pronto Inactivo</option>
+                            <option value="inactivo" <%= servicios.agua === 'inactivo' ? 'selected' : '' %>>Inactivo</option>
+                        </select>
+                        <textarea id="causa-agua" name="causa-agua" placeholder="Causa de inactividad"></textarea>
+                    </div>
+                </div>
+                <div class="service">
+                    <div class="circle" id="circle-gas">
+                        <img src="../assets/icons/icongas.png" alt="Servicio Gas">
+                    </div>
+
+                    <div>
+    
+                        <select id="gas" name="gas">
+                            <option value="activo" <%= servicios.gas === 'activo' ? 'selected' : '' %>>Activo</option>
+                            <option value="Pronto Inactivo" <%= servicios.gas === 'Pronto Inactivo' ? 'selected' : '' %>>Pronto Inactivo</option>
+                            <option value="inactivo" <%= servicios.gas === 'inactivo' ? 'selected' : '' %>>Inactivo</option>
+                        </select>
+                        <textarea id="causa-gas" name="causa-gas" placeholder="Causa de inactividad"></textarea>
+                    </div>
+                </div>
+                <div class="service">
+                    <div class="circle" id="circle-luz">
+                        <img src="../assets/icons/iconluz.png" alt="Servicio Luz">
+                    </div>
+                    <div>
+                        <select id="luz" name="luz">
+                            <option value="activo" <%= servicios.luz === 'activo' ? 'selected' : '' %>>Activo</option>
+                            <option value="Pronto Inactivo" <%= servicios.luz === 'Pronto Inactivo' ? 'selected' : '' %>>Pronto Inactivo</option>
+                            <option value="inactivo" <%= servicios.luz === 'inactivo' ? 'selected' : '' %>>Inactivo</option>
+                        </select>
+                        <textarea id="causa-luz" name="causa-luz" placeholder="Causa de inactividad"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button type="submit">Actualizar</button>
+        </form>
+    </section>
+    <!-- Aquí irá el contenido principal de tu vista services_panel.ejs -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/javascript/control_panelservices.js"></script>
+</body>
+</html>

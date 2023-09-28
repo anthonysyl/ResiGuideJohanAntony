@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+header {
+    background-color: #000;
+    height: 85px;
+    width: 100%;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    padding-left: 50px; /* Este valor define el margen a la izquierda del logo, ajusta según necesites */
+}
+
+#logo-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+.service-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    color: #000000;
+   
+    text-align: center;
+    margin-top: 120px;
+    margin-right: 50%;
+  }
+  
+  .conjunto-text {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600; /* 600 es semibold en Roboto */
+    font-size: 20px;
+    text-align: center;
+    color: #D9D9D9;
+    margin-top: 35px;
+    margin-right: 47%;
+  }
+  
+  .conjunto-name {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600; /* 600 es semibold en Roboto */
+    font-size: 20px;
+    color: #000;
+    margin-top: 40px;
+  }
+  .circle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.service {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.circle {
+    width: 123px;
+    height: 124px;
+    border-radius: 50%;
+    margin-right: 600px;
+    position: relative;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1; /* Menor z-index, quedará detrás del botón y la shape */
+}
+
+.circle img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+.service div label,
+    .service div select {
+        width: 98px;
+        height: 41px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Ajusta según tus preferencias */
+        border-radius: 10px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 600; /* Semibold */
+        position: relative;
+        left: 120px;
+        font-size: 15px;
+        bottom: 190px;
+        margin-top: 60px; /* Espacio entre el label y el select */
+    }
+    
+    /* Estilos para las cajas de texto */
+    .service div textarea {
+        width: 458px;
+        height: 96px;
+
+        bottom: 150px;
+        box-shadow: 0px 6px 9px rgba(0, 0, 0, 0.5); /* Ajusta según tus preferencias */
+        border-radius: 10px;
+        border-color: #ECECEC;;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 600; /* Semibold */
+        font-size: 15px;
+        color: #0c0c0c;
+ 
+    
+        
+    }
+    textarea {
+        background-color:  #ECECEC;;
+        margin-top: 10px; /* Ajusta según lo que necesites */
+        margin-left: 20px; /* Ajusta según lo que necesites */
+    }
+    button[type="submit"] {
+        width: 155px; /* Ancho del botón */
+        border-radius: 10px;
+        height: 55px; /* Altura del botón */
+        background: linear-gradient(to right, #FE1010, #FE1010); /* Gradiente horizontal */
+        color: white; /* Color del texto */
+        font-family: 'Roboto', sans-serif; /* Tipo de fuente */
+        font-size: 20px; /* Tamaño de la fuente */
+        margin-left: 30px;
+        margin-bottom: 50px;
+        font-weight: 600; /* Peso de la fuente semi bold */
+        border: none; /* Sin borde */
+        cursor: pointer; /* Cambiar el cursor a mano al pasar sobre el botón */
+    }
+    
+    /* Puedes añadir esto si quieres que tenga un estilo diferente al pasar el ratón sobre el botón */
+    button[type="submit"]:hover {
+        background: linear-gradient(to right, #D80909, #D80909); /* Sombrear un poco el color al pasar el ratón */
+    }
+    
+    
