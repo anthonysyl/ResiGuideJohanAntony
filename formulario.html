@@ -18,9 +18,19 @@
   <div class="formulario">
     <div class="imagen-formulario" id="imagenFormulario">
       <img src="assets/register_images/midle_photo2.png" alt="RESIGUIDE" style="width: 100%; height: 100%;">
+      <div id="contenedorNueva">
+        <img id="nuevaImagen" src="assets/images/system_images/edification.png" alt="Nueva Imagen" style="opacity: 0;">
+    </div>
+      
       <div class="nombre-empresa">
-      RESIGUIDE
-      </div>  
+      
+        <div class="nombre-empresa">
+          RESIGUIDE
+        </div>
+      
+    </div>
+
+      <!-- Puedes incluir también el logo u otros elementos que quieras que aparezcan con la nueva imagen -->
     </div>
     <div class="form-content">
       <form id="registroForm">
@@ -28,6 +38,7 @@
           <span>Already have an account?</span>
           <button id="signinButton" type ="button">SIGN IN</button>
         </div> 
+        <div class="elementos-formulario"> <!-- Este div envuelve todos los elementos que deseas ocultar/mostrar -->
         <h1>Bienvenido A Resiguide!</h1>
         <p>register your account!</p>
         <div class="input-group">
@@ -60,11 +71,38 @@
 
       <input type="submit" value="Registrarse">
 
+      </div>
+    </form>
+      <div class="formulario-login">
+        <h2>Iniciar Sesión</h2>
+        <form id='login-form'action="/login" method="post">
+            <div class="grupo-formulario">
+                <label for="correo">Correo Electrónico</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="grupo-formulario">
+                <label for="contrasena">Contraseña</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="grupo-formulario">
+                <input type="submit" value="Ingresar">
+            </div>
+       
+        </form>
+        <div class="recuperar-contrasena">
+            <a href="#">¿Olvidaste tu contraseña?</a>
+            <br>
+            <label for="contrasena">¿Eres administrador?</label>
+            <a href="Admin/admin.html">Click Aquí</a>
+        </div>
+    </div>
+   
 
 </div>
 </body>
 </html>
-  
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="javascript/login_user.js"></script>
   <script src="javascript/script.js"></script>
   <script  src="javascript/register.js"></script>
   

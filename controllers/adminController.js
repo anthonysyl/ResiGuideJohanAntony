@@ -58,12 +58,14 @@ const postPanelControl = async (req, res) => {
   }
 
   // Extraer los datos del formulario del request
-  const { aguaEstado, gasEstado, luzEstado } = req.body;
 
   // Actualizar los estados de los servicios en la base de datos
-  await Servicio.update({ estado: aguaEstado }, { where: { nombre: 'Agua', conjunto_id: admin.conjunto_id } });
-  await Servicio.update({ estado: gasEstado }, { where: { nombre: 'Gas', conjunto_id: admin.conjunto_id } });
-  await Servicio.update({ estado: luzEstado }, { where: { nombre: 'Luz', conjunto_id: admin.conjunto_id } });
+  const { aguaEstado, gasEstado, luzEstado, causaAgua, causaGas, causaLuz } = req.body;
+
+  // Actualizar los estados y causas de los servicios en la base de datos
+  await Servicio.update({ estado: aguaEstado, causa: causaAgua }, { where: { nombre: 'Agua', conjunto_id: admin.conjunto_id } });
+  await Servicio.update({ estado: gasEstado, causa: causaGas }, { where: { nombre: 'Gas', conjunto_id: admin.conjunto_id } });
+  await Servicio.update({ estado: luzEstado, causa: causaLuz }, { where: { nombre: 'Luz', conjunto_id: admin.conjunto_id } });
 
   // Redirigir al administrador de vuelta al panel de control
   res.redirect('/admin/control-panel');

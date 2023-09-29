@@ -13,6 +13,10 @@ const Servicio = sequelize.define('Servicio', {
         values: ['Activo', 'Pronto Inactivo', 'Inactivo'],
         allowNull: false
     },
+    causa: {
+        type: DataTypes.STRING(255), // especifica la longitud máxima del VARCHAR
+        allowNull: true // permite valores NULL
+    },
     conjunto_id: {
         type: DataTypes.INTEGER
     },

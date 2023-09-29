@@ -56,9 +56,61 @@ $('#registroForm').submit(function(e) {
         }
     });
 });
-$(document).ready(function() {
-    $('#signinButton').click(function() {
-      window.location.href = '/login.html';
-    });
-  });
   
+
+
+// Manejar el clic del botón Sign In
+$(document).ready(function() {
+    var alturaInicial = $(".formulario").height() + "px";
+    var alturaFinal = "562px";
+    var posicionFinal = "460px";
+    var $signinButton = $("#signinButton");
+    var $formularioLogin = $('.formulario-login');
+    $formularioLogin.css({'opacity': 0, 'display': 'none'});
+    
+    $signinButton.click(function() {
+        var $imagenOriginal = $('#imagenFormulario img:first-child');
+        var $imagenNueva = $('#nuevaImagen');
+        var duration = 20;
+        
+        $signinButton.css('position', 'relative'); 
+        var isSignIn = $(this).text().trim() === "SIGN IN";
+    
+        $(this).text(isSignIn ? "SIGN UP" : "SIGN IN");
+        $(this).css({
+            "border-color": isSignIn ? "green" : "#EC4F2C",
+            "color": isSignIn ? "green" : "#EC4F2C"
+        });
+
+        var posicionBoton = isSignIn ? "-700px" : "0";
+        
+        if (isSignIn) {
+            $(".elementos-formulario").animate({opacity: 0}, duration);
+
+            $imagenOriginal.css({'z-index': 0, 'opacity': 0});
+            $(".formulario").animate({ height: alturaFinal }, duration);
+            $imagenNueva.css({'z-index': 0, 'opacity': 1});
+            $("#imagenFormulario").animate({ left: posicionFinal, height: alturaFinal }, duration);
+            $(".formulario").animate({ height: alturaFinal }, duration);
+            $signinButton.animate({ left: posicionBoton }, duration);
+
+            // Ajusta el posicionamiento de .formulario-login aquí cuando .elementos-formulario está oculto
+            $formularioLogin.css('transform', 'translate(-400px, -480px))'); // Ajusta los valores según sea necesario
+            $formularioLogin.css('display', 'block').animate({'opacity': 1}, duration);
+        } else {
+            $(".elementos-formulario").fadeIn(duration);
+            $(".elementos-formulario").animate({opacity: 1}, duration);
+            $imagenNueva.css({'z-index': 0, 'opacity': 0});
+            $imagenOriginal.css({'z-index': 0, 'opacity': 1});
+            $("#imagenFormulario").animate({ left: "0", height: alturaInicial }, duration);
+            $(".formulario").animate({ height: alturaInicial }, duration);
+            $signinButton.animate({ left: "0" }, duration);
+            $formularioLogin.animate({opacity: 0}, duration, function() {
+                $(this).css('display', 'none');
+                // Restablece el posicionamiento de .formulario-login aquí cuando .elementos-formulario está visible
+                $formularioLogin.css('transform', 'translate(-400px, -480px)'); // Ajusta los valores según sea necesario
+            });
+        }
+    });
+});
+    

@@ -143,6 +143,7 @@ body ::after
     font-size: 10px;
     font-weight: 300;
     cursor: pointer;
+    z-index: 8;
 }
 
 h1 {
@@ -262,4 +263,110 @@ input[type="submit"] {
   color: gray;
 }
 
+.imagen-formulario {
+  position: relative;
+  left: 0;
+  overflow: hidden; 
+  transition: left 0.2s ease-in-out, height 0.2s ease-in-out;
+}
 
+#contenedorNueva {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1.02);
+
+  left: 0;
+
+}
+
+#nuevaImagen, #imagenFormulario img {
+  width: 100%;
+  height: 100%;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1.02);
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.formulario {
+  height: alturaInicial; /* Asegúrate de sustituir por la altura inicial real */
+  transition: height 0.25s ease-in-out;
+}
+
+.formulario.alturaFinal {
+  height: 562px;
+}
+.formulario-login {
+  transform: translate(-400px, -480px);
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.formulario-login h2 {
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.grupo-formulario {
+  margin-bottom: 15px;
+}
+
+.grupo-formulario label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 300;
+  font-size: 14px;
+  color: #AFAFAF;
+}
+
+.grupo-formulario input[type="email"], .grupo-formulario input[type="password"] {
+  width: 300px;
+  height: 27px;
+  padding: 10px;
+  margin-top: 8px;
+  border: 1px solid #e9e9e9;
+  box-shadow: 8px 9px 12px rgba(0,0,0,0.1);
+  color: #AFAFAF;
+  font-weight: 300;
+  font-size: 16px;
+  border-radius: 10px;
+  display: block;
+  transform: translate(5px, 5px);
+}
+
+.grupo-formulario input[type="submit"] {
+  position: relative;
+  bottom: 0;
+  right: 0;
+  width: 106px;
+  height: 41px;
+  background: linear-gradient(to right, #ffffff, #ffffff);
+  color: rgb(0, 0, 0);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.recuperar-contrasena {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #AFAFAF;
+}
+
+.recuperar-contrasena a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.recuperar-contrasena a:hover {
+  text-decoration: underline;
+}
