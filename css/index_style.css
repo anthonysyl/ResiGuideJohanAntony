@@ -116,6 +116,7 @@ nav a {
     margin-top: 50px;
     width: 299px;
     height: 185px;
+  
     justify-content: space-around;
     position: relative;
     box-shadow: 0px 10px 30px 5px rgba(0, 0, 0, 0.5);
@@ -123,8 +124,10 @@ nav a {
     margin-left: auto;
     margin-right: 40px;
     z-index: 3;
+    overflow: auto;  
     background-color: white; /* añadir esta línea para asignar un color de fondo blanco */
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: height 0.4s ease-out, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     top: 0;
 }
 .card:hover
@@ -167,6 +170,39 @@ nav a {
 /* Status cards buttons*/
 .card img {
     filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.5));
+}
+.saber-mas {
+    font-family: 'Roboto', sans-serif;
+    display: inline-block; /* color de fondo */ /* color del texto */
+    border-radius: 12;
+    padding: 10px 20px;
+    color: #000;
+    box-shadow: 0 0 1rem #808080;  /* Rojo para 'Inactivo' */
+    text-decoration: none;
+    margin-top: 140px; /* espacio en la parte superior */
+  }
+  .causa-text {
+    text-align: center;
+    padding: 20px 0;
+    position: absolute;
+    top: 50%;
+    font-family: 'Roboto', sans-serif;
+    color: #000;
+    left: 50%;
+    max-height: 600px;
+    white-space: normal;
+    word-wrap: break-word;
+    
+    transform: translate(-50%, -50%);
+    width: 90%;
+}
+
+.card-expanded {
+    height: 360px;  /* Nuevo height (185px original + 200px) */
+}
+
+.card .icon {
+    transition: opacity 0.5s;
 }
 header {
     position: relative;
@@ -212,8 +248,6 @@ header {
     gap: 20px; /* Agrega un espacio entre las tarjetas de noticias */
   }
   
-  .news-card {
-    /* el resto de tus estilos */
-  }
+  
   
  

@@ -49,16 +49,35 @@
     <!-- Aquí están las tres tarjetas -->
     <div id="cards-container">
         <div class="card">
-            <img class="icon" src="assets/icons/iconwater.png" alt="Icono Agua" width="91" height="83">
+      
+             <img class="icon" src="assets/icons/iconwater.png" alt="Icono Agua" width="91" height="83">
             <div class="status-circle <%= servicios.find(service => service.nombre === 'Agua').estado.toLowerCase().replace(' ', '-') %>"></div>
+            <button class="saber-mas">Saber más</button>
+            <div class="causa-text" style="opacity: 0; transition: opacity 0.5s;">
+              <%= servicios.find(service => service.nombre === 'Agua').causa ? servicios.find(service => service.nombre === 'Agua').causa : 'Todo correcto en estos momentos' %>
+              <button class="volver">Volver</button>
+          </div>
+        
         </div>
+    
         <div class="card">
             <img class="icon" src="assets/icons/icongas.png" alt="Icono Gas" width="175" height="139">
             <div class="status-circle <%= servicios.find(service => service.nombre === 'Gas').estado.toLowerCase().replace(' ', '-') %>"></div>
+            <button class="saber-mas">Saber más</button>
+            <div class="causa-text" style="opacity: 0; transition: opacity 0.5s;">
+              <%= servicios.find(service => service.nombre === 'Gas').causa ? servicios.find(service => service.nombre === 'Gas').causa : 'Todo correcto en estos momentos' %>
+              <button class="volver">Volver</button>
+          </div>
+            
         </div>
         <div class="card">
             <img class="icon" src="assets/icons/iconluz.png" alt="Icono Electricidad" width="112" height="75">
             <div class="status-circle <%= servicios.find(service => service.nombre === 'Luz').estado.toLowerCase().replace(' ', '-') %>"></div>
+            <button class="saber-mas">Saber más</button>
+            <div class="causa-text" style="opacity: 0; transition: opacity 0.5s;">
+              <%= servicios.find(service => service.nombre === 'Luz').causa ? servicios.find(service => service.nombre === 'Luz').causa : 'Todo correcto en estos momentos' %>
+              <button class="volver">Volver</button>
+          </div>
         </div>
     </div>
 </div>
@@ -99,5 +118,6 @@
   </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/javascript/inicio.js"></script>
+<script src="/javascript/opecausa.js"></script>
 </body >
 </html>
