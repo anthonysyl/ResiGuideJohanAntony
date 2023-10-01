@@ -17,8 +17,7 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1920;
-    height: 1080;
+    background-size: 1920px 1030px; 
     font-family: 'Inter', sans-serif;
  
     
@@ -263,7 +262,8 @@ input[type="submit"] {
 }
 
 .fa {
-  color: gray;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
 }
 
 .imagen-formulario {

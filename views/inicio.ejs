@@ -41,7 +41,11 @@
   </div>
     </header>
     <hr class="custom-hr">
-    <img src="assets/images/body_images/fondo3.jpg" alt="Descripción de la imagen" class="custom-img">
+    <% if (usuario.Conjunto && usuario.Conjunto.imageURL) { %>
+      <img src="<%= usuario.Conjunto.imageURL %>" alt="Imagen del conjunto" class="custom-img">
+    <% } else { %>
+      <img src="assets/images/body_images/fondo3.jpg" alt="Descripción de la imagen" class="custom-img">
+    <% } %>
     <!-- Este es el contenedor principal debajo de la imagen -->
     <div id="service-status">
     <h2>DISPONIBILIDAD DE LOS SERVICIOS DE TU CONJUNTO</h2>

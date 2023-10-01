@@ -1,9 +1,10 @@
 const express = require('express');
 const conjuntoController = require('../controllers/conjuntoController'); // Cambiado el nombre del controlador
 const router = express.Router();
+const uploadCloudinary = require('../config/cloudinary');
 
 router.get('/register-conjunto', conjuntoController.getRegisterConjunto);
-router.post('/register-conjunto', conjuntoController.postRegisterConjunto);
+router.post('/register-conjunto', uploadCloudinary.single('imagen'), conjuntoController.postRegisterConjunto);
 router.get('/register-admin/:id', conjuntoController.getRegisterAdmin);
 router.post('/register-admin/:id', conjuntoController.postRegisterAdmin);
 router.get('/aprobar-registro/:id', conjuntoController.aprobarRegistro);

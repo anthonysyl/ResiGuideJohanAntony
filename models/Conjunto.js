@@ -16,6 +16,12 @@ const Conjunto = sequelize.define('Conjunto', {
   direccion: {
     type: DataTypes.STRING
   },
+  imageURL: {
+    type: DataTypes.STRING,
+  },
+  imageID: {
+    type: DataTypes.STRING,
+  },
   fecha_registro: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW

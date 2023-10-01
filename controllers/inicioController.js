@@ -4,6 +4,7 @@
 const { Usuario, Conjunto, Servicio } = require('../models/associations');
 const noticiasController = require('./noticiasController')
 
+
 const inicioController = {
   mostrarInicio: async (req, res) => {
     try {
@@ -37,7 +38,9 @@ const inicioController = {
       res.status(500).send('Error al obtener los datos del usuario');
     }
   }
+  
 };
+
 
 
 module.exports = inicioController;

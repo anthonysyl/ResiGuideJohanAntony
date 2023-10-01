@@ -1,0 +1,18 @@
+node_modules/
+
+# Ignorar el archivo .env donde guardamos variables de entorno sensibles
+.env
+
+# Ignorar la caché de npm
+.npm
+
+# Si estás utilizando logs, puedes ignorar también archivos .log
+*.log
+
+# Ignorar directorio de caché de IDEs como VSCode
+.vscode/
+
+# Otros archivos temporales o específicos del sistema
+*.tmp
+*.DS_Store  # Para usuarios de macOS
+*.swp   

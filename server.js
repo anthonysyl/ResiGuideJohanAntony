@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -15,6 +16,10 @@ const inicioRoutes = require('./routes/inicioRoutes');
 const conjuntoRoutes = require('./routes/conjuntoRoutes'); 
 const noticiasRoutes = require('./routes/noticiasRoutes');
 const servicesPanelRoute = require('./routes/servicesPanelRoute');
+const uploadCloudinary = require('./config/cloudinary');
+
+
+
 
 const emailRoutes = require('./routes/emailRoutes'); // Asegúrate de usar la ruta correcta al archivo
 require('./models/associations');
@@ -97,6 +102,8 @@ app.get('/conjuntos', async (req, res) => {
 
 app.listen(3000, function() {
   console.log('Servidor escuchando en puerto 3000!');
+  console.log(process.env.CLOUDINARY_API_SECRET);
 });
+
 
 module.exports = sequelize;

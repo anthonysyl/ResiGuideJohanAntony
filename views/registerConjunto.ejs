@@ -9,7 +9,7 @@
 <body>
 
 <div id="conjunto-form">
-<form action="/register-conjunto" method="POST">
+<form action="/register-conjunto" method="POST" enctype="multipart/form-data">
   <!-- Tus campos de formulario aquí basándose en tu modelo de conjunto -->
   <div>
     <label for="nombre">Nombre:</label>
@@ -19,8 +19,10 @@
     <label for="direccion">Dirección:</label>
     <input type="text" id="direccion" name="direccion">
   </div>
+  <input type="file" id="imagen" name="imagen">
+  <input type="submit" value="Registrar Conjunto">
+
   <!-- ... otros campos ... -->
-  <button type="submit">Siguiente</button>
 </form>
 </div>
 
