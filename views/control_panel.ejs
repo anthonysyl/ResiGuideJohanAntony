@@ -26,7 +26,15 @@
 <p id="conjunto-text">
     Conjunto <span id="conjunto-name"><%= admin.nombre_conjunto %></span>
 </p>
+
 <div class="shape">
+  <div id="notificationArea">
+    <img src="/assets/icons/campana.png" alt="Notificaciones" class="bell-icon">
+    <span id="notificationCount" class="notification-badge">0</span>
+    <div id="notificationDropdown" class="dropdown">
+     
+    </div>
+  </div>
     <a href="/services-panel" class="no-underline">
     <div class="card" style="--card-color: #AF6251; --border-start: #FE1010; --border-end: #AF6251;">
       <div class="icon icon-services"></div>
@@ -42,6 +50,7 @@
       <p class="card-text">AJUSTES DE LA CUENTA</p>
     </div>
 </div>
+
     <!-- Aquí irán las Card Views -->
   </div>
 
@@ -49,8 +58,11 @@
 
 
     </form>
+ 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="/javascript/control_panel.js"></script>
+  
     <footer>
     <p>Panel Administrativo</p>
 </footer>

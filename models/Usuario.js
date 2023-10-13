@@ -2,6 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../database');
 const Conjunto = require('../models/Conjunto');
 
+
 const Usuarios = sequelize.define('Usuarios', {
   nombre: {
     type: DataTypes.STRING,
@@ -41,6 +42,8 @@ const Usuarios = sequelize.define('Usuarios', {
 }, {
   timestamps: false
 });
+
+
 
 
 

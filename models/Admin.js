@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../database'); // Importamos sequelize desde database.js
-
+const sequelize = require('../database');
+ // Importamos sequelize desde database.js
 const Admin = sequelize.define('Administrador', {
   id: {
     type: DataTypes.INTEGER,
@@ -45,6 +45,7 @@ const Admin = sequelize.define('Administrador', {
   tableName: 'administradores',
   timestamps: false
 });
+
 
 
 

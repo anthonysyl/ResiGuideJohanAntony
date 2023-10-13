@@ -32,7 +32,7 @@ const inicioController = {
   
       // Renderiza la vista 'inicio.ejs' y pasa los datos necesarios 
 
-      res.render('inicio', { usuario: usuario || {}, servicios, noticias });
+      res.render('inicio', { usuario: usuario || {}, servicios, noticias, userId: req.session.userId});
     } catch (error) {
       console.error('Error al obtener los datos del usuario:', error);
       res.status(500).send('Error al obtener los datos del usuario');

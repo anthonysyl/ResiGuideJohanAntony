@@ -17,6 +17,10 @@ const conjuntoRoutes = require('./routes/conjuntoRoutes');
 const noticiasRoutes = require('./routes/noticiasRoutes');
 const servicesPanelRoute = require('./routes/servicesPanelRoute');
 const uploadCloudinary = require('./config/cloudinary');
+const http = require('http');
+const socketIo = require('socket.io');
+
+
 
 
 
@@ -25,7 +29,16 @@ const emailRoutes = require('./routes/emailRoutes'); // Asegúrate de usar la ru
 require('./models/associations');
 
 
+
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+
+// Importamos el archivo chatSockets
+const chatSockets = require('./sockets/chatSockets');
+// Llamamos a la función setup
+chatSockets.setup(io);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -37,9 +50,11 @@ app.use(session({
 }));
 
 //Rutas
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use('/', inicioRoutes);
+
 app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', conjuntoRoutes); // Cambiado el nombre de la ruta
@@ -48,6 +63,7 @@ app.use('/api/servicios', require('./routes/serviciosRoutes'));
 app.use('/email', emailRoutes);
 app.use('/noticias', noticiasRoutes);
 app.use('/', servicesPanelRoute);
+
 app.get('/', (req, res) => {
   
   res.render('home');
@@ -100,7 +116,7 @@ app.get('/conjuntos', async (req, res) => {
   }
 });
 
-app.listen(3000, function() {
+server.listen(3000, function() {
   console.log('Servidor escuchando en puerto 3000!');
   console.log(process.env.CLOUDINARY_API_SECRET);
 });

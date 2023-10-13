@@ -118,10 +118,54 @@
     </div>
   <% }); %>
 </section>
+<div class="chatbot-section">
+  <div class="chatbot-main">
+      <div class="chatbot-image">
+          <img src="/assets/images/system_images/bot.png" alt="Chatbot">
+      </div>
+      <div class="chatbot-text">
+          <p class="chatbot-question">¿Tienes alguna cuestión acerca de tu conjunto?</p>
+          <p class="chatbot-instruction">Habla con nuestro chatbot para que encuentres respuesta a tu inquietud.</p>
+      </div>
+  </div>
+  <div class="chatbot-mini">
+      <img src="/assets/icons/botsito.png" alt="Mini Chatbot">
+  </div>
+  <div class="chat-container">
+    <header>
+        <img src="/assets/icons/chatbot.png" alt="ResiBot" />
+        <span>ResiBot</span>
+    </header>
+    <div class="chat-messages">
+      <div class="message user-message">
+        <span>Tu mensaje aquí</span>
+    </div>
+    
+    <!-- Para un mensaje del bot -->
+    <div class="message bot-message">
+        <img src="/assets/icons/iconChat.png" alt="ResiBot" class="bot-icon"/>
+        <span>Mensaje del bot aquí</span>
+    </div>
+        <!-- Aquí se mostrarán los mensajes del chat -->
+    </div>
+    <div class="chat-input">
+        <textarea placeholder="Send a message"></textarea>
+        <button id="sendMessageBtn"><img src="/assets/icons/plane.png" alt="Enviar"></button>
+    </div>
+</div>
+
+</div>
 
   </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 <script src="/javascript/inicio.js"></script>
+<script> const nombreUsuario = "<%= usuario.nombre %>";
+  
+  const nombreConjunto = "<%= usuario.Conjunto ? usuario.Conjunto.nombre : '' %>";
+  const userId = "<%= usuario.id %>";</script>
+
 <script src="/javascript/opecausa.js"></script>
+
 </body >
 </html>
