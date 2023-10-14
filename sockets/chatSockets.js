@@ -6,6 +6,7 @@ const setup = (io) => {
 
         socket.on('userConnected', (userId) => {
             connectedUsers[userId] = socket.id;
+            console.log('Usuario conectado:', userId, 'Socket ID:', socket.id);
         });
 
         socket.on('adminConnected', (adminId) => {
@@ -24,18 +25,11 @@ const setup = (io) => {
             io.to(connectedUsers[data.userId]).emit('adminAccepted', { adminId: data.adminId, adminName: data.adminName });
         });
         socket.on('denyChat', (data) => {
-            io.to(connectedUsers[data.userId]).emit('adminDenied', {});
+            console.log("ID de usuario a denegar:", data.userId);
+            console.log("Emitiendo chatDenied a:", connectedUsers[data.userId]);
+            io.to(connectedUsers[data.userId]).emit('chatDenied');
         });
-        socket.on('adminAccepted', function(data) {
-            addMessage(`El administrador ${data.adminName} se ha unido al chat.`, 'bot');
-            // Puedes añadir más lógica aquí si lo necesitas.
-        });
-        
-        socket.on('adminDenied', function() {
-            addMessage('El administrador ha decidido no unirse al chat en este momento.', 'bot');
-        });
-
-        // ... Más lógica si es necesario ...
+    
     });
 };
 

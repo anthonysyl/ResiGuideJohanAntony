@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require('path');
 const adminController = require('../controllers/adminController');
 const Admin = require('../models/Admin');
+const Usuario = require('../models/Usuario');
 const Conjunto = require('../models/Conjunto');
 
 
@@ -47,6 +48,25 @@ router.get('/control-panel', adminController.getPanelControl);
 
 // Ruta para actualizar el estado de los servicios
 router.post('/control-panel', adminController.postPanelControl);
+
+router.get('/control_panel', async (req, res) => {
+  try {
+      // Aquí, como ejemplo, obtengo el primer usuario y administrador. 
+      // Adapta esta lógica a tus necesidades.
+      const usuario = await Usuario.findOne();
+      const admin = await Admin.findOne();
+
+      if (!usuario || !admin) {
+          throw new Error("No se pudo obtener el usuario o administrador.");
+      }
+
+      res.render('control_panel', { adminId: admin.id, userId: usuario.id });
+  } catch (error) {
+      console.error("Error al obtener IDs:", error);
+      res.status(500).send("Error interno del servidor");
+  }
+});
+
   
 
 module.exports = router;

@@ -1,6 +1,10 @@
 const socket = io.connect('/');
 
-socket.emit('adminConnected', 'adminIdQueQuieras');
+
+
+socket.emit('adminConnected', adminId); 
+
+
 let notificationCount = 0;
 const bellIcon = document.querySelector('.bell-icon');
 const dropdown = document.getElementById('notificationDropdown');
@@ -36,13 +40,27 @@ function toggleDropdown() {
 function addNotificationToDropdown(data) {
   const notificationDiv = document.createElement('div');
   notificationDiv.className = "notification";
+  // Añade un identificador basado en el userId
+  notificationDiv.setAttribute('data-user-id', data.userId);
   notificationDiv.innerHTML = `
       <img src="/assets/icons/change.png" alt="Usuario"> 
-      <span class="notification-text">${data.userName} quiere comunicarse contigo!</span>
+      <span class="notification-text">Un usuario quiere comunicarse contigo!</span>
       <button class="accept" onclick="acceptChat('${data.userId}')">Aceptar</button>
       <button class="deny" onclick="denyChat('${data.userId}')">Denegar</button>
   `;
+  
   dropdown.appendChild(notificationDiv);
+}
+function denyChat(userId) {
+  // Selecciona y elimina la notificación basada en el userId
+  const notification = document.querySelector(`.notification[data-user-id="${userId}"]`);
+  console.log(`.notification[data-user-id="${userId}"]`);
+  if (notification) {
+      notification.remove();
+  }
+
+  // Emitir un evento al servidor para notificar al usuario que su solicitud fue denegada.
+  socket.emit('denyChat', { userId: userId });
 }
 
 

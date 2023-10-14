@@ -162,8 +162,13 @@
 <script src="/javascript/inicio.js"></script>
 <script> const nombreUsuario = "<%= usuario.nombre %>";
   
-  const nombreConjunto = "<%= usuario.Conjunto ? usuario.Conjunto.nombre : '' %>";
-  const userId = "<%= usuario.id %>";</script>
+  const nombreConjunto = "<%= usuario.Conjunto ? usuario.Conjunto.nombre : '' %>";</script>
+  <script>
+    const userId = '<%= userId %>';
+    const adminId = '<%= adminId %>';  // Asegúrate de que esta línea esté presente y correcta.
+  </script>
+  
+
 
 <script src="/javascript/opecausa.js"></script>
 

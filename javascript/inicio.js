@@ -71,9 +71,8 @@ function handleBotResponse(userMessage) {
         }, 1000);
     } else if (userMessage === '3') {
         addMessage('Espera un momento...', 'bot');
-    
-        // Usar sockets en lugar de fetch para solicitar chat
-        socket.emit('requestAdmin', { userId: 'tuUserID', adminId: 'adminIdQueQuieras' }, (confirmation) => {
+  
+        socket.emit('requestAdmin', { userId: userId, adminId: adminId }, (confirmation) => {
             if (confirmation) {
                 addMessage('Tu solicitud está pendiente. Espera un momento...', 'bot');
             } else {
@@ -83,6 +82,14 @@ function handleBotResponse(userMessage) {
     }
 }
 
+socket.on('adminAccepted', function(data) {
+    addMessage(`El administrador ${data.adminName} ha aceptado tu solicitud de chat.`, 'bot');
+});
+
+socket.on('chatDenied', () => {
+    console.log("Evento chatDenied recibido en el cliente.");
+    addMessage('Su solicitud ha sido denegada.');
+});
 function addMessage(content, sender) {
     const messagesDiv = document.querySelector('.chat-messages');
     const messageDiv = document.createElement('div');

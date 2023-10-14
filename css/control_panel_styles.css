@@ -279,12 +279,21 @@ footer {
     position: absolute;
     right: 0;
     top: 30px; 
-    width: 200px;
+    width: 411px;
+    border-radius: 10px;
     border: 1px solid #ccc;
     background-color: #fff;
     display: none; /* Inicialmente oculto */
     overflow: auto;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    
     max-height: 300px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: max-height 0.3s ease-out; /* Animación */
+}
+.button
+{
+    border: 10px;
+    background-color: #4caf50;
 }
