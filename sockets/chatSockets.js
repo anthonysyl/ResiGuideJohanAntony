@@ -5,8 +5,16 @@ const setup = (io) => {
     io.on('connection', (socket) => {
 
         socket.on('userConnected', (userId) => {
+            console.log("Usuario conectado con ID:", userId);
             connectedUsers[userId] = socket.id;
-            console.log('Usuario conectado:', userId, 'Socket ID:', socket.id);
+        });
+        socket.on('disconnect', () => {
+            // Encuentra el userId basado en el socket.id y elimina la entrada de connectedUsers
+            const userIdToDisconnect = Object.keys(connectedUsers).find(key => connectedUsers[key] === socket.id);
+            if (userIdToDisconnect) {
+                delete connectedUsers[userIdToDisconnect];
+                console.log('Usuario desconectado:', userIdToDisconnect);
+            }
         });
 
         socket.on('adminConnected', (adminId) => {
@@ -25,9 +33,13 @@ const setup = (io) => {
             io.to(connectedUsers[data.userId]).emit('adminAccepted', { adminId: data.adminId, adminName: data.adminName });
         });
         socket.on('denyChat', (data) => {
-            console.log("ID de usuario a denegar:", data.userId);
-            console.log("Emitiendo chatDenied a:", connectedUsers[data.userId]);
-            io.to(connectedUsers[data.userId]).emit('chatDenied');
+            const userSocketId = connectedUsers[data.userId];
+            if (userSocketId) {
+                console.log("Emitiendo chatDenied a:", userSocketId);
+                io.to(userSocketId).emit('chatDenied');
+            } else {
+                console.log("No se encontró un socket.id para el usuario:", data.userId);
+            }
         });
     
     });

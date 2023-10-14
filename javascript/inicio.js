@@ -1,5 +1,7 @@
 const socket = io.connect('/');
 
+socket.emit('userConnected', userId);
+
 const menuIcon = document.getElementById("menu-icon");
 const slider = document.getElementById("slider");
 
@@ -88,7 +90,7 @@ socket.on('adminAccepted', function(data) {
 
 socket.on('chatDenied', () => {
     console.log("Evento chatDenied recibido en el cliente.");
-    addMessage('Su solicitud ha sido denegada.');
+    addMessage('Su solicitud ha sido denegada.', 'bot');
 });
 function addMessage(content, sender) {
     const messagesDiv = document.querySelector('.chat-messages');
