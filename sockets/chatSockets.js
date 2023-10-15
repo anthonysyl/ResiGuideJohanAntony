@@ -3,6 +3,10 @@ let connectedAdmins = {};
 
 const setup = (io) => {
     io.on('connection', (socket) => {
+        socket.on('adminConnected', (adminId) => {
+            console.log('Administrador conectado con ID: ', adminId)
+            connectedAdmins[adminId] = socket.id;
+        });
 
         socket.on('userConnected', (userId) => {
             console.log("Usuario conectado con ID:", userId);
@@ -17,9 +21,7 @@ const setup = (io) => {
             }
         });
 
-        socket.on('adminConnected', (adminId) => {
-            connectedAdmins[adminId] = socket.id;
-        });
+      
 
         socket.on('requestAdmin', (data, callback) => {
             io.to(connectedAdmins[data.adminId]).emit('userWantsToChat', { userId: data.userId, userName: data.userName });
@@ -30,7 +32,23 @@ const setup = (io) => {
         });
 
         socket.on('acceptChat', (data) => {
-            io.to(connectedUsers[data.userId]).emit('adminAccepted', { adminId: data.adminId, adminName: data.adminName });
+            io.to(connectedUsers[data.userId]).emit('adminAccepted', { adminId: data.adminId });
+        });
+        socket.on('userMessage', function(data) {
+            console.log('Mensaje recibido de un usuario:', data.message);
+            const adminSocketId = connectedAdmins[data.adminId];
+            if (adminSocketId) {
+                io.to(adminSocketId).emit('userMessage', { message: data.message });
+            } else {
+                console.log('No se encontró un socket para el administrador con ID:', data.adminId); // Nuevo log para manejar el caso en el que no se encuentra el administrador
+            }
+        });
+        socket.on('adminMessage', function(data) {
+            console.log('Mensaje recibido del administrador:', data.message);
+            const userSocketId = connectedUsers[data.userId];
+            if (userSocketId) {
+                io.to(userSocketId).emit('adminMessage', { message: data.message });
+            }
         });
         socket.on('denyChat', (data) => {
             const userSocketId = connectedUsers[data.userId];

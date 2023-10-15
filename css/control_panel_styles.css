@@ -297,3 +297,167 @@ footer {
     border: 10px;
     background-color: #4caf50;
 }
+.chat-container {
+    opacity: 0; 
+    z-index: 9999;
+    width: 311px;
+    height: 402px;
+    background-color: #FFF;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    bottom: 10px;
+    display: flex;
+    border-radius: 10px;
+    flex-direction: column; 
+    right: 10px;
+    transition: opacity 0.5s; /* Agregamos transición para el efecto fade in/out */
+    display: none; /* Oculto por defecto */
+}
+
+.chat-container.expanded {
+    opacity: 1;
+    display: block; /* Mostramos el chat cuando tiene la clase expanded */
+}
+
+.chat-container header {
+    height: 56px;
+    width: 311px;
+    background-color: #7ccefd;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; 
+    justify-content: center;
+    position: relative;
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400; 
+    border-radius: 10px;
+    display: flex;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    align-items: center;
+
+}
+
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 250px;
+    flex-grow: 1; 
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.message {
+    padding: 5px 10px;
+    border-radius: 5px;
+    word-wrap: break-word; 
+    margin: 5px 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300; 
+    max-width: 70%; /* para que los mensajes no ocupen todo el ancho */
+}
+
+.user-message {
+    align-self: flex-end; /* para que se muestre a la derecha */
+    background-color: #a3fcfc;
+}
+
+.bot-message {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+.bot-message .bot-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+
+.chat-input {
+    height: 52px;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    flex-shrink: 0;
+    justify-content: space-between;
+    position: absolute; /* Posición absoluta */
+    bottom: 0; /* Siempre en la parte inferior */
+    left: 0; /* Desde el lado izquierdo */
+    right: 0;
+
+}
+
+.chat-input textarea {
+    flex: 1;
+    width: calc(100% - 55px); /* 100% - (ancho del ícono + padding del botón) */
+    resize: none;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300; /* 300 corresponde a Light en la familia Roboto */
+    font-size: 15px;
+    height: 40px;
+    background-color: #ffffff;
+    padding: 10px;
+    margin-right: 10px;
+    margin-top: -20px;
+    border-radius: 5px;
+    border-top: 1px solid #EFEFEF;
+}
+
+
+.chat-input button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.chat-input button img {
+    width: 35px;
+    height: 32px;
+}
+.accept
+{
+    
+    border-radius: 10px;
+    background-color: #4caf50;
+}
+.deny
+{
+    border-radius: 10px;
+    background-color: #f55757;
+}
+.message {
+    padding: 5px 10px;
+    border-radius: 5px;
+    word-wrap: break-word; 
+    margin: 5px 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    max-width: 70%; /* para que los mensajes no ocupen todo el ancho */
+}
+
+/* Estilo para los mensajes del usuario */
+.user-message {
+    background-color: #a3fcfc; 
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+.admin-message {
+    background-color: #5ba2ff; 
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #000;
+}

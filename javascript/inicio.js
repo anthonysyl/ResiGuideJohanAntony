@@ -4,6 +4,7 @@ socket.emit('userConnected', userId);
 
 const menuIcon = document.getElementById("menu-icon");
 const slider = document.getElementById("slider");
+let hasGreeted = false;
 
 menuIcon.addEventListener("click", () => {
   slider.classList.toggle("open");
@@ -57,12 +58,17 @@ sendButton.addEventListener('click', function() {
     if (userMessage) {
         addMessage(userMessage, 'user');
         chatInput.value = ''; // Limpiar el input
-        handleBotResponse(userMessage); // Manejar la respuesta del bot
+        handleBotResponse(userMessage); 
+        socket.emit('userMessage', { message: userMessage, userId: userId, adminId: adminId }); // Manejar la respuesta del bot
     }
+});
+socket.on('adminMessage', function(data) {
+    addMessage(data.message, 'admin');
 });
 
 function handleBotResponse(userMessage) {
-    if (userMessage.toLowerCase().includes('hola')) {
+    if (userMessage.toLowerCase().includes('hola')&& !hasGreeted) {
+        hasGreeted = true; 
         setTimeout(() => {
             addMessage(`Hola ${nombreUsuario} del conjunto ${nombreConjunto}, ¿qué quieres saber hoy? Elige tu opción:`, 'bot');
             setTimeout(() => {
@@ -85,12 +91,14 @@ function handleBotResponse(userMessage) {
 }
 
 socket.on('adminAccepted', function(data) {
-    addMessage(`El administrador ${data.adminName} ha aceptado tu solicitud de chat.`, 'bot');
-});
 
+    addMessage("El administrador  ha aceptado tu solicitud.", 'bot');
+});
 socket.on('chatDenied', () => {
     console.log("Evento chatDenied recibido en el cliente.");
+
     addMessage('Su solicitud ha sido denegada.', 'bot');
+    chatInput.disabled = true;
 });
 function addMessage(content, sender) {
     const messagesDiv = document.querySelector('.chat-messages');
@@ -102,6 +110,10 @@ function addMessage(content, sender) {
     } else if (sender === 'bot') {
         messageDiv.className = 'message bot-message';
         messageDiv.innerHTML = `<img src="/assets/icons/iconChat.png" alt="ResiBot" class="bot-icon"/><span>${content}</span>`;
+    }
+    else if (sender === 'admin') {
+        messageDiv.className = 'message admin-message';
+        messageDiv.textContent = content; // añade esta línea
     }
 
     messagesDiv.appendChild(messageDiv);

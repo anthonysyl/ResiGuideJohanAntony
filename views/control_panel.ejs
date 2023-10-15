@@ -35,6 +35,21 @@
      
     </div>
   </div>
+  <div class="chat-container">
+    <header>
+        <!-- Retiramos el ícono del bot ya que no lo necesitas aquí -->
+        <span>Chat con el Usuario</span>
+    </header>
+    <div class="chat-messages">
+        <!-- Aquí aparecerán los mensajes del chat -->
+    </div>
+    <div class="chat-input">
+        <textarea id="chatInput" placeholder="Escribe tu mensaje..."></textarea>
+        <button id="sendMessageBtn">
+            <img src="/assets/icons/plane.png" alt="Enviar">
+        </button>
+    </div>
+</div>
     <a href="/services-panel" class="no-underline">
     <div class="card" style="--card-color: #AF6251; --border-start: #FE1010; --border-end: #AF6251;">
       <div class="icon icon-services"></div>
@@ -60,7 +75,9 @@
     </form>
     <script>
 
+
       const adminId ='<%= adminId %>';
+      console.log('La id de admin es:', adminId);
     </script>
  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
