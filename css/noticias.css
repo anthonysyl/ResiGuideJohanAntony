@@ -107,6 +107,33 @@ h2 {
     font-size: 15px;
     cursor: pointer;
 }
+.news-text {
+    width: 504px;
+    height: 113px;
+    margin: 20px auto;
+    background-color: #FFFFFF; /* Cambiado a blanco */
+    border: none;
+    padding: 10px;
+    resize: none; 
+    border-radius: 10px;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.submit-button {
+    width: 108px;
+    height: 38px;
+    background-color: #CC4324;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    margin: 20px auto; /* Añadido para centrar */
+}
+
 .news-container {
     width: 934px;
     height: 254px;
@@ -114,13 +141,18 @@ h2 {
     display: flex;
     align-items: center;
     padding: 20px;
+    margin: 10px auto; /* Añadido para centrar y dar espacio entre las noticias */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadido box shadow */
+    border-radius: 20px; /* Añadido border radius */
 }
 
 .news-image {
     width: 202px;
     height: 151px;
-    background-color: grey; /* Puedes cambiarlo por una imagen real usando background-image */
+    background-color: grey; 
     margin-right: 20px;
+    background-size: cover; /* Añadido para adaptar imágenes */
+    background-position: center; /* Centra la imagen */
 }
 
 .news-text {
@@ -141,6 +173,7 @@ h2 {
     display: flex;
     align-items: center;
     padding: 10px;
+    border-radius: 20px; /* Añadido border radius */
 }
 
 .news-actions {

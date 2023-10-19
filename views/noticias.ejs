@@ -45,6 +45,13 @@
   
   
 </form>
+<% if (typeof noticias !== 'undefined' && noticias.length > 0) { %>
+    <% noticias.forEach(noticia => { %>
+        ...
+    <% }) %>
+<% } else { %>
+    <p>No hay noticias disponibles.</p>
+<% } %>
 <div id="news-list">
     <% noticias.forEach(noticia => { %>
         <div class="news-container">

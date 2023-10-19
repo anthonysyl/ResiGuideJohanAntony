@@ -46,14 +46,12 @@ exports.agregarNoticia = async (req, res) => {
 exports.getNoticias = async (req, res) => {
   try {
       const noticias = await Noticia.findAll();
-      console.log(noticias);
-      res.render('noticias', { noticias });
+      res.render('noticias', { noticias: noticias });
   } catch (error) {
-      console.error("Error al obtener las noticias:", error);
-      res.status(500).send("Error interno del servidor");
+      console.error("Error al obtener noticias:", error);
+      res.status(500).send("Error al obtener noticias");
   }
 };
-
 exports.getNoticiasManuales = async (conjuntoId) => {
   try {
     // Buscar noticias manuales
