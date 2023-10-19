@@ -347,6 +347,7 @@ header {
     height: 84px; 
     margin-top: -15px;
     cursor: pointer;
+    
 }
 .chat-container {
     opacity: 0; 
@@ -489,6 +490,57 @@ header {
     font-weight: 300; 
     /* Y cualquier otro estilo que quieras añadir */
 }
+@keyframes slideFadeIn {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.slide-fade-enter {
+    animation: slideFadeIn 0.5s forwards;
+}
+
   
   
- 
+ /* Animaciones */
+ @keyframes slideDownFadeIn {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUpFadeOut {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+.chat-container {
+    display: none; /* Por defecto estará oculto */
+    animation-duration: 0.5s;
+    transition: opacity 0.5s, transform 0.5s; 
+}
+
+.chat-enter {
+    display: block;
+    animation-name: slideDownFadeIn;
+}
+
+.chat-exit {
+    animation-name: slideUpFadeOut;
+}

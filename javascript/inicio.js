@@ -15,16 +15,27 @@ document.addEventListener("DOMContentLoaded", function() {
   const chatInput = document.getElementById('chatInput');
     const sendButton = document.getElementById('sendButton');
 
-  chatbotMini.addEventListener("click", function() {
-    console.log("chatbot-mini fue clickeado");
-      if(chatContainer.classList.contains('expanded')) {
-          chatContainer.classList.remove('expanded');
-          chatContainer.style.display = 'none';
-      } else {
-          chatContainer.classList.add('expanded');
-          chatContainer.style.display = 'block';
-      }
-  });
+   chatbotMini.addEventListener("click", function() {
+        console.log("chatbot-mini fue clickeado");
+          if(chatContainer.classList.contains('expanded')) {
+              chatContainer.classList.remove('expanded');
+              chatContainer.classList.add('chat-exit');
+              
+              setTimeout(() => {
+                  chatContainer.style.display = 'none';
+                  chatContainer.classList.remove('chat-exit'); // Limpiar la clase para futuras animaciones
+              }, 500); // Tiempo igual a la duración de la animación
+    
+          } else {
+              chatContainer.style.display = 'block';
+              chatContainer.classList.add('expanded');
+              chatContainer.classList.add('chat-enter');
+              
+              setTimeout(() => {
+                  chatContainer.classList.remove('chat-enter'); // Limpiar la clase para futuras animaciones
+              }, 500); // Tiempo igual a la duración de la animación
+          }
+      });
   let observerOptions = {
       root: null,
       rootMargin: "0px",
@@ -105,18 +116,24 @@ function addMessage(content, sender) {
     const messageDiv = document.createElement('div');
 
     if (sender === 'user') {
-        messageDiv.className = 'message user-message';
+        messageDiv.className = 'message user-message slide-fade-enter'; // Añade la clase aquí
         messageDiv.innerHTML = `<span>${content}</span>`;
     } else if (sender === 'bot') {
-        messageDiv.className = 'message bot-message';
+        messageDiv.className = 'message bot-message slide-fade-enter'; // Añade la clase aquí
         messageDiv.innerHTML = `<img src="/assets/icons/iconChat.png" alt="ResiBot" class="bot-icon"/><span>${content}</span>`;
     }
     else if (sender === 'admin') {
-        messageDiv.className = 'message admin-message';
-        messageDiv.textContent = content; // añade esta línea
+        messageDiv.className = 'message admin-message slide-fade-enter'; // Añade la clase aquí
+        messageDiv.textContent = content;
     }
 
     messagesDiv.appendChild(messageDiv);
+    
+    // Remover la clase de animación después de que termine (para que si vuelves a añadir el mismo elemento no se repita la animación)
+    setTimeout(() => {
+        messageDiv.classList.remove("slide-fade-enter");
+    }, 500); // 0.5s es la duración de nuestra animación en el CSS.
+
     // Asegúrate de que el último mensaje esté siempre visible
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }

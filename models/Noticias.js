@@ -11,14 +11,21 @@ const Noticia = sequelize.define('Noticia', {
         type: DataTypes.STRING(100),
         allowNull: false
     },
+    descripcion: {
+        type: DataTypes.STRING(255),
+        allowNull: false
+    },
     contenido: {
         type: DataTypes.TEXT,
         allowNull: false
     },
-    tipo: {
-        type: DataTypes.ENUM,
-        values: ['Destacada', 'Secundaria'],
-        allowNull: false
+    imagenUrl: {
+        type: DataTypes.STRING(255),
+        allowNull: true
+    },
+    imagenId: {
+        type: DataTypes.STRING(255),
+        allowNull: true
     },
     conjunto_id: {
         type: DataTypes.INTEGER,

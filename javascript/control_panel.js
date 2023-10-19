@@ -8,6 +8,20 @@ $(document).ready(function() {
     socket.on('userMessage', function(data) {
       addMessage(data.message, 'user');  // suponiendo que 'user' es la etiqueta que quieres mostrar en el chat del administrador
   });
+  // Referencia al panel
+  const slidePanel = document.querySelector('.slide-panel');
+
+  // Evento cuando el mouse se acerca al borde izquierdo de la ventana
+  document.addEventListener('mousemove', (event) => {
+      if (event.clientX < 50) {
+          slidePanel.style.left = '0';
+      }
+  });
+  
+  // Evento para esconder el panel cuando el mouse se aleja
+  slidePanel.addEventListener('mouseleave', () => {
+      slidePanel.style.left = '-300px';
+  });
     let notificationCount = 0;
     const bellIcon = document.querySelector('.bell-icon');
     const dropdown = document.getElementById('notificationDropdown');
@@ -64,9 +78,32 @@ $(document).ready(function() {
 
         dropdown.appendChild(notificationDiv);
     }
+    let currentChatUserId = null;
+    function clearChat(userId) {
+        const chatContainer = document.querySelector('.chat-messages');
+        if (currentChatUserId !== userId) {
+            chatContainer.innerHTML = '';
+        }
+    }
+    function removeNotification(userId) {
+        const notification = document.querySelector(`.notification[data-user-id="${userId}"]`);
+        if (notification) {
+            notificationCount--;  // decrementa el contador de notificaciones
+            const badge = document.getElementById('notificationCount');
+            badge.textContent = notificationCount;
+            if(notificationCount === 0) {
+                badge.style.display = 'none';
+            }
+            notification.remove();
+        }
+    }
     
 
     function acceptChat(userId) {
+        if (currentChatUserId !== userId) {
+            clearChat(userId);
+        }
+      
         currentChatUserId = userId;
         socket.emit('acceptChat', { userId: userId, adminId: adminId });
 
@@ -75,6 +112,8 @@ $(document).ready(function() {
         chatContainer.classList.add('expanded');
         const welcomeMessage = "El administrador ha aceptado tu solicitud";
         socket.emit('adminMessage', { message: welcomeMessage, userId: currentChatUserId });
+        removeNotification(userId); 
+    
     }
 
    
@@ -90,18 +129,20 @@ $(document).ready(function() {
           messageDiv.className = 'message admin-message';
           messageDiv.innerHTML = `<span>${content}</span>`;
       }
+   
       
       chatContainer.appendChild(messageDiv);
       chatContainer.scrollTop = chatContainer.scrollHeight;
+   
     }
 
+    
     function denyChat(userId) {
         const notification = document.querySelector(`.notification[data-user-id="${userId}"]`);
         console.log(`.notification[data-user-id="${userId}"]`);
         if (notification) {
             notification.remove();
         }
-
         socket.emit('denyChat', { userId: userId });
     }
 

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+    <title>Administrador - Subir Noticias</title>
+    <link rel="stylesheet" href="css/noticias.css">
+</head>
+<body>
+    <header>
+        <div id="logo-container">
+            <h1>RESIGUIDE</h1>
+        </div>
+        <!-- Aquí irán otros elementos del header si los necesitas -->
+    </header>
+
+<h1>Noticias relacionadas al conjunto</h1>
+<h2>Sube las noticias relacionadas a tu conjunto,<br>mantén informado a los residentes.</h2>
+
+<form action="/noticias/agregar" method="POST" enctype="multipart/form-data">
+    <div class="input-file">
+        Sube la foto relacionada a tu noticia
+        <input type="file" name="imagen">
+    </div>
+
+    <div class="text-box-container">
+        <div class="input-section">
+            <label for="titulo">Título:</label>
+            <input type="text" class="text-box" id="titulo" name="titulo">
+        </div>
+        <div class="input-section">
+            <label for="descripcion">Descripción:</label>
+            <input type="text" class="text-box" id="descripcion" name="descripcion">
+        </div>
+    </div>
+
+    <label for="news-text">Texto de la noticia:</label>
+    <textarea id="news-text" class="news-text" name="contenido"></textarea>
+
+    <!-- Asegúrate de agregar un campo para el conjunto_id -->
+    <input type="hidden" name="conjunto_id" value="ID_DEL_CONJUNTO_AQUI">
+
+    <button type="submit" class="submit-button">Subir</button>
+  
+  
+</form>
+<div id="news-list">
+    <% noticias.forEach(noticia => { %>
+        <div class="news-container">
+            <div class="news-image" style="background-image: url('<%= noticia.imagenUrl %>')"></div>
+            <div class="news-text">
+                <div class="news-title"><%= noticia.titulo %></div>
+                <div class="news-description"><%= noticia.descripcion %></div>
+                <button class="edit-button" onclick="location.href='/editar-noticia/<%= noticia.id %>'">Editar</button>
+            </div>
+            <div class="news-actions">
+                <div class="action-button accept"></div>
+                <div class="action-button delete" data-id="<%= noticia.id %>" onclick="eliminarNoticia(this)"></div>
+
+            </div>
+        </div>
+    <% }) %>
+</div>
+<script>
+      function eliminarNoticia(idNoticia) {
+        const idNoticia = element.getAttribute("data-id");
+        if(confirm("¿Está seguro de que desea eliminar esta noticia?")) {
+            fetch(`/eliminar-noticia/${idNoticia}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    location.reload(); // Recargar la página
+                } else {
+                    alert("Error al eliminar la noticia.");
+                }
+            });
+        }
+    }
+
+</script>
+</body>
+
+</html>

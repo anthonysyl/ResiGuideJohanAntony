@@ -16,13 +16,25 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
+        
         folder: 'conjuntos', // El nombre de la carpeta en Cloudinary
         format: async (req, file) => 'png', // 'jpeg', 'png', etc.
+    }
+});
+const storageNoticias = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'noticias',
+        format: async (req, file) => 'png',
     }
 });
 
 // ... (resto de tu configuración de Cloudinary)
 const uploadCloudinary = multer({ storage: storage });
+const uploadNoticias = multer({ storage: storageNoticias });
 
-module.exports = uploadCloudinary;
+module.exports = { uploadCloudinary, uploadNoticias };
+
+   
+
 

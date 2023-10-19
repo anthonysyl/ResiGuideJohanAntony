@@ -5,6 +5,73 @@ body {
     margin: 0;
     font-family: 'Inter', sans-serif;
 }
+.slide-panel {
+    width: 300px;
+    height: 600px;
+    position: fixed;
+    top: 90x;
+    left: -300px;
+    z-index: 9999;
+    transition: left 0.3s ease;
+    background-color: #1e1e2f;
+    color: #FFF;
+    font-size: 12px;
+    box-shadow: 2px 6px 4px rgba(0, 0, 0, 0.2); 
+    font-family: "Roboto", sans-serif; 
+}
+
+.profile-section {
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-section img {
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+.profile-section h2 {
+    font-size: 15px;
+    font-weight: light;
+    margin: 10px 0;
+}
+
+.buttons-section {
+    margin-top: 60px;
+    padding: 20px 0;
+}
+
+.custom-button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: transparent;
+    color: #c2c2c2;
+    border: none;
+    transition: background-color 0.3s ease;
+    font-size: 12px; 
+    font-weight: bold;
+}
+
+.custom-button:hover {
+    background-color: #2e2e3f;
+}
+
+.custom-button span.icon {
+    margin-right: 10px;
+    width: 20px; /* ajusta según el tamaño que prefieras para el ícono */
+    height: 20px; /* ajusta según el tamaño que prefieras para el ícono */
+}
+
+.custom-button.logout {
+    background-color: rgb(32, 32, 32);
+}
+
+.collapse-button {
+    display: none;
+}
 
 header {
     background-color: #000;
@@ -252,6 +319,11 @@ footer {
     height: 100px;
     display: block;
     cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.bell-icon:hover
+{  transform: scale(1.03);    
+    filter: drop-shadow(0px 3px 2px rgba(252, 189, 95, 0.5));
 }
 
 .notification-badge {
@@ -268,11 +340,13 @@ footer {
 
 .bell-container {
     position: relative;
+    
 }
 
 .bell-icon {
     font-size: 24px;
     cursor: pointer;
+    filter: drop-shadow(0px 3px 2px rgba(211, 211, 211, 0.5));
 }
 
 .dropdown {
@@ -282,7 +356,7 @@ footer {
     width: 411px;
     border-radius: 10px;
     border: 1px solid #ccc;
-    background-color: #fff;
+    background-color: #F5F5F5;
     display: none; /* Inicialmente oculto */
     overflow: auto;
     font-family: 'Roboto', sans-serif;
@@ -424,13 +498,15 @@ footer {
 .accept
 {
     
-    border-radius: 10px;
-    background-color: #4caf50;
+    border-radius: 5px;
+    background-color:#4caf50;
+    border-color: #4caf50;
 }
 .deny
 {
-    border-radius: 10px;
-    background-color: #f55757;
+    border-radius: 5px;
+    background-color: #FF5656;
+    border-color:#FF5656;
 }
 .message {
     padding: 5px 10px;

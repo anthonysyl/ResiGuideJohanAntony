@@ -1,7 +1,19 @@
 // noticiasRoutes.js
 const express = require('express');
 const router = express.Router();
+const { agregarNoticia,getNoticias, getNoticiasManuales, getNoticiasAutomaticas } = require('../controllers/noticiasController');
+const { uploadNoticias } = require('../config/cloudinary');
 const noticiasController = require('../controllers/noticiasController');
+
+
+router.get('noticias', noticiasController.getNoticias);
+router.post('/agregar', uploadNoticias.single('imagen'), agregarNoticia);
+
+
+
+router.get('/', (req, res) => {
+  res.render('noticias');
+});
 
 router.get('/manuales', async (req, res, next) => {
   try {

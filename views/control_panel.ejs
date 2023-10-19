@@ -12,6 +12,31 @@
         </div>
         <!-- Aquí irán otros elementos del header si los necesitas -->
     </header>
+    <div class="slide-panel">
+
+      <!-- Sección de Perfil -->
+      <div class="profile-section">
+          <img src="/assets/icons/botsito.png" alt="Icon">
+          <h2><%= admin.nombre %></h2>
+          <p><%= admin.nombre_conjunto %></p>
+          
+      </div>
+      
+  
+      <!-- Encabezado del Panel -->
+     
+  
+      <!-- Sección de botones/pastillas -->
+      <div class="buttons-section">
+          <button class="custom-button"><span class="icon"><!-- Icono aquí --></span> Manejo de servicios</button>
+          <button class="custom-button"><span class="icon"><!-- Icono aquí --></span> Manejo de noticias</button>
+          <button class="custom-button"><span class="icon"><!-- Icono aquí --></span> Ajustes de cuenta</button>
+          <button class="custom-button logout"><span class="icon"><!-- Icono aquí --></span> Cerrar sesión</button>
+      </div>
+  
+      <!-- Botón para colapsar barra lateral -->
+      <button class="collapse-button"><span class="icon"><!-- Icono aquí --></span> Collapse Sidebar</button>
+  </div>
     <div id="panel-label">
         <p>Panel de Control</p>
       </div>
@@ -56,10 +81,12 @@
       <p class="card-text">MANEJO DE SERVICIOS</p>
     </div>
     </a>
+    <a href="/noticias" class="no-underline"> 
     <div class="card" style="--card-color: #55A47E; --border-start: #95FFC6; --border-end: #55A47E;">
       <div class="icon icon-news"></div>
       <p class="card-text">NOTICIAS MANUALES</p>
     </div>
+    </a>
     <div class="card" style="--card-color: #818181; --border-start: #D9D9D9; --border-end: #818181;">
       <div class="icon icon-settings"></div>
       <p class="card-text">AJUSTES DE LA CUENTA</p>
@@ -77,7 +104,7 @@
 
 
       const adminId ='<%= adminId %>';
-      console.log('La id de admin es:', adminId);
+  
     </script>
  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
