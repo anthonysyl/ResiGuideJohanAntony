@@ -1,10 +1,10 @@
 const axios = require('axios');
-const Conjunto = require('../models/Conjunto');
+const Conjunto =require('../models/Conjunto')
 const Noticia = require('../models/Noticias');
 const Admin = require('../models/Admin');
 
 
-exports.agregarNoticia = async (req, res) => {
+agregarNoticia = async (req, res) => {
   try {
     const admin = await Admin.findOne({ where: { id: req.session.adminId } });
     if (!admin) {
@@ -43,7 +43,7 @@ exports.agregarNoticia = async (req, res) => {
       res.status(500).json({ success: false, message: 'Error interno del servidor' });
   }
 };
-exports.getNoticias = async (req, res) => {
+getNoticias = async (req, res) => {
   try {
       const noticias = await Noticia.findAll();
       res.render('noticias', { noticias: noticias });
@@ -52,13 +52,13 @@ exports.getNoticias = async (req, res) => {
       res.status(500).send("Error al obtener noticias");
   }
 };
-exports.getNoticiasManuales = async (conjuntoId) => {
+getNoticiasManuales = async (conjuntoId) => {
   try {
     // Buscar noticias manuales
     const noticiasManuales = await Noticia.findAll({
       where: { conjunto_id: conjuntoId },
       order: [['fecha_publicacion', 'DESC']],
-      limit: 2
+      limit: 3
     });
     return noticiasManuales;
   } catch (error) {
@@ -66,29 +66,75 @@ exports.getNoticiasManuales = async (conjuntoId) => {
     throw error;
   }
 };
-
-exports.getNoticiasAutomaticas = async (nombreConjunto) => {
+editarNoticia = async (req, res) => {
   try {
-    // Buscar noticias automáticas
+      const { id } = req.params;
+      const { imagen, titulo, descripcion, contenido } = req.body;
+
+      const noticiaExistente = await Noticia.findOne({ where: { id } });
+      if (!noticiaExistente) {
+          return res.status(404).json({ success: false, message: 'Noticia no encontrada' });
+      }
+
+      await Noticia.update({ imagen, titulo, descripcion, contenido }, { where: { id } });
+
+      res.json({ success: true, message: 'Noticia actualizada correctamente' });
+  } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+eliminarNoticia = async (req, res) => {
+  try {
+      const { id } = req.params;
+
+      const noticiaExistente = await Noticia.findOne({ where: { id } });
+      if (!noticiaExistente) {
+          return res.status(404).json({ success: false, message: 'Noticia no encontrada' });
+      }
+
+      await Noticia.destroy({ where: { id } });
+
+      res.json({ success: true, message: 'Noticia eliminada correctamente' });
+  } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+
+getNoticiasAutomaticas = async (nombreConjunto) => {
+  try {
     const terminoBusqueda = "conjuntos residenciales bogotá news";
 
-    // Imprimir el término de búsqueda para verificarlo
     console.log('Término de Búsqueda:', terminoBusqueda);
     const response = await axios.get('https://newsapi.org/v2/top-headlines?country=co&apiKey=dd1890aa41604cff8592dd009f4382e6', {
       params: {
         q: terminoBusqueda,
-     
       }
+    }).catch(error => {
+        console.error("Error con Axios:", error);
+        throw new Error("Error al obtener noticias automáticas");
     });
+
     console.log('Nombre Conjunto:', nombreConjunto);
     console.log('Respuesta API:', response.data);
     const noticiasAutomaticas = response.data.articles.slice(0, 2);
+
     if (noticiasAutomaticas.length === 0) {
       console.log('No se encontraron noticias automáticas para el conjunto:', nombreConjunto);
     }
+
     return noticiasAutomaticas;
   } catch (error) {
     console.error(error);
     throw error;
   }
+};
+module.exports = {
+  agregarNoticia,
+  getNoticias,
+  getNoticiasManuales,
+  editarNoticia,
+  eliminarNoticia,
+  getNoticiasAutomaticas
 };

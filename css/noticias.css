@@ -133,33 +133,64 @@ h2 {
     cursor: pointer;
     margin: 20px auto; /* Añadido para centrar */
 }
+.input-news-text {
+    width: 504px;
+    height: 113px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    resize: none; /* Deshabilita el redimensionamiento del textarea */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añade un ligero sombreado */
+    transition: border-color 0.2s; /* Efecto de transición suave al enfocarse */
+}
+
+.input-news-text:focus {
+    border-color: #007BFF; /* Cambia el color del borde cuando está enfocado */
+    outline: none;
+}
+
+#news-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
 
 .news-container {
     width: 934px;
-    height: 254px;
-    background-color: #F5F5F5;
+    height: auto;
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     padding: 20px;
-    margin: 10px auto; /* Añadido para centrar y dar espacio entre las noticias */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadido box shadow */
-    border-radius: 20px; /* Añadido border radius */
+    margin: 10px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
 }
 
 .news-image {
+    position: relative;
     width: 202px;
     height: 151px;
-    background-color: grey; 
     margin-right: 20px;
-    background-size: cover; /* Añadido para adaptar imágenes */
-    background-position: center; /* Centra la imagen */
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.news-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .news-text {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    margin-right: 20px;
+    gap: 10px;
 }
 
 .news-title,
@@ -169,40 +200,56 @@ h2 {
     background-color: #F5F5F5;
     font-size: 16px;
     font-weight: 300;
-    margin-bottom: 10px;
     display: flex;
     align-items: center;
     padding: 10px;
-    border-radius: 20px; /* Añadido border radius */
+    border-radius: 20px;
+}
+
+.news-content {
+    flex: 2;
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .news-actions {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 20px;
+    gap: 10px;
 }
 
 .action-button {
     width: 34px;
     height: 32px;
     border-radius: 50%;
-    margin-bottom: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
 }
 
 .accept {
     background-color: green;
+    color: #FFF;
 }
 
 .delete {
     background-color: red;
+    color: #FFF;
 }
 
 .edit-button {
     background-color: #333;
     color: #FFF;
     padding: 10px 15px;
-    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    margin-top: 10px;
+    border: none;
 }

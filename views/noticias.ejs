@@ -36,7 +36,7 @@
     </div>
 
     <label for="news-text">Texto de la noticia:</label>
-    <textarea id="news-text" class="news-text" name="contenido"></textarea>
+    <textarea id="news-text" class="input-news-text" name="contenido"></textarea>
 
     <!-- Asegúrate de agregar un campo para el conjunto_id -->
     <input type="hidden" name="conjunto_id" value="ID_DEL_CONJUNTO_AQUI">
@@ -45,49 +45,41 @@
   
   
 </form>
-<% if (typeof noticias !== 'undefined' && noticias.length > 0) { %>
-    <% noticias.forEach(noticia => { %>
-        ...
-    <% }) %>
-<% } else { %>
-    <p>No hay noticias disponibles.</p>
-<% } %>
 <div id="news-list">
     <% noticias.forEach(noticia => { %>
         <div class="news-container">
-            <div class="news-image" style="background-image: url('<%= noticia.imagenUrl %>')"></div>
-            <div class="news-text">
-                <div class="news-title"><%= noticia.titulo %></div>
-                <div class="news-description"><%= noticia.descripcion %></div>
-                <button class="edit-button" onclick="location.href='/editar-noticia/<%= noticia.id %>'">Editar</button>
+            
+            <div class="news-image" onclick="triggerFileInput(this)">
+                <input type="file" style="display: none;" onchange="updateImage(this)">
+                <img src="<%= noticia.imagenUrl %>" alt="Imagen de noticia" class="news-img">
             </div>
-            <div class="news-actions">
-                <div class="action-button accept"></div>
-                <div class="action-button delete" data-id="<%= noticia.id %>" onclick="eliminarNoticia(this)"></div>
+            
+            <div class="news-text">
+                <div class="news-title">
+                    <input type="text" value="<%= noticia.titulo %>" disabled>
+                </div>
+                <div class="news-description">
+                    <input type="text" value="<%= noticia.descripcion %>" disabled>
+                </div>
+            </div>
 
+            <div class="news-content">
+                <textarea disabled><%= noticia.contenido %></textarea>
+            </div>
+
+            <div class="news-actions">
+                <button class="action-button accept" onclick="actualizarNoticia(this, '<%= noticia.id %>')" style="display: none;">✓</button>
+                <button class="action-button delete" data-id="<%= noticia.id %>" onclick="eliminarNoticia(this)">✖</button>
+
+                <button class="edit-button" onclick="editarNoticia(this)">Editar</button>
             </div>
         </div>
     <% }) %>
-</div>
-<script>
-      function eliminarNoticia(idNoticia) {
-        const idNoticia = element.getAttribute("data-id");
-        if(confirm("¿Está seguro de que desea eliminar esta noticia?")) {
-            fetch(`/eliminar-noticia/${idNoticia}`, {
-                method: 'DELETE'
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.success) {
-                    location.reload(); // Recargar la página
-                } else {
-                    alert("Error al eliminar la noticia.");
-                }
-            });
-        }
-    }
 
-</script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/javascript/noticias.js"></script>
+
+
 </body>
 
 </html>

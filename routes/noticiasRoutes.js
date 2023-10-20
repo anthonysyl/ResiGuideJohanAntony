@@ -1,35 +1,48 @@
 const express = require('express');
 const router = express.Router();
-const { agregarNoticia, getNoticias, getNoticiasManuales, getNoticiasAutomaticas } = require('../controllers/noticiasController');
-const noticiasController = require('../controllers/noticiasController');
+const {
+    agregarNoticia,
+    getNoticias,
+    getNoticiasManuales,
+    getNoticiasAutomaticas,
+    editarNoticia,
+    eliminarNoticia
+} = require('../controllers/noticiasController');
 
 const { uploadNoticias } = require('../config/cloudinary');
 
-router.get('/', noticiasController.getNoticias);
+// Obtener todas las noticias
+router.get('/', getNoticias);
+
+// Agregar una noticia
 router.post('/agregar', uploadNoticias.single('imagen'), agregarNoticia);
 
-router.get('/', (req, res) => {
-  res.render('noticias');
-});
+// Editar una noticia por ID
+router.put('/editar-noticia/:id', editarNoticia); // Aquí también cambié post a put
 
+// Eliminar una noticia por ID
+router.delete('/eliminar-noticia/:id', eliminarNoticia);
+
+// Noticias Manuales
 router.get('/manuales', async (req, res, next) => {
-  try {
-    const conjuntoId = req.user.conjunto_id; // Asegúrate de obtener el conjunto_id correctamente
-    const noticias = await getNoticiasManuales(conjuntoId);
-    res.json(noticias);
-  } catch (error) {
-    next(error);
-  }
+    try {
+        const conjuntoId = req.user.conjunto_id; 
+        const noticias = await getNoticiasManuales(conjuntoId);
+        res.json(noticias);
+    } catch (error) {
+        next(error);
+    }
 });
 
+// Noticias Automáticas
 router.get('/automaticas', async (req, res, next) => {
-  try {
-    const nombreConjunto = req.user.nombreConjunto; // Asegúrate de obtener el nombreConjunto correctamente
-    const noticias = await getNoticiasAutomaticas(nombreConjunto);
-    res.json(noticias);
-  } catch (error) {
-    next(error);
-  }
+    try {
+        const nombreConjunto = req.user.nombreConjunto; 
+        const noticias = await getNoticiasAutomaticas(nombreConjunto);
+        res.json(noticias);
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;
