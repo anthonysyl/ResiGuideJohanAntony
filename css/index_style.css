@@ -544,3 +544,29 @@ header {
 .chat-exit {
     animation-name: slideUpFadeOut;
 }
+.admin {
+    position: relative;
+}
+
+.admin-status-indicator {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.admin-status-indicator.online {
+    z-index: 9999;
+    background-color: green;
+}
+
+.admin-status-indicator.offline {
+    background-color: gray;
+}
+
+.admin-status-indicator.in-chat {
+    background-color: blue;
+}

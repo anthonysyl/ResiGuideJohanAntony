@@ -1,10 +1,13 @@
 $(document).ready(function() {
     // Configuración y manejo de eventos de WebSockets.
     const socket = io.connect('/');
- 
-
+    
+    let notificationCount = 0; 
     socket.emit('adminConnected', adminId); 
-   
+    const dropdown = document.getElementById('notificationDropdown');
+    
+    // Luego, puedes llamar a loadStoredNotifications sin problemas
+    loadStoredNotifications();
     socket.on('userMessage', function(data) {
       addMessage(data.message, 'user');  // suponiendo que 'user' es la etiqueta que quieres mostrar en el chat del administrador
   });
@@ -22,18 +25,27 @@ $(document).ready(function() {
   slidePanel.addEventListener('mouseleave', () => {
       slidePanel.style.left = '-300px';
   });
-    let notificationCount = 0;
+
     const bellIcon = document.querySelector('.bell-icon');
-    const dropdown = document.getElementById('notificationDropdown');
+
     
 
     socket.on('userWantsToChat', (data) => {
         console.log("Evento recibido: userWantsToChat", data);
+        
+        // Incrementar el contador de notificaciones y actualizar el badge.
         notificationCount++;
         const badge = document.getElementById('notificationCount');
         badge.textContent = notificationCount;
         badge.style.display = 'block';
+        
+        // Añadir notificación al menú desplegable.
         addNotificationToDropdown(data);
+        
+        // Almacenar notificación en localStorage.
+        const storedNotifications = JSON.parse(localStorage.getItem('notifications') || "[]");
+        storedNotifications.push(data);
+        localStorage.setItem('notifications', JSON.stringify(storedNotifications));
     });
 
     bellIcon.addEventListener('click', function() {
@@ -95,6 +107,26 @@ $(document).ready(function() {
                 badge.style.display = 'none';
             }
             notification.remove();
+            const storedNotifications = JSON.parse(localStorage.getItem('notifications') || "[]");
+            const newStoredNotifications = storedNotifications.filter(notification => notification.userId !== userId);
+            localStorage.setItem('notifications', JSON.stringify(newStoredNotifications));
+        }
+    }
+    function loadStoredNotifications() {
+        const storedNotifications = JSON.parse(localStorage.getItem('notifications') || "[]");
+    
+        storedNotifications.forEach(data => {
+            addNotificationToDropdown(data);
+        });
+    
+        // Actualizar el contador y el badge.
+        notificationCount = storedNotifications.length;
+        const badge = document.getElementById('notificationCount');
+        if (notificationCount > 0) {
+            badge.textContent = notificationCount;
+            badge.style.display = 'block';
+        } else {
+            badge.style.display = 'none';
         }
     }
     
@@ -138,12 +170,21 @@ $(document).ready(function() {
 
     
     function denyChat(userId) {
+        console.log("Deny chat called for user:", userId);
+        
         const notification = document.querySelector(`.notification[data-user-id="${userId}"]`);
-        console.log(`.notification[data-user-id="${userId}"]`);
+        console.log("Notification element found:", !!notification);
+    
         if (notification) {
             notification.remove();
         }
+    
         socket.emit('denyChat', { userId: userId });
+    
+        // Vamos a imprimir las notificaciones antes y después de intentar eliminar
+        console.log("Before removal:", JSON.parse(localStorage.getItem('notifications')));
+        removeNotification(userId); 
+        console.log("After removal:", JSON.parse(localStorage.getItem('notifications')));
     }
 
     const chatContainer = document.querySelector('.chat-messages');

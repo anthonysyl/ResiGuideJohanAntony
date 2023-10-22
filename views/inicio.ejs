@@ -39,7 +39,15 @@
     
   </div>
     </header>
+   
+  </div>
+
     <hr class="custom-hr">
+    <div class="admin">
+      <img src="/assets/icons/iconChat.png" alt="Admin">
+      <div class="admin-status-indicator"></div>
+      <div id="admin-indicators-container"></div>
+  </div>
     <% if (usuario.Conjunto && usuario.Conjunto.imageURL) { %>
       <img src="<%= usuario.Conjunto.imageURL %>" alt="Imagen del conjunto" class="custom-img">
     <% } else { %>

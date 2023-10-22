@@ -18,7 +18,8 @@
 <h1>Noticias relacionadas al conjunto</h1>
 <h2>Sube las noticias relacionadas a tu conjunto,<br>mantén informado a los residentes.</h2>
 
-<form action="/noticias/agregar" method="POST" enctype="multipart/form-data">
+<form id="formNoticias" action="/noticias/agregar" method="POST" enctype="multipart/form-data">
+
     <div class="input-file">
         Sube la foto relacionada a tu noticia
         <input type="file" name="imagen">
@@ -75,7 +76,30 @@
             </div>
         </div>
     <% }) %>
-
+    <script>
+        document.querySelector('#formNoticias').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita el envío regular del formulario
+    
+            // Construir los datos del formulario para enviar por AJAX
+            let formData = new FormData(document.querySelector('#formNoticias'));
+    
+            // Envía los datos usando axios
+            axios.post('/noticias/agregar', formData)
+                .then(response => {
+                    if (response.data.success) {
+                        alert(response.data.message);
+                        // Aquí podrías agregar la lógica para actualizar tu página con la nueva noticia, si lo deseas.
+                        location.reload(); // Esto recargará la página para ver la nueva noticia.
+                    } else {
+                        alert('Error al agregar noticia: ' + response.data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Error al realizar la petición al servidor.');
+                    console.error(error);
+                });
+        });
+    </script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/javascript/noticias.js"></script>
 

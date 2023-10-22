@@ -2,6 +2,8 @@ const socket = io.connect('/');
 
 socket.emit('userConnected', userId);
 
+socket.emit('requestAdminStatus', userId);
+
 const menuIcon = document.getElementById("menu-icon");
 const slider = document.getElementById("slider");
 let hasGreeted = false;
@@ -55,6 +57,20 @@ document.addEventListener("DOMContentLoaded", function() {
 const chatContainer = document.querySelector('.chat-messages');
 const chatInput = document.querySelector('.chat-input textarea');
 const sendButton = document.getElementById('sendMessageBtn');
+socket.on('adminStatusUpdate', (data) => {
+    console.log("Datos recibidos en adminStatusUpdate:", data);
+
+    // Encuentra el indicador de estado del administrador
+    const indicator = document.querySelector('.admin-status-indicator');
+
+    if (indicator) {
+        // Remueve todas las clases previas (online, offline, in-chat)
+        indicator.classList.remove('online', 'offline', 'in-chat');
+
+        // Añade la clase del nuevo estado
+        indicator.classList.add(data.status);
+    }
+});
 
 function addMessage(content, type) {
     const messageDiv = document.createElement('div');
@@ -62,6 +78,19 @@ function addMessage(content, type) {
     messageDiv.textContent = content;
     chatContainer.appendChild(messageDiv);
     chatContainer.scrollTop = chatContainer.scrollHeight; // Para auto-scroll hacia el último mensaje
+}
+function isChatOpen() {
+    return document.querySelector(".chat-container").classList.contains('expanded');
+}
+function showChat() {
+    let chatContainer = document.querySelector(".chat-container");
+    chatContainer.style.display = 'block';
+    chatContainer.classList.add('expanded');
+    chatContainer.classList.add('chat-enter');
+    
+    setTimeout(() => {
+        chatContainer.classList.remove('chat-enter'); 
+    }, 500); 
 }
 
 sendButton.addEventListener('click', function() {
@@ -74,8 +103,12 @@ sendButton.addEventListener('click', function() {
     }
 });
 socket.on('adminMessage', function(data) {
+    if (!isChatOpen()) {
+        showChat();
+    }
     addMessage(data.message, 'admin');
 });
+
 
 function handleBotResponse(userMessage) {
     if (userMessage.toLowerCase().includes('hola')&& !hasGreeted) {
