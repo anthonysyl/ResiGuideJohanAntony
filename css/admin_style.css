@@ -1,44 +1,165 @@
 body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f2f2f2;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
+    transition: all 0.3s;
 }
 
-h2 {
-    text-align: center;
+.login-container {
+    position: relative;
+    animation: fadeIn 1s;
 }
 
-form {
-    width: 300px;
+.card {
+    width: 400px; /* Aumentamos el tamaño */
+    height: 500px; /* Aumentamos el tamaño */
+    background-color: white;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Centramos el box shadow */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    border-radius: 10px; /* Aumentamos el border radius */
+    transition: transform 0.2s;
+}
+
+.top-text {
+    position: relative; /* Cambiamos a relative para que quede dentro del card */
+    text-align: center;
+    margin-bottom: 20px; /* Añadimos un margen */
+}
+
+.already-account {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.help-residents {
+    font-weight: 300;
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+.input-field {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centramos el contenido */
 }
 
 label {
-    display: block;
-    margin-bottom: 10px;
+    font-weight: 300;
+    font-size: 12px;
+    margin-bottom: 10px; /* Añadimos un margen */
 }
 
-input[type="email"],
-input[type="password"] {
-
-    width: 92%;
-    padding: 10px;
+input {
+    width: 224px;
+    height: 30px;
+    padding-left: 10px;
     border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-bottom: 15px;
+    border-radius: 5px; /* Añadimos border radius */
+    font-size: 14px;
+    transition: border-color 0.3s;
 }
 
-button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
+input:focus {
+    border-color: #CC4324;
+    outline: none;
 }
+
+.login-btn {
+    width: 73px;
+    height: 27px;
+    background-color: #CC4324;
+    color: white;
+    border: none;
+    border-radius: 5px; /* Añadimos border radius */
+    font-weight: 300;
+    font-size: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #a12f1b;
+}
+
+.switch {
+    position: absolute;
+    top: -40px;
+    right: 20px; /* Ajustamos la posición */
+}
+
+#registerBtn {
+    background-color: #fff;
+    border: 1px solid #CC4324;
+    color: #CC4324;
+    padding: 5px 10px;
+    border-radius: 5px; /* Añadimos border radius */
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#registerBtn:hover {
+    background-color: #CC4324;
+    color: #fff;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@media (max-width: 768px) {
+    .card {
+        width: 80%; /* Usar un porcentaje del ancho de la pantalla para que sea flexible */
+    }
+
+    input {
+        width: 80%; /* Reducir el ancho del input para que se ajuste al nuevo ancho de la card */
+    }
+}
+
+/* Estilo para teléfonos móviles */
+@media (max-width: 480px) {
+    .card {
+        width: 90%; /* Usar un porcentaje aún mayor del ancho de la pantalla para aprovechar todo el espacio */
+    }
+
+    .top-text {
+        margin-bottom: 10px; /* Reducir el margen para aprovechar mejor el espacio en pantallas pequeñas */
+    }
+
+    label, .already-account, .help-residents, .login-btn {
+        font-size: 10px; /* Reducir el tamaño de la fuente para que encaje mejor en pantallas pequeñas */
+    }
+
+    input {
+        width: 90%; /* Aumentar el ancho del input para que se ajuste al nuevo ancho de la card */
+    }
+
+    .login-btn {
+        width: 60px; /* Reducir un poco el ancho del botón */
+        height: 25px; /* Reducir un poco la altura del botón */
+    }
+
+    .switch {
+        top: -30px; /* Ajustar la posición del botón de registro */
+    }
+}
+
+
+
+
+

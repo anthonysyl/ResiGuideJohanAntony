@@ -4,6 +4,7 @@ const Conjunto = require('../models/Conjunto');
 const Admin = require('../models/Admin');
 const RegistroPendiente = require('../models/registros_pendientes');
 const uploadCloudinary = require('../config/cloudinary');
+const initServices = require('../initServices');
 const saltRounds = 10;
 
 const transporter = nodemailer.createTransport({
@@ -34,6 +35,7 @@ exports.postRegisterConjunto = async (req, res) => {
     console.log('Conjunto ID:', conjunto.id); 
 
     if (conjunto && conjunto.id) { 
+      await initServices(conjunto.id);
       res.redirect(`/register-admin/${conjunto.id}`);
     } else {
       res.send('Error: El ID del conjunto no está disponible');

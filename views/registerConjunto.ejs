@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/css/registerconjunto.css">
-<title>Registro de Conjunto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/registerconjunto.css">
+    <title>Registro de Conjunto</title>
 </head>
 <body>
 
-<div id="conjunto-form">
-<form action="/register-conjunto" method="POST" enctype="multipart/form-data">
-  <!-- Tus campos de formulario aquí basándose en tu modelo de conjunto -->
-  <div>
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre" required>
-  </div>
-  <div>
-    <label for="direccion">Dirección:</label>
-    <input type="text" id="direccion" name="direccion">
-  </div>
-  <input type="file" id="imagen" name="imagen">
-  <input type="submit" value="Registrar Conjunto">
-
-  <!-- ... otros campos ... -->
-</form>
+<div class="container">
+    <div id="conjunto-form">
+        <h2>Registro de Conjunto</h2>
+        <form action="/register-conjunto" method="POST" enctype="multipart/form-data">
+            <div class="input-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="input-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion">
+            </div>
+            <div class="input-group">
+                <label for="imagen">Imagen:</label>
+                <input type="file" id="imagen" name="imagen">
+            </div>
+            <input type="submit" value="Registrar Conjunto" class="submit-btn">
+        </form>
+    </div>
 </div>
 
 <script src="/js/main.js"></script>

@@ -7,7 +7,7 @@ socket.emit('requestAdminStatus', userId);
 const menuIcon = document.getElementById("menu-icon");
 const slider = document.getElementById("slider");
 let hasGreeted = false;
-
+let commandThreeCount = 0;
 menuIcon.addEventListener("click", () => {
   slider.classList.toggle("open");
 });
@@ -111,26 +111,56 @@ socket.on('adminMessage', function(data) {
 
 
 function handleBotResponse(userMessage) {
-    if (userMessage.toLowerCase().includes('hola')&& !hasGreeted) {
+    if (userMessage.toLowerCase().includes('hola') && !hasGreeted) {
         hasGreeted = true; 
         setTimeout(() => {
             addMessage(`Hola ${nombreUsuario} del conjunto ${nombreConjunto}, ¿qué quieres saber hoy? Elige tu opción:`, 'bot');
             setTimeout(() => {
-                addMessage('1. Servicios', 'bot');
-                addMessage('2. Noticias', 'bot');
+                /*addMessage('1. Servicios', 'bot');*/
+               /* addMessage('2. Noticias', 'bot');*/
                 addMessage('3. Hablar con el administrador', 'bot');
             }, 500); 
         }, 1000);
+    } else if (hasGreeted) {  // Aseguramos que el usuario haya saludado primero
+        if (userMessage === '1') {
+            addMessage('Aquí están algunos de los servicios que ofrecemos:', 'bot');
+            // Aquí puedes listar servicios o proporcionar más detalles como desees
+            addMessage('a. Servicio 1', 'bot');
+            addMessage('b. Servicio 2', 'bot');
+        } else if (userMessage === '2') {
+            addMessage('Aquí están las últimas noticias:', 'bot');
+            // Aquí puedes listar noticias o proporcionar más detalles
+            addMessage('a. Noticia 1', 'bot');
+            addMessage('b. Noticia 2', 'bot');
     } else if (userMessage === '3') {
-        addMessage('Espera un momento...', 'bot');
-  
-        socket.emit('requestAdmin', { userId: userId, adminId: adminId }, (confirmation) => {
-            if (confirmation) {
-                addMessage('Tu solicitud está pendiente. Espera un momento...', 'bot');
-            } else {
-                addMessage('Hubo un problema al enviar tu solicitud. Inténtalo de nuevo más tarde.', 'bot');
-            }
-        });
+        commandThreeCount++;
+        if (commandThreeCount > 1) { // Si el comando '3' se ha enviado más de dos veces
+            addMessage('Has intentado contactar al administrador demasiadas veces. Espera 30 segundos para volver a usar el chat.', 'bot');
+            
+            // Deshabilitar el input y el botón de enviar
+            chatInput.disabled = true;
+            sendButton.disabled = true;
+            
+            setTimeout(() => {
+                // Reactivar el input y el botón de enviar después de 30 segundos
+                chatInput.disabled = false;
+                sendButton.disabled = false;
+                addMessage('Ahora puedes continuar usando el chat.', 'bot');
+                commandThreeCount = 0; // Restablece el contador
+            }, 30000); // 30000ms = 30 segundos
+        } else {
+            // Tu código existente para manejar el comando '3'
+            addMessage('Espera un momento...', 'bot');
+      
+            socket.emit('requestAdmin', { userId: userId, adminId: adminId }, (confirmation) => {
+                if (confirmation) {
+                    addMessage('Tu solicitud está pendiente. Espera un momento...', 'bot');
+                } else {
+                    addMessage('Hubo un problema al enviar tu solicitud. Inténtalo de nuevo más tarde.', 'bot');
+                }
+            });
+          }
+        }
     }
 }
 
