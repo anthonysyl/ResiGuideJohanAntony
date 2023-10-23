@@ -545,28 +545,38 @@ header {
     animation-name: slideUpFadeOut;
 }
 .admin {
-    position: relative;
+    right: 0px;
+    margin-right: 120px;
+    position: fixed;
+    z-index: 9999;
 }
 
 .admin-status-indicator {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
+    position: fixed;
+    top: 220px;
+    right: 160px;
     z-index: 1;
+    filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.5));
 }
 
 .admin-status-indicator.online {
     z-index: 9999;
-    background-color: green;
+    background-color: #2bfd0f;
+    box-shadow: 0 0 1rem #3bf723;
+    filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.5));
 }
 
 .admin-status-indicator.offline {
     background-color: gray;
+    box-shadow: 0 0 1rem #d1d1d1;
+    filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.5));
 }
 
 .admin-status-indicator.in-chat {
-    background-color: blue;
+    background-color: rgb(248, 255, 152);
+    box-shadow: 0 0 1rem #f5ff64;
+    filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.5));
 }

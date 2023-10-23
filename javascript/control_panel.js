@@ -5,6 +5,7 @@ $(document).ready(function() {
     let notificationCount = 0; 
     socket.emit('adminConnected', adminId); 
     const dropdown = document.getElementById('notificationDropdown');
+    const chatContainer = document.querySelector('.chat-messages');
     
     // Luego, puedes llamar a loadStoredNotifications sin problemas
     loadStoredNotifications();
@@ -129,6 +130,17 @@ $(document).ready(function() {
             badge.style.display = 'none';
         }
     }
+    const endChatButton = document.getElementById('endChatBtn');
+    if (endChatButton && chatContainer) {
+        endChatButton.addEventListener('click', function() {
+            // Emitir un evento al servidor para indicar el fin del chat
+            socket.emit('endChat', { adminId: adminId });
+            addMessage('Haz finalizado el chat', 'admin');
+
+            // Eliminar el contenedor del chat del DOM
+
+        });
+    }
     
 
     function acceptChat(userId) {
@@ -167,8 +179,7 @@ $(document).ready(function() {
       chatContainer.scrollTop = chatContainer.scrollHeight;
    
     }
-
-    
+   
     function denyChat(userId) {
         console.log("Deny chat called for user:", userId);
         
@@ -187,7 +198,7 @@ $(document).ready(function() {
         console.log("After removal:", JSON.parse(localStorage.getItem('notifications')));
     }
 
-    const chatContainer = document.querySelector('.chat-messages');
+
     const chatInput = document.querySelector('.chat-input textarea');
     const sendButton = document.getElementById('sendMessageBtn');
     sendButton.addEventListener('click', function() {

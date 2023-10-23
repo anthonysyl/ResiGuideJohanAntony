@@ -371,8 +371,8 @@ footer {
     border: 10px;
     background-color: #4caf50;
 }
-.chat-container {
-    opacity: 0; 
+.chat-container { /* Empuja el contenedor completamente fuera de la vista hacia abajo */
+    transition: opacity 0.5s, transform 0.5s; 
     z-index: 9999;
     width: 311px;
     height: 402px;
@@ -381,7 +381,6 @@ footer {
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     position: fixed;
     bottom: 10px;
-    display: flex;
     border-radius: 10px;
     flex-direction: column; 
     right: 10px;
@@ -466,6 +465,25 @@ footer {
     left: 0; /* Desde el lado izquierdo */
     right: 0;
 
+}
+.end-chat-btn {
+    background-color: #ff4a4a; /* Color rojo */
+    color: white; /* Texto blanco */
+    border: none; 
+    border-radius: 5px;
+    padding: 5px 15px; 
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400; 
+    cursor: pointer; 
+    position: absolute; /* Posicionar el botón en el lado derecho */
+    right: 125px; /* Espacio desde la derecha */
+    top: 50%; 
+    transform: translateY(50%); /* Centra el botón verticalmente */
+    transition: background-color 0.3s; /* Efecto suave al pasar el ratón por encima */
+}
+
+.end-chat-btn:hover {
+    background-color: #e52222; /* Color rojo más oscuro al pasar el ratón por encima */
 }
 
 .chat-input textarea {

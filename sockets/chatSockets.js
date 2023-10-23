@@ -1,6 +1,8 @@
 let connectedUsers = {};
 let connectedAdmins = {};
 let adminStatus = {};
+let currentChats = {}; // { adminId: userId, ... }
+
 
 const setup = (io) => {
     io.on('connection', (socket) => {
@@ -35,6 +37,7 @@ const setup = (io) => {
 
         // Administrador acepta chat
         socket.on('acceptChat', (data) => {
+            currentChats[data.adminId] = data.userId;
             io.to(connectedUsers[data.userId]).emit('adminAccepted', { adminId: data.adminId });
             adminStatus[data.adminId] = 'in-chat';
             io.emit('adminStatusUpdate', { adminId: data.adminId, status: 'in-chat' });
@@ -42,16 +45,31 @@ const setup = (io) => {
 
         // Fin del chat
         socket.on('endChat', (data) => {
+            const userId = currentChats[data.adminId];
+            if (!userId) {
+                console.log(`No hay chat activo para el administrador ${data.adminId}`);
+                return;
+            }
+        
             adminStatus[data.adminId] = 'online';
             console.log(`Estado del Administrador ${data.adminId}: ${adminStatus[data.adminId]}`);
-            io.to(connectedUsers[data.userId]).emit('chatEnded', { adminId: data.adminId });
-            io.to(connectedAdmins[data.adminId]).emit('chatEnded', { userId: data.userId });
+        
+            io.to(connectedUsers[userId]).emit('chatEnded', { adminId: data.adminId });
+            io.to(connectedAdmins[data.adminId]).emit('chatEnded', { userId: userId });
             io.emit('adminStatusUpdate', { adminId: data.adminId, status: 'online' });
+            
+            delete currentChats[data.adminId];
         });
         // Mensaje de usuario
         socket.on('userMessage', function(data) {
             console.log('Mensaje recibido de un usuario:', data.message);
+              if (currentChats[data.adminId] !== data.userId) {
+        console.log(`El chat entre el usuario ${data.userId} y el administrador ${data.adminId} ya no está activo.`);
+        return;
+    }
+
             const adminSocketId = connectedAdmins[data.adminId];
+            
             if (adminSocketId) {
                 io.to(adminSocketId).emit('userMessage', { message: data.message });
             }
@@ -86,6 +104,20 @@ const setup = (io) => {
                 
                 io.emit('adminStatusUpdate', { adminId: adminIdToDisconnect, status: 'offline' });
             }
+            const userIdToDisconnect = Object.keys(connectedUsers).find(key => connectedUsers[key] === socket.id);
+            if (userIdToDisconnect) {
+                console.log('Usuario desconectado con ID: ', userIdToDisconnect);
+                delete connectedUsers[userIdToDisconnect];
+        
+                // Opcionalmente, puedes liberar a un administrador aquí si es necesario:
+                const adminIdToFree = Object.keys(currentChats).find(key => currentChats[key] === userIdToDisconnect);
+                if (adminIdToFree) {
+                    adminStatus[adminIdToFree] = 'online';
+                    delete currentChats[adminIdToFree];
+                    io.emit('adminStatusUpdate', { adminId: adminIdToFree, status: 'online' });
+                }
+            }
+            
         });
     
     });

@@ -144,6 +144,13 @@ socket.on('chatDenied', () => {
     addMessage('Su solicitud ha sido denegada.', 'bot');
     chatInput.disabled = true;
 });
+socket.on('chatEnded', () => {
+    console.log("Evento chatEnded recibido en el cliente.");
+    
+    addMessage('El chat ha terminado.', 'bot');
+    chatInput.disabled = true;
+    sendButton.disabled = true; // También deshabilita el botón de enviar
+});
 function addMessage(content, sender) {
     const messagesDiv = document.querySelector('.chat-messages');
     const messageDiv = document.createElement('div');
