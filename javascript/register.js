@@ -1,6 +1,6 @@
 window.onload = function () {
     // Hacer una solicitud al servidor para obtener los conjuntos
-    fetch('http://localhost:3000/conjuntos') // Asegúrate de reemplazar con la URL correcta de tu backend
+    fetch('/conjuntos') // Asegúrate de reemplazar con la URL correcta de tu backend
         .then((response) => response.json())
         .then((data) => {
             const conjuntos = data;
@@ -40,7 +40,7 @@ $('#registroForm').submit(function(e) {
 
     // Enviar los datos al servidor
     $.ajax({
-        url: "http://localhost:3000/registro",
+        url: "/registro",
         type: "POST",
         data: usuarioData,
         success: function(data) {
