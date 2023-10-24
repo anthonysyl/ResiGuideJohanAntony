@@ -117,7 +117,7 @@ app.get('/conjuntos', async (req, res) => {
 });
 
 server.listen(PORT, function() {
-  console.log('Servidor escuchando en puerto 3000!');
+  console.log('Servidor escuchando en puerto ');
   console.log(process.env.CLOUDINARY_API_SECRET);
 });
 
