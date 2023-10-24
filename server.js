@@ -20,7 +20,7 @@ const uploadCloudinary = require('./config/cloudinary');
 const http = require('http');
 const socketIo = require('socket.io');
 
-
+const PORT = process.env.PORT || 3000;
 
 
 
@@ -116,7 +116,7 @@ app.get('/conjuntos', async (req, res) => {
   }
 });
 
-server.listen(3000, function() {
+server.listen(PORT, function() {
   console.log('Servidor escuchando en puerto 3000!');
   console.log(process.env.CLOUDINARY_API_SECRET);
 });
