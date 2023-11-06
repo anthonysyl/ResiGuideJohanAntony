@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="css/index_style.css">
 </head>
 <body>
+  <div id="sidebar" class="sidebar">
+    <ul>
+        <li><%= usuario.nombre %></li>
+        <li><%= usuario.tipo_usuario %></li>
+        <form action="/logout" method="POST">
+          <button type="submit">Cerrar Sesión</button>
+      </form>
+
+    </ul>
+</div>
+
     <header>
         <div id="logo">RESIGUIDE</div>
         <nav>
@@ -32,11 +43,7 @@
         <ul>
 
 
-            <li><%= usuario.nombre %></li>
-            <li><%= usuario.tipo_usuario %></li>
-            <li>Log Out</li>
-        </ul>
-    
+         
   </div>
     </header>
    
@@ -120,7 +127,6 @@
       <img src="<%= noticia.urlToImage || '/path/a/imagen/default.png' %>" alt="<%= noticia.title %>">
       <div class="news-text">
         <p><%= noticia.description || noticia.contenido %></p>
-        <button><a href="<%= noticia.url || '#' %>">Saber más</a></button>
       </div>
     </div>
   <% }); %>
@@ -179,7 +185,9 @@
 
   
 
-
+<script>  document.getElementById('logoutButton').addEventListener('click', function() {
+  console.log('Intentando cerrar sesión...');
+});</script>
 <script src="/javascript/opecausa.js"></script>
 
 </body >

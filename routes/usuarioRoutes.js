@@ -15,6 +15,8 @@ router.get('/registro', async (req, res) => {
 });
 router.post('/registro', usuarioController.create);
 router.post('/login', usuarioController.login);
+router.post('/logout', usuarioController.logout);
+
 
 router.get('/inicio', (req, res) => {
   if (!req.session.userId) {
@@ -25,5 +27,7 @@ router.get('/inicio', (req, res) => {
   // Si el usuario está logeado, muestra la página de inicio
   res.sendFile(path.join(__dirname, '../inicio.html'));
 });
+
+
 
 module.exports = router;

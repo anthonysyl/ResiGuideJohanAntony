@@ -20,7 +20,7 @@ exports.create = async (req, res) => {
     res.json({ success: true }); // Agrega esta línea
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: 'Ha ocurrido un error' });
+
   }
 };
 exports.login = async (req, res) => {
@@ -28,7 +28,7 @@ exports.login = async (req, res) => {
 
   const usuario = await Usuario.findOne({ where: { email } });
   if (!usuario) {
-    return res.status(400).json({ message: 'Usuario no encontrado.' });
+    return res.status(400).json({ error: 'Usuario no encontrado.' });
   }
 
   // Verifica la contraseña con bcrypt
@@ -43,4 +43,23 @@ exports.login = async (req, res) => {
   // Redirige al usuario a la página de inicio
   res.redirect('/inicio');
 };
+exports.logout = (req, res) => {
+  if (req.session) {
+      console.log("Intentando cerrar sesión para el usuario con ID:", req.session.userId);
+
+      req.session.destroy(err => {
+          if (err) {
+              console.log("Error al cerrar sesión:", err);
+              res.status(500).send('Error al cerrar la sesión');
+          } else {
+              console.log("Sesión cerrada con éxito.");
+              res.redirect('/formulario.html');
+          }
+      });
+  } else {
+      console.log("No hay sesión activa para cerrar.");
+      res.redirect('/formulario.html');
+  }
+};
+
   

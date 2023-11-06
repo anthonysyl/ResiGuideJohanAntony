@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const Admin = require('../models/Admin');
 const Conjunto = require('../models/Conjunto');
 const Servicio = require('../models/Servicio');
@@ -6,20 +7,27 @@ const path = require('path');
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-
   const admin = await Admin.findOne({ where: { email } });
   if (!admin) {
     return res.render('admin', { message: 'Admin no encontrado.' });
   }
 
-  if (password !== admin.password_hash) {
+  // Correcta verificación de la contraseña
+  const validPassword = bcrypt.compareSync(password, admin.password_hash);
+  if (!validPassword) {
     return res.render('admin', { message: 'Contraseña incorrecta.' });
   }
+  if (!admin.conjunto_id) {
+    return res.render('admin', { message: 'Conjunto no asignado al admin.' });
+}
 
-  const conjunto = await Conjunto.findByPk(admin.conjunto_id);
-  if (!conjunto) {
+const conjunto = await Conjunto.findByPk(admin.conjunto_id);
+if (!conjunto) {
     return res.render('admin', { message: 'Conjunto no encontrado.' });
-  }
+}
+
+
+  // Continuar si la contraseña es correcta..
   
   const usuarios = await conjunto.getUsuarios();
   const usuario = usuarios[0];  // Asegúrate de manejar el caso en que usuarios pueda ser una lista vacía.

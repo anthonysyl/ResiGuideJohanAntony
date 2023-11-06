@@ -207,3 +207,28 @@ function addMessage(content, sender) {
     // Asegúrate de que el último mensaje esté siempre visible
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
+function openSidebar() {
+    document.getElementById("sidebar").style.width = "250px";
+}
+
+function closeSidebar() {
+    document.getElementById("sidebar").style.width = "0";
+}
+
+// Para detectar el deslizamiento del mouse hacia la derecha
+document.addEventListener('mousemove', function(e) {
+    if (e.clientX > (window.innerWidth - 50)) { // Ajusta '50' según la sensibilidad deseada
+        openSidebar();
+    }
+});
+document.getElementById('sidebar').addEventListener('mouseleave', function() {
+    closeSidebar();
+});
+
+
+// Opcional: cerrar el menú al hacer clic fuera de él
+document.addEventListener('click', function(e) {
+    if (e.target.closest('#sidebar') === null) {
+        closeSidebar();
+    }
+});

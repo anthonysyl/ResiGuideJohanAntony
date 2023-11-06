@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const session = require('express-session');
+
 const bcrypt = require('bcryptjs');
 const adminRoutes = require('./routes/adminRoutes');
 const sequelize = require('./database');
@@ -48,6 +49,9 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false }
 }));
+const redirectIfAuthenticated = require('./Middleware/authMiddleware');
+app.use(redirectIfAuthenticated);
+
 
 //Rutas
 
@@ -56,6 +60,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/', inicioRoutes);
 
 app.use('/css', express.static(path.join(__dirname, 'css')));
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', conjuntoRoutes); // Cambiado el nombre de la ruta
 app.use('/admin', adminRoutes);
