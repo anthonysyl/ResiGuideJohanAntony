@@ -116,23 +116,18 @@ function handleBotResponse(userMessage) {
         setTimeout(() => {
             addMessage(`Hola ${nombreUsuario} del conjunto ${nombreConjunto}, ¿qué quieres saber hoy? Elige tu opción:`, 'bot');
             setTimeout(() => {
-                /*addMessage('1. Servicios', 'bot');*/
-               /* addMessage('2. Noticias', 'bot');*/
-                addMessage('3. Hablar con el administrador', 'bot');
+                addMessage('1. Preguntas Frecuentes', 'bot');
+                addMessage('2. Hablar con el administrador', 'bot');
             }, 500); 
         }, 1000);
     } else if (hasGreeted) {  // Aseguramos que el usuario haya saludado primero
         if (userMessage === '1') {
-            addMessage('Aquí están algunos de los servicios que ofrecemos:', 'bot');
+            addMessage('Aquí están algunas de las preguntas más solicitadas por los usuarios:', 'bot');
             // Aquí puedes listar servicios o proporcionar más detalles como desees
-            addMessage('a. Servicio 1', 'bot');
-            addMessage('b. Servicio 2', 'bot');
-        } else if (userMessage === '2') {
-            addMessage('Aquí están las últimas noticias:', 'bot');
-            // Aquí puedes listar noticias o proporcionar más detalles
-            addMessage('a. Noticia 1', 'bot');
-            addMessage('b. Noticia 2', 'bot');
-    } else if (userMessage === '3') {
+            addMessage('¿Cómo puedo recibir notificaciones sobre eventos importantes en mi conjunto residencial?', 'bot');
+            addMessage('¿Qué debo hacer si encuentro un problema o error en la aplicación?', 'bot');
+            addMessage('¿Que significan los colores de los servicios y del icono de robot de arriba?', 'bot');
+    } else if (userMessage === '2') {
         commandThreeCount++;
         if (commandThreeCount > 1) { // Si el comando '3' se ha enviado más de dos veces
             addMessage('Has intentado contactar al administrador demasiadas veces. Espera 30 segundos para volver a usar el chat.', 'bot');
