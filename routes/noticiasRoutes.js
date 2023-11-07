@@ -11,6 +11,9 @@ const {
 
 const { uploadNoticias } = require('../config/cloudinary');
 
+// Aplicar el middleware de autenticación antes de las rutas que lo requieren
+
+
 // Obtener todas las noticias
 router.get('/', getNoticias);
 
@@ -18,7 +21,7 @@ router.get('/', getNoticias);
 router.post('/agregar', uploadNoticias.single('imagen'), agregarNoticia);
 
 // Editar una noticia por ID
-router.put('/editar-noticia/:id', editarNoticia); // Aquí también cambié post a put
+router.put('/editar-noticia/:id', editarNoticia);
 
 // Eliminar una noticia por ID
 router.delete('/eliminar-noticia/:id', eliminarNoticia);
@@ -26,7 +29,7 @@ router.delete('/eliminar-noticia/:id', eliminarNoticia);
 // Noticias Manuales
 router.get('/manuales', async (req, res, next) => {
     try {
-        const conjuntoId = req.user.conjunto_id; 
+        const conjuntoId = req.admin.conjunto_id; 
         const noticias = await getNoticiasManuales(conjuntoId);
         res.json(noticias);
     } catch (error) {

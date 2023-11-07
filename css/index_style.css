@@ -213,39 +213,57 @@ header {
   }
 
   .news-card {
-    margin-top: 150px;
+    margin-top: 20px;
     width: 913px;
-    height: 225px;
+    min-height: 222px; /* Altura mínima inicial */
     border-radius: 10px;
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
-    margin: 0 auto;
-  }
-  
-  .news-card img {
+    margin: 20px auto;
+    overflow: hidden; /* Previene desbordamiento */
+}
+
+.news-card img {
     width: 339px;
-    height: 222px;
+    height: 100%;
     object-fit: cover;
     border-radius: 20px;
-  }
-  
-  .news-text {
+}
+
+.news-text {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; /* Alinea el contenido desde el inicio */
     padding: 20px;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-size: 20px;
-    border-radius: 20px;
-  }
-  .news-section {
+    width: calc(100% - 339px); /* Ajusta el ancho del contenedor de texto */
+}
+
+.news-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: left; /* Alinea el título a la izquierda */
+}
+
+.news-description {
+    font-size: 18px;
+    color: #666;
+    margin-top: 5px;
+    text-align: left; /* Alinea la descripción a la izquierda */
+    overflow: auto; /* Permite desplazamiento si es necesario */
+}
+
+.news-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px; 
-  }
+    gap: 20px;
+}
   .chatbot-section {
     background-image: url('/assets/images/body_images/estructura.jpg'); 
     background-size: 1920px 956px;
@@ -352,8 +370,8 @@ header {
 .chat-container {
     opacity: 0; 
     z-index: 9999;
-    width: 311px;
-    height: 402px;
+    width: 400px;
+    height: 550px;
     background-color: #FFF;
     border-radius: 10px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
@@ -402,7 +420,7 @@ header {
 .chat-messages {
     flex: 1;
     overflow-y: auto;
-    max-height: 250px;
+    max-height: 350px;
     flex-grow: 1; 
     padding: 10px;
     display: flex;

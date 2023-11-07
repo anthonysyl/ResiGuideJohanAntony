@@ -22,9 +22,9 @@
         <div id="logo">RESIGUIDE</div>
         <nav>
             <ul>
-                <li><a href="#">SERVICIOS</a></li>
-                <li><a href="#">NOTICIAS</a></li>
-                <li><a href="#">COMUNICACIÓN</a></li>
+                <li><a href="service-status">SERVICIOS</a></li>
+                <li><a href="news-section">NOTICIAS</a></li>
+                <li><a href="chatbot-section">COMUNICACIÓN</a></li>
                 <!-- Agrega la información del usuario aquí -->
                
             </ul>
@@ -124,9 +124,10 @@
 <section class="news-section">
   <% noticias.forEach(noticia => { %>
     <div class="news-card">
-      <img src="<%= noticia.urlToImage || '/path/a/imagen/default.png' %>" alt="<%= noticia.title %>">
+      <img src="<%= noticia.imagenUrl || 'assets/images/body_images/estructura.jpg' %>" alt="<%= noticia.titulo %>">
       <div class="news-text">
-        <p><%= noticia.description || noticia.contenido %></p>
+        <h3 class="news-title"><%= noticia.titulo %></h3>
+        <p class="news-content"><%= noticia.contenido %></p>
       </div>
     </div>
   <% }); %>

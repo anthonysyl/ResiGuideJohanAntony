@@ -1,4 +1,7 @@
-document.addEventListener("DOMContentLoaded", function() {// Si estás en un entorno de navegador, es probable que necesites incluir axios desde un CDN en tu HTML en lugar de requerirlo así.
+
+document.addEventListener("DOMContentLoaded", function() 
+{
+
 
     function editarNoticia(buttonElement) {
         const newsContainer = buttonElement.closest('.news-container');

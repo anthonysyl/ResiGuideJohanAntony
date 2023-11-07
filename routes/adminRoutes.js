@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
+// Asegúrate de que la ruta sea correcta
+ // Asegúrate de que la ruta sea correcta
 const path = require('path');
 const adminController = require('../controllers/adminController');
+const authAdminMiddleware = require('../Middleware/authAdminMiddleware')
 const Admin = require('../models/Admin');
 const Usuario = require('../models/Usuario');
 const Conjunto = require('../models/Conjunto');
@@ -11,20 +14,32 @@ const Conjunto = require('../models/Conjunto');
 
 // Middleware de autenticación
 router.use(async (req, res, next) => {
-  if (!req.session || !req.session.adminId) {
-    // No hay ninguna sesión de admin. Redirigir a la página de login.
-
+  if (req.session && req.session.adminId) {
+    try {
+      const admin = await Admin.findByPk(req.session.adminId);
+      if (admin) {
+        req.admin = admin;
+        next();
+      } else {
+        // Administrador no encontrado, manejar este caso
+        res.status(401).send('No autorizado');
+      }
+    } catch (error) {
+      // Manejar error de base de datos o de servidor
+      console.error("Error al obtener administrador:", error);
+      res.status(500).send("Error interno del servidor");
+    }
+  } else {
+    next(); // Continuar si no hay sesión de admin
   }
-
-  // Hay una sesión de admin. Obtén los datos del admin de la base de datos.
-  const admin = await Admin.findByPk(req.session.adminId);
-
-  // Establece req.admin para que pueda ser utilizado en las siguientes rutas/middlewares.
-  req.admin = admin;
-
-  // Continúa al siguiente middleware/ruta
-  next();
 });
+
+
+
+
+
+
+
 
 // Tus rutas ya existentes...
 
@@ -44,12 +59,12 @@ router.get('/logout', (req, res) => {
     });
   });
 
-router.get('/control-panel', adminController.getPanelControl);
+router.get('/control-panel', authAdminMiddleware, adminController.getPanelControl);
 
 // Ruta para actualizar el estado de los servicios
-router.post('/control-panel', adminController.postPanelControl);
+router.post('/control-panel', authAdminMiddleware, adminController.postPanelControl);
 
-router.get('/control_panel', async (req, res) => {
+router.get('/control_panel', authAdminMiddleware, async (req, res) => {
   try {
       // Aquí, como ejemplo, obtengo el primer usuario y administrador. 
       // Adapta esta lógica a tus necesidades.
@@ -66,7 +81,11 @@ router.get('/control_panel', async (req, res) => {
       res.status(500).send("Error interno del servidor");
   }
 });
+router.get('/services-panel', adminController.getServicesPanel);
 
-  
+
+
+
+
 
 module.exports = router;

@@ -45,13 +45,19 @@ agregarNoticia = async (req, res) => {
 };
 getNoticias = async (req, res) => {
   try {
-      const noticias = await Noticia.findAll();
-      res.render('noticias', { noticias: noticias });
+      const admin = await Admin.findByPk(req.session.adminId);
+      if (!admin || !admin.conjunto_id) {
+          return res.redirect('/Admin/login.html');
+      }
+
+      const noticias = await Noticia.findAll({ where: { conjunto_id: admin.conjunto_id } });
+      res.render('noticias', { noticias });
   } catch (error) {
-      console.error("Error al obtener noticias:", error);
       res.status(500).send("Error al obtener noticias");
   }
 };
+
+
 getNoticiasManuales = async (conjuntoId) => {
   try {
     // Buscar noticias manuales
@@ -69,38 +75,57 @@ getNoticiasManuales = async (conjuntoId) => {
 editarNoticia = async (req, res) => {
   try {
       const { id } = req.params;
-      const { imagen, titulo, descripcion, contenido } = req.body;
+      const admin = await Admin.findByPk(req.session.adminId);
+      if (!admin || !admin.conjunto_id) {
+          return res.status(401).send('No autorizado');
+      }
 
-      const noticiaExistente = await Noticia.findOne({ where: { id } });
+      const noticiaExistente = await Noticia.findOne({ where: { id, conjunto_id: admin.conjunto_id } });
       if (!noticiaExistente) {
           return res.status(404).json({ success: false, message: 'Noticia no encontrada' });
       }
 
+      const { imagen, titulo, descripcion, contenido } = req.body;
       await Noticia.update({ imagen, titulo, descripcion, contenido }, { where: { id } });
-
-      res.json({ success: true, message: 'Noticia actualizada correctamente' });
+      res.json({ success: true, message: 'Noticia actualizada' });
   } catch (error) {
       res.status(500).json({ success: false, message: error.message });
+  }
+}
+exports.getNoticiasPanel = async (req, res) => {
+  try {
+    // Aquí, obtén las noticias manuales específicas para el conjunto del administrador
+    const conjuntoId = req.admin.conjunto_id; // Asegúrate de que req.admin esté disponible
+    const noticias = await Noticia.findAll({
+      where: { conjunto_id: conjuntoId }
+    });
+
+    res.render('noticias_panel', { noticias });
+  } catch (error) {
+    console.error('Error al obtener noticias:', error);
+    res.status(500).send('Error interno del servidor');
   }
 };
 
 eliminarNoticia = async (req, res) => {
   try {
       const { id } = req.params;
+      const admin = await Admin.findByPk(req.session.adminId);
+      if (!admin || !admin.conjunto_id) {
+          return res.status(401).send('No autorizado');
+      }
 
-      const noticiaExistente = await Noticia.findOne({ where: { id } });
+      const noticiaExistente = await Noticia.findOne({ where: { id, conjunto_id: admin.conjunto_id } });
       if (!noticiaExistente) {
           return res.status(404).json({ success: false, message: 'Noticia no encontrada' });
       }
 
       await Noticia.destroy({ where: { id } });
-
-      res.json({ success: true, message: 'Noticia eliminada correctamente' });
+      res.json({ success: true, message: 'Noticia eliminada' });
   } catch (error) {
       res.status(500).json({ success: false, message: error.message });
   }
 };
-
 
 getNoticiasAutomaticas = async (nombreConjunto) => {
   try {

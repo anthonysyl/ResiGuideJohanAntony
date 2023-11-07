@@ -56,6 +56,7 @@ const getPanelControl = async (req, res) => {
   const adminResponse = { ...admin.toJSON(), nombre_conjunto: conjunto.nombre };
 
   res.render('control_panel', { admin: adminResponse, adminId: admin.id });
+  
 };
 
 const postPanelControl = async (req, res) => {

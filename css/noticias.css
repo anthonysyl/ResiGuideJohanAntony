@@ -1,11 +1,11 @@
 header {
     background-color: #000;
     height: 95px;
-    width: 1920px;
+    width: 100%;
     color: #FFF;
     display: flex;
     align-items: center;
-    margin-left: -28px; 
+    margin-left: -2px; 
     margin-top: -28px;
 }
 
