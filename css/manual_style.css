@@ -1,0 +1,347 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@300&display=swap');
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Oscurecimiento semitransparente */
+    z-index: 10000; /* Detrás del manual */
+    display: block;
+}
+.contenedor-principal {
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11000; /* Por encima del overlay */
+    max-height: 90vh; /* Ajusta la altura máxima */
+    width: 800px; /* Ancho fijo */
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    scrollbar-width: none; /* Para navegadores como Firefox */
+    -ms-overflow-style: none; /* Para Internet Explorer 10+ *//* Elimina el desplazamiento vertical */
+
+}
+
+.contenedor-principal::-webkit-scrollbar {
+    display: none; /* Para navegadores WebKit como Chrome y Safari */
+}
+.fondo-manual {
+    width: 800px;
+    height: 1130px;
+    background-color: #CC4324;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.contenido-manual {
+    width: 620px;
+    height: 940px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px; /* Añadido para dar espacio al contenido */
+    text-align: center; /* Asegura que el contenido esté centrado */
+}
+
+.titulo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    margin-top: 20px; /* Espaciado desde la parte superior */
+}
+
+.subtitulo {
+    animation: fadeIn 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    font-size: 24px; /* Ajustado para diferenciar del título principal */
+    margin-top: 20px;
+}
+
+.texto {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    color: #B5B5B5;
+    animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    margin-top: 10px;
+}
+.tarjetas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.tarjeta {
+    width: 141px;
+    height: 99px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    align-items: center;
+    margin: 0 10px; /* Margen reducido para pegar más las tarjetas */
+}
+.tarjeta img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.5)); /* Efecto de sombra añadido */
+}
+
+#tarjeta1 {
+    background-color: #94F2FF;
+}
+
+#tarjeta2 {
+    background-color: #FFC940;
+}
+
+#tarjeta3 {
+    background-color: #BEFFD4;
+}
+.estados-servicio {
+    margin-top: 20px;
+}
+
+.estado {
+    margin-left: 100px;
+    display: flex;
+    align-items: center;
+    animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    margin-bottom: 10px; /* Espaciado entre cada estado */
+}
+
+.circulo {
+    width: 25px;
+    height: 27px;
+    border-radius: 50%; /* Hace que sea un círculo */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    margin-right: 10px; /* Espaciado entre el círculo y el texto */
+}
+
+.descripcion-estado {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    font-size: 14px;
+    color: #000000; /* Texto negro */
+}
+/* Estilos anteriores */
+
+.tarjeta-estado-servicio {
+    width: 141px;
+    height: 141px;
+    background-color: #94F2FF;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 10px; /* Opcional: Si deseas bordes redondeados */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    margin: 20px auto; /* Centrado horizontal con margen superior */
+}
+
+.texto-tarjeta-estado {
+    font-family: 'Roboto', sans-serif; /* Ajustar según sea necesario */
+    font-weight: normal;
+    font-size: 14px;
+    text-align: center;
+    animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    color: #000000; /* O cualquier otro color deseado */
+    padding: 10px; /* Asegura que el texto no toque los bordes */
+}
+/* Estilos anteriores */
+
+/* Estilos anteriores */
+
+
+.indicador-pagina {
+    position: absolute;
+    bottom: 10px; /* Ajustado para ubicar en la esquina inferior derecha */
+    right: 10px; /* Ajustado para ubicar en la esquina inferior derecha */
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #FFFFFF; /* Color blanco para contraste */
+    display: flex;
+    align-items: center;
+}
+
+.indicador-pagina .flecha {
+    font-size: 20px;
+    margin-left: 5px;
+}
+#pagina2 .titulo {
+    animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    margin-top: 180px;
+    /* Estilos específicos para el título en la segunda página */
+}
+
+#pagina2 .seccion-noticias {
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
+    align-items: center;
+    animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); /* Centra los elementos horizontalmente */
+    margin-top: 20px;
+}
+
+
+#pagina2 .shape-grande {
+    width: 391px;
+    height: 117px;
+    background-color: #FFFFFF; /* Color blanco */
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Box shadow */
+    position: relative; /* Para posicionar los elementos internos */
+    display: flex;
+    align-items: center; /* Centrar el contenido verticalmente */
+}
+
+#pagina2 .shape-pequena {
+    width: 154px;
+    border-radius: 10px;
+    height: 117px; /* Ajusta el tamaño según la imagen */
+    margin-right: 20px; /* Espaciado desde el lado derecho */
+}
+
+#pagina2 .texto-noticias {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300; /* Light */
+    font-size: 14px;
+    color: #B5B5B5; /* Color del texto */
+    margin-left: 10px; /* Alinea el texto a la derecha */
+/* Espaciado desde la imagen, ajusta según sea necesario */
+}
+#pagina3 .centro {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+}
+
+#pagina3 .circulo-chat {
+   
+    width: 72px;
+    height: 77px;
+    background-color: #94F2FF;
+    animation: zoomIn 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-radius: 50%; /* Hace que sea un círculo */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Box shadow */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centra la imagen del bot dentro del círculo */
+}
+
+#pagina3 .icono-bot {
+    width: 55px;
+    height: 56px; /* Ajusta estas dimensiones según la imagen real */
+}
+#pagina3 .shape-imagen {
+    width: 190px;
+    height: 250px;
+    animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 10px; /* Si deseas bordes redondeados */
+    overflow: hidden; /* Esconde cualquier parte de la imagen que exceda los límites de la shape */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centra la imagen dentro de la shape */
+    margin: auto; /* Centra la shape horizontalmente */
+}
+
+#pagina3 .shape-imagen img {
+    max-width: 100%; /* Asegura que la imagen no sea más ancha que la shape */
+    max-height: 100%; /* Asegura que la imagen no sea más alta que la shape */
+    height: auto; /* Mantiene la proporción de la imagen */
+}
+#pagina3 .iconos-administrador {
+    display: flex;
+    justify-content: center;
+    animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    margin-top: 20px;
+}
+
+#pagina3 .icono {
+    display: flex;
+    animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+
+#pagina3 .icono .circulo {
+    animation: slideRight cubic-bezier(0.075, 0.82, 0.165, 1) ease-in-out;
+    width: 19px;
+    height: 18px;
+    border-radius: 50%; /* Hace que sea un círculo */
+    margin-top: -10px; /* Posiciona parcialmente sobre el icono */
+    position: relative;
+    z-index: 1; /* Asegura que el círculo se sitúe sobre la imagen */
+}
+
+#pagina3 .descripcion-icono {
+    animation: slideRight cubic-bezier(0.075, 0.82, 0.165, 1) ease-in-out;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200; /* Extra Light */
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+.navegacion-manual {
+    position: relative;
+    bottom: 90%;
+    z-index: 1000;
+    left: 40px;
+    top: -60px;
+
+  
+
+
+    /* Resto de tus estilos para navegacion-manual... */
+}
+
+.navegacion-manual span {
+    cursor: pointer;
+    font-size: 30px; /* Tamaño grande para pruebas */
+    color: rgb(0, 0, 0); /* Color llamativo para pruebas */
+
+}
+#boton-terminar {
+    font-family: 'Roboto', sans-serif; /* Especifica la familia de fuentes */
+    font-weight: 300; /* Roboto Light */
+    font-size: 14px; /* Tamaño de la fuente */
+    cursor: pointer; /* Cambia el cursor a pointer para indicar que es clickeable */
+    /* Otros estilos para tu botón como color, fondo, etc., si son necesarios */
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideRight {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}

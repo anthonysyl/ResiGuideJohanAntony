@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RESIGUIDE</title>
     <link rel="stylesheet" href="css/index_style.css">
+    <link rel="stylesheet" href="css/manual_style.css">
 </head>
+
 <body>
+  <div class="overlay"></div> 
+
   <div id="sidebar" class="sidebar">
     <ul>
         <li><%= usuario.nombre %></li>
@@ -46,9 +50,170 @@
          
   </div>
     </header>
-   
+  
+    <div class="contenedor-principal">
+      <div class="fondo-manual">
+  
+          <!-- Contenido de la Primera Página -->
+          <div id="pagina1" class="contenido-manual" style="display: none;">
+              <h1 class="titulo">Bienvenido a tu inicio como usuario.</h1>
+              <p class="texto">
+                  Para entender tu inicio como usuario te explicaremos a continuación<br>
+                  las secciones principales que vas a ver en tu vista.
+              </p>
+              <h2 class="subtitulo">Sección de servicios.</h2>
+              <p class="texto">
+                  A continuación observarás en la sección de Servicios tres<br>
+                  cartas estilizadas con tres imágenes de los servicios básicos<br>
+                  del conjunto: Agua, Luz y Gas.
+              </p>
+              <div class="tarjetas">
+                  <div class="tarjeta" id="tarjeta1">
+                      <img src="../assets/icons/iconwater.png" alt="Imagen 1" style="width: 63px; height: 44px;">
+                  </div>
+                  <div class="tarjeta" id="tarjeta2">
+                      <img src="../assets/icons/icongas.png" alt="Imagen 2" style="width: 110px; height: 74px; margin-left: 22px; margin-top: 15px;">
+                  </div>
+                  <div class="tarjeta" id="tarjeta3">
+                      <img src="../assets/icons/iconluz.png" alt="Imagen 3" style="width: 70px; height: 40px;">
+                  </div>
+              </div>
+              <div class="texto-servicios">
+                  <p class="texto">
+                      Cada uno de estos tres servicios posee en su esquina inferior<br>
+                      derecha un círculo de color que en este caso sería el círculo de<br>
+                      color de estado del servicio y variarían su color dependiendo de<br>
+                      cómo se encuentre en el momento.
+                  </p>
+              </div>
+              <div class="estados-servicio">
+                  <div class="estado">
+                      <div class="circulo" style="background-color: #17A400;"></div>
+                      <p class="descripcion-estado">Activo: El servicio se encuentra activo en estos momentos.</p>
+                  </div>
+                  <div class="estado">
+                      <div class="circulo" style="background-color: #FAB329;"></div>
+                      <p class="descripcion-estado">Pronto inactivo: El servicio se suspenderá pronto.</p>
+                  </div>
+                  <div class="estado">
+                      <div class="circulo" style="background-color: #FF0303;"></div>
+                      <p class="descripcion-estado">Inactivo: El servicio se encuentra suspendido actualmente.</p>
+                  </div>
+              </div>
+              <div class="texto-servicios">
+                  <p class="texto">
+                      Además de esto también estas cartas tendrán un botón "Saber más" en el cual si el usuario da clic<br>
+                      en ellos podrá visualizar de manera dinámica un texto que hace alusión a la causa del por qué<br>
+                      el servicio se encuentra en un estado.
+                  </p>
+              </div>
+              <div class="tarjeta-estado-servicio">
+                  <p class="texto-tarjeta-estado">Causa del estado de tu servicio</p>
+              </div>
+          </div>
+  
+          <!-- Contenido de la Segunda Página -->
+          <div id="pagina2" class="contenido-manual" style="display:none;">
+            <h1 class="titulo">Sección de noticias.</h1>
+            <p class="texto">
+                En la sección de noticias podrás encontrar las noticias<br>
+                referentes al conjunto residencial al cuál perteneces. Cada<br>
+                noticia tiene una foto, un título y una descripción detallada<br>
+                de lo que ofrece la noticia.
+            </p>
+        
+            <div class="seccion-noticias">
+              <div class="shape-grande">
+                  <img src="../assets/images/body_images/fondo3.jpg" alt="Imagen" class="shape-pequena"> <!-- Actualiza con la ruta de tu imagen -->
+                  <p class="texto-noticias">Noticias relacionadas a tu conjunto residencial</p>
+              </div>
+              <br>
+              <div class="shape-grande">
+                <img src="../assets/images/body_images/fondo3.jpg" alt="Imagen" class="shape-pequena"> <!-- Asegúrate de actualizar la ruta de la imagen, si es diferente -->
+                <p class="texto-noticias">Noticias relacionadas a tu conjunto residencial</p>
+            </div>
+            
+              
+          </div>
+          <p class="texto">
+            Nota: estas noticias, al igual que con los servicios, no hacen<br>
+            actualizaciones a tiempo real con el usuario, por ende, este<br>
+            mismo tendrá que recargar la página para comprobar si hay cambios actuales<br>
+            en el sistema de su vista como usuario. Esto también tiene que estar arraigado<br>
+            a los cambios que el administrador del conjunto realice en su panel de control.
+        </p>
+          
+              <!-- Los nuevos componentes de la segunda página irán aquí -->
+          </div>
+          <div id="pagina3" class="contenido-manual">
+            <h1 class="titulo">Sección de Chat del conjunto</h1>
+            <p class="texto">
+                En la sección del Chat del conjunto podemos encontrar un<br>
+                chat en el cuál podemos abrirlo dándole clic al icono<br>
+                representado como un "bot".
+            </p>
+            <div class="centro">
+                <div class="circulo-chat">
+                    <img src="../assets/icons/botsito.png" alt="Bot Icon" class="icono-bot"> <!-- Asegúrate de actualizar la ruta de la imagen -->
+                </div>
+            </div>
+            
+      <p class="texto">
+          Se desplegará un chat en el cual el usuario podrá<br>
+          comunicarse con el ChatBot escribiendo "Hola", el cuál<br>
+          mismo te desplegará múltiples opciones las cuales el usuario<br>
+          podrá elegir.
+      </p>
+  
+      <div class="centro">
+        <div class="shape-imagen">
+            <!-- Reemplaza 'path_to_your_image' con la ruta real de tu imagen -->
+            <img src="../assets/icons/funciona.PNG" alt="Descripción de la imagen">
+        </div>
+    </div>
+    
+    <p class="texto">
+      La opción de hablar con el administrador genera una solicitud<br>
+      la cual permite al Usuario y el encargado del conjunto<br>
+      comunicarse mutuamente. Para tener en cuenta cuando<br>
+      como usuario puedes comunicarte con el administrador es<br>
+      mediante este icono que persiste en toda la vista del usuario.
+  </p>
+  
+  <div class="iconos-administrador">
+      <!-- Primer icono -->
+      <div class="icono">
+          <img src="../assets/icons/iconChat.png" alt="Conectado" style="width: 78px; height: 80px;">
+          <div class="circulo" style="background-color: #0DBC14;"></div>
+          <p class="descripcion-icono">El administrador<br>se encuentra<br>conectado</p>
+      </div>
+      <!-- Segundo icono -->
+      <div class="icono">
+          <img src="../assets/icons/iconChat.png" alt="Conectado, respondiendo chat" style="width: 78px; height: 80px;">
+          <div class="circulo" style="background-color: #FFC85E;"></div>
+          <p class="descripcion-icono">El administrador<br>se encuentra<br>conectado pero<br>respondiendo un chat</p>
+      </div>
+      <!-- Tercer icono -->
+      <div class="icono">
+          <img src="../assets/icons/iconChat.png" alt="No conectado" style="width: 78px; height: 80px;">
+          <div class="circulo" style="background-color: #D9D9D9;"></div>
+          <p class="descripcion-icono">El administrador<br>no se encuentra<br>conectado</p>
+      </div>
+  </div>
+  </div>
+            
+            <!-- Aquí irán los nuevos componentes de la tercera página -->
+        </div>
+       
+        <div class="navegacion-manual">
+          <span id="boton-atras" onclick="cambiarPagina('atras')">&#x2190;</span> <!-- Flecha hacia la izquierda -->
+          <span id="boton-siguiente" onclick="cambiarPagina('siguiente')">&#x2192;</span> <!-- Flecha hacia la derecha -->
+          <span id="boton-terminar" onclick="terminarManual()">Terminar</span>
+
+      </div>
   </div>
 
+  
     <hr class="custom-hr">
     <div class="admin">
       <img src="/assets/icons/iconChat.png" alt="Admin">
@@ -172,6 +337,10 @@
 </div>
 
   </section>
+
+
+
+
   <script>
     const userId = '<%= userId %>';
     const adminId = '<%= adminId %>';  
@@ -185,11 +354,53 @@
   const nombreConjunto = "<%= usuario.Conjunto ? usuario.Conjunto.nombre : '' %>";</script>
 
   
-
 <script>  document.getElementById('logoutButton').addEventListener('click', function() {
   console.log('Intentando cerrar sesión...');
 });</script>
 <script src="/javascript/opecausa.js"></script>
+<script>
+  
+  window.onload = function() {
+    // Asegura que se muestre la primera página al cargar la página
+    cambiarPagina('inicio');
+};
+function mostrarManual() {
+    document.querySelector('.overlay').style.display = 'block';
+    document.querySelector('.contenedor-principal').style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Bloquea el scroll del body
+  }
+
+
+let paginaActual = 1; // Inicia en la primera página
+
+function cambiarPagina(direccion) {
+    let totalPaginas = 3; // Ajusta según el número total de páginas que tengas
+    if (direccion === 'inicio') {
+        paginaActual = 1;
+    } else if (direccion === 'siguiente' && paginaActual < totalPaginas) {
+        paginaActual++;
+    } else if (direccion === 'atras' && paginaActual > 1) {
+        paginaActual--;
+    }
+  
+      var paginas = document.getElementsByClassName('contenido-manual');
+      for (var i = 0; i < paginas.length; i++) {
+          paginas[i].style.display = 'none'; // Oculta todas las páginas
+      }
+      document.getElementById('pagina' + paginaActual).style.display = 'block'; // Muestra la página actual
+  
+      // Actualiza la visibilidad de los botones
+      document.getElementById('boton-atras').style.display = paginaActual === 1 ? 'none' : 'inline';
+      document.getElementById('boton-siguiente').style.display = paginaActual === totalPaginas ? 'none' : 'inline';
+      document.getElementById('boton-terminar').style.display = paginaActual === totalPaginas ? 'inline' : 'none';
+  }
+  
+  function terminarManual() {
+    document.querySelector('.overlay').style.display = 'none';
+    document.querySelector('.contenedor-principal').style.display = 'none';
+    document.body.style.overflow = 'auto'; // Restablece el desplazamiento normal de la página
+}
+</script>
 
 </body >
 </html>

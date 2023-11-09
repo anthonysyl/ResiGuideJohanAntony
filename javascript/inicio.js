@@ -227,3 +227,14 @@ document.addEventListener('click', function(e) {
         closeSidebar();
     }
 });
+function abrirManual() {
+    document.querySelector('.overlay').style.display = 'block';
+    document.querySelector('.contenedor-principal').style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Deshabilita el desplazamiento de la página
+}
+
+function terminarManual() {
+    document.querySelector('.overlay').style.display = 'none';
+    document.querySelector('.contenedor-principal').style.display = 'none';
+    document.body.style.overflow = 'auto'; // Restablece el desplazamiento normal de la página
+}

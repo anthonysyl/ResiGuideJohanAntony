@@ -8,14 +8,13 @@ const noticiasController = require('./noticiasController')
 const inicioController = {
   mostrarInicio: async (req, res) => {
     try {
-      
-      // Obtén los datos del usuario desde la base de datos
+      // ... código existente para obtener datos del usuario ...
 
       const usuario = await Usuario.findByPk(req.session.userId, {
         include: [
           { model: Conjunto, as: 'Conjunto', include: [{ model: Servicio, as: 'Servicios' }] }
         ],
-        attributes: ['nombre', 'tipo_usuario', 'id']
+        attributes: ['nombre', 'tipo_usuario', 'fecha_registro', 'id'] // Añadir 'fecha_registro'
       });
       console.log("ID del usuario:", usuario.id);
       let admin = null;
@@ -38,21 +37,26 @@ const inicioController = {
   
       // Renderiza la vista 'inicio.ejs' y pasa los datos necesarios 
 
+      const esPrimerInicioSesion = calculaPrimerInicioSesion(usuario.fecha_registro);
+
       res.render('inicio', {
         usuario: usuario || {},
         servicios,
         noticias,
         userId: usuario.id,
-        adminId: admin.id  // Asegúrate de que esta línea esté presente y correcta.
+        adminId: admin ? admin.id : null,
+        primerInicioSesion: esPrimerInicioSesion // Añade esta línea
       });
     } catch (error) {
-      console.error('Error al obtener los datos del usuario:', error);
-      res.status(500).send('Error al obtener los datos del usuario');
+      // ... manejo de errores ...
     }
   }
-  
 };
-
+function calculaPrimerInicioSesion(fechaRegistro) {
+  if (!fechaRegistro) return false;
+  const diferenciaDias = (new Date() - new Date(fechaRegistro)) / (1000 * 60 * 60 * 24);
+  return diferenciaDias <= 1; // Ajusta este valor si deseas un rango de tiempo diferente
+}
 
 
 module.exports = inicioController;

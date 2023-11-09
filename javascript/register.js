@@ -31,29 +31,31 @@ $('#registroForm').submit(function(e) {
         tipo_usuario: $('input[name=tipo_usuario]:checked').val(),
         conjunto_id: $('#conjunto_id').val()
     };
-    
+
     // Validar los datos antes de enviar
     if (!usuarioData.nombre || !usuarioData.email || !usuarioData.password || !usuarioData.tipo_usuario || !usuarioData.conjunto_id) {
         alert('Por favor completa todos los campos');
         return false;
     }
 
-    // Enviar los datos al servidor
-    $.ajax({
-        url: "/registro",
-        type: "POST",
-        data: usuarioData,
-        success: function(data) {
-            if (data.success) {
-                alert('Usuario registrado con éxito!');
-            } else {
-                alert('Hubo un error al registrar al usuario');
-            }
-        },
-        error: function(err) {
-            console.error(err);
+    // Enviar los datos al servidor para registro
+   // Enviar los datos al servidor para registro
+   $.ajax({
+    url: "/registro",
+    type: "POST",
+    data: usuarioData,
+    success: function(data) {
+        if (data.success) {
+            // Redirige al usuario a la página de inicio
+            window.location.href = "/inicio";
+        } else {
             alert('Hubo un error al registrar al usuario');
         }
+    },
+    error: function(err) {
+        console.error(err);
+        alert('Hubo un error al registrar al usuario');
+    }
     });
 });
   

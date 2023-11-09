@@ -1,4 +1,5 @@
 const Usuario = require('../models/Usuario');
+
 const bcrypt = require('bcryptjs');
 
 exports.create = async (req, res) => {
@@ -9,7 +10,8 @@ exports.create = async (req, res) => {
     const salt = bcrypt.genSaltSync(10);
     const password_hash = bcrypt.hashSync(password, salt);
 
-    await Usuario.create({
+    // Crea el nuevo usuario
+    const usuario = await Usuario.create({
       nombre,
       email,
       password_hash,
@@ -17,32 +19,49 @@ exports.create = async (req, res) => {
       tipo_usuario,
       conjunto_id
     });
-    res.json({ success: true }); // Agrega esta línea
+
+    // Aquí se inicia sesión con el nuevo usuario
+    req.session.userId = usuario.id;
+
+    // Redirige al usuario a la página de inicio
+    res.json({ success: true, userId: usuario.id });
   } catch (error) {
     console.log(error);
-
+    res.status(500).send('Error al procesar la solicitud');
   }
 };
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
-  const usuario = await Usuario.findOne({ where: { email } });
-  if (!usuario) {
-    return res.status(400).json({ error: 'Usuario no encontrado.' });
+  try {
+    const usuario = await Usuario.findOne({ where: { email } });
+    if (!usuario) {
+      return res.status(400).json({ error: 'Usuario no encontrado.' });
+    }
+
+    // Verifica la contraseña
+    const validPassword = bcrypt.compareSync(password, usuario.password_hash);
+    if (!validPassword) {
+      return res.status(400).json({ message: 'Contraseña incorrecta.' });
+    }
+
+    // Calcula la diferencia en días entre la fecha actual y la fecha de registro
+    const diferenciaDias = (new Date() - new Date(usuario.fecha_registro)) / (1000 * 60 * 60 * 24);
+
+    // Guarda en la sesión si es el primer inicio de sesión
+    req.session.primerInicioSesion = diferenciaDias <= 1;
+
+    // Guarda el ID del usuario en la sesión
+    req.session.userId = usuario.id;
+
+    // Redirige al usuario a la página de inicio
+    res.redirect('/inicio');
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error al procesar la solicitud');
   }
-
-  // Verifica la contraseña con bcrypt
-  const validPassword = bcrypt.compareSync(password, usuario.password_hash);
-  if (!validPassword) {
-    return res.status(400).json({ message: 'Contraseña incorrecta.' });
-  }
-
-  // Guarda el ID del usuario en la sesión
-  req.session.userId = usuario.id;
-
-  // Redirige al usuario a la página de inicio
-  res.redirect('/inicio');
 };
+
 exports.logout = (req, res) => {
   if (req.session) {
       console.log("Intentando cerrar sesión para el usuario con ID:", req.session.userId);
