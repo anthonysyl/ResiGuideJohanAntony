@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>Panel de Control</title>
     <link rel="stylesheet" href="../css/control_panel_styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body>
     <header>
@@ -101,6 +103,63 @@
 
 
     </form>
+    <div class="seccion-principal">
+
+      <!-- Rectángulo Negro (Divisor) -->
+      <div class="rectangulo-negro"></div>
+  
+      <!-- Título de la Sección -->
+      <h2 class="titulo-seccion">Usuarios del conjunto: <%= admin.nombre_conjunto %></h2>
+  
+      
+      
+      <div class="caja-usuarios">
+
+        <!-- Encabezados de Usuarios -->
+        <div class="encabezados-usuarios">
+          <div class="contenedor-filtro">
+            <select id="filterStatus">
+                <option value="todos">Todos</option>
+                <option value="conectados">Conectados</option>
+            </select>
+        </div>
+            <span class="encabezado">Estado</span>
+            <span class="encabezado">Usuario</span>
+            <span class="encabezado">E-mail</span>
+            <span class="encabezado">Tipo</span>
+            <span class="encabezado">Opciones</span>
+        </div>
+        <div class="linea-horizontal"></div>
+        <div class="contenido-usuarios">
+          <!-- Usuario de Ejemplo -->
+          <% usuarios.forEach(usuario => { %>
+            <div class="usuario" data-user-id="<%= usuario.id %>">
+                <div class="estado">
+                    <span class="circulo-estado circulo-desconectado"></span> <!-- Inicialmente desconectado -->
+                </div>
+                <div class="nombre-usuario"><%= usuario.nombre %></div>
+                <div class="email-usuario"><%= usuario.email %></div>
+                <div class="tipo-usuario"><%= usuario.tipo_usuario %></div>
+                <div class="opciones-usuario">
+                    <i class="fas fa-trash"></i> <!-- Ícono de basura de FontAwesome -->
+                </div>
+            </div>
+        <% }) %>
+          <!-- Puedes duplicar este bloque para más usuarios de ejemplo -->
+      </div>
+    <div class="pagination">
+    <div class="pagination-button prev <% if (currentPage === 1) { %> disabled <% } %>">Anterior</div>
+    <div class="page-numbers">
+        <% for(let i = 1; i <= totalPages; i++) { %>
+            <a href="#" data-page="<%= i %>" class="page-link <%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+        <% } %>
+    </div>
+    <div class="pagination-button next <% if (currentPage === totalPages) { %> disabled <% } %>">Siguiente</div>
+</div>
+        <!-- Aquí continuaría el resto del contenido de la caja de usuarios -->
+    </div>
+      <!-- Puedes duplicar este bloque para más usuarios de ejemplo -->
+  </div>
     <script>
 
  
@@ -112,8 +171,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/javascript/control_panel.js"></script>
-   
-  
+ 
 
 
     <footer>

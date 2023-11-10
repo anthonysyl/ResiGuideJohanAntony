@@ -60,6 +60,40 @@ router.get('/logout', (req, res) => {
   });
 
 router.get('/control-panel', authAdminMiddleware, adminController.getPanelControl);
+router.get('/control-panel-data', authAdminMiddleware, async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = 4; // Número de usuarios por página
+  const offset = (page - 1) * limit;
+  const filterStatus = req.query.filterStatus; // Nuevo parámetro para el filtro
+
+  try {
+      let whereClause = {
+          conjunto_id: req.admin.conjunto_id // Asumiendo que 'req.admin' tiene el 'conjunto_id'
+      };
+
+      // Si se solicita filtrar por usuarios conectados
+      if (filterStatus === 'conectados') {
+          // Aquí debes agregar la lógica para filtrar solo los usuarios conectados
+          // Esto dependerá de cómo estés rastreando el estado de conexión de los usuarios
+          // Por ejemplo, podrías tener un campo en tu base de datos que indique si están conectados
+          whereClause['conectado'] = true; // Esto es solo un ejemplo
+      }
+
+      const { count, rows } = await Usuario.findAndCountAll({
+          where: whereClause,
+          limit: limit,
+          offset: offset
+      });
+
+      res.json({
+          usuarios: rows,
+          totalPages: Math.ceil(count / limit),
+          currentPage: page
+      });
+  } catch (error) {
+      res.status(500).json({ message: "Error interno del servidor" });
+  }
+});
 
 // Ruta para actualizar el estado de los servicios
 router.post('/control-panel', authAdminMiddleware, adminController.postPanelControl);

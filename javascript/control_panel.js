@@ -4,6 +4,7 @@ $(document).ready(function() {
     
     let notificationCount = 0; 
     socket.emit('adminConnected', adminId); 
+    socket.emit('requestCurrentStatus');
     const dropdown = document.getElementById('notificationDropdown');
     const chatContainer = document.querySelector('.chat-messages');
     
@@ -12,6 +13,18 @@ $(document).ready(function() {
     socket.on('userMessage', function(data) {
       addMessage(data.message, 'user');  // suponiendo que 'user' es la etiqueta que quieres mostrar en el chat del administrador
   });
+  let usuariosConectados = {};
+  socket.on('updateUserStatus', (data) => {
+    const usuarioElement = document.querySelector(`.usuario[data-user-id="${data.userId}"]`);
+    if (usuarioElement) {
+        const circuloEstado = usuarioElement.querySelector('.circulo-estado');
+        circuloEstado.style.backgroundColor = data.status === 'online' ? 'green' : 'grey';
+
+        // Actualizar el registro de usuarios conectados
+        usuariosConectados[data.userId] = data.status === 'online';
+    }
+});
+  
   // Referencia al panel
   const slidePanel = document.querySelector('.slide-panel');
 
@@ -251,5 +264,53 @@ $(document).ready(function() {
             }
         });
     });
-
+    
+    $('.pagination a').on('click', function(e) {
+        e.preventDefault();
+        const page = $(this).data('page');
+    
+        $.ajax({
+            url: '/admin/control-panel-data?page=' + page,  // Usa la nueva ruta aquí
+            type: 'GET',
+            success: function(response) {
+                updateUsers(response.usuarios);
+                // Actualiza también los controles de paginación si es necesario
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+    
+    function updateUsers(usuarios) {
+        const usersContainer = $('.contenido-usuarios');
+        usersContainer.empty();
+    
+        usuarios.forEach(usuario => {
+            const userHtml = `
+            <div class="usuario" data-user-id="${usuario.id}">
+                <div class="estado"><span class="circulo-estado" style="background-color: ${usuario.conectado ? 'green' : 'grey'};"></span></div>
+                <div class="nombre-usuario">${usuario.nombre}</div>
+                <div class="email-usuario">${usuario.email}</div>
+                <div class="tipo-usuario">${usuario.tipo_usuario}</div>
+                <div class="opciones-usuario">
+                    <i class="fas fa-trash"></i> <!-- Ícono de basura de FontAwesome -->
+                </div>
+            </div>
+            `;
+            usersContainer.append(userHtml);
+        });
+    }
+    $('#filterStatus').on('change', function() {
+        const selectedFilter = $(this).val();
+        document.querySelectorAll('.usuario').forEach(usuarioElement => {
+            const userId = usuarioElement.getAttribute('data-user-id');
+            if (selectedFilter === 'conectados' && !usuariosConectados[userId]) {
+                usuarioElement.style.display = 'none';
+            } else {
+                usuarioElement.style.display = '';
+            }
+        });
+    });
+    
 });

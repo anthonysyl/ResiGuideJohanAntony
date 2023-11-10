@@ -20,6 +20,8 @@ const setup = (io) => {
         socket.on('userConnected', (userId) => {
             console.log("Usuario conectado con ID:", userId);
             connectedUsers[userId] = socket.id;
+            io.emit('updateUserStatus', { userId: userId, status: 'online' });
+
         });
 
         // Petición de chat por parte de un usuario
@@ -92,6 +94,17 @@ const setup = (io) => {
                 io.to(userSocketId).emit('chatDenied');
             }
         });
+        socket.on('requestCurrentStatus', () => {
+            // Enviar el estado de todos los usuarios
+            for (let userId in connectedUsers) {
+                socket.emit('updateUserStatus', { userId: userId, status: 'online' });
+            }
+
+            // Enviar el estado de todos los administradores
+            for (let adminId in adminStatus) {
+                socket.emit('adminStatusUpdate', { adminId: adminId, status: adminStatus[adminId] });
+            }
+        });
 
         // Desconexión
         socket.on('disconnect', () => {
@@ -108,6 +121,9 @@ const setup = (io) => {
             if (userIdToDisconnect) {
                 console.log('Usuario desconectado con ID: ', userIdToDisconnect);
                 delete connectedUsers[userIdToDisconnect];
+                io.emit('updateUserStatus', { userId: userIdToDisconnect, status: 'offline' });
+
+
         
                 // Opcionalmente, puedes liberar a un administrador aquí si es necesario:
                 const adminIdToFree = Object.keys(currentChats).find(key => currentChats[key] === userIdToDisconnect);
@@ -119,6 +135,7 @@ const setup = (io) => {
             }
             
         });
+
     
     });
 };

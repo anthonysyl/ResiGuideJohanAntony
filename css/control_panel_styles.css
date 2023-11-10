@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500');
+
 
 body {
     margin: 0;
@@ -555,3 +557,192 @@ footer {
     font-weight: 300;
     color: #000;
 }
+.seccion-principal {
+    width: 100%;
+    background-color: #E5F5FE;
+    padding: 20px 0;
+    margin-top: -20px;
+    position: relative; /* Asegura que la posición relativa para los elementos hijos */
+}
+
+.rectangulo-negro {
+    margin-bottom: 20px;
+    height: 99px;
+    background-color: #000;
+    width: 100%;
+}
+
+.titulo-seccion {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 120px;
+    margin-left: 620px; /* Ajusta este margen según sea necesario */
+    position: absolute; /* Posición relativa para el título */
+    z-index: 10; /* Asegura que el título se muestre encima de otros elementos */
+}
+
+.caja-usuarios {
+    position: relative;
+    padding: 20px;
+    width: 858px;
+    height: 558px;
+    background-color: white;
+    margin: 80px auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-y: auto;
+    position: relative; /* Posición relativa para la caja */
+    top: -50px; /* Ajusta la caja hacia arriba */
+}
+
+.usuario {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+.encabezados-usuarios {
+    display: flex;
+    justify-content: space-between; /* Distribuye los encabezados uniformemente */
+    margin-top: 190px; /* Aumenta este margen para empujar los encabezados hacia abajo */
+    padding: 0 42px; /* Espacio en los lados del contenedor */
+}
+
+.encabezado {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center; /* Centra el texto dentro de su espacio */
+    padding: 0 5px; /* Agrega un poco de espacio a los lados */
+}
+
+.linea-horizontal {
+    height: 2px;
+    background-color: #B5B5B5;
+    width: 794px;
+
+    margin: 22px auto; /* Centra la línea */
+}
+.contenido-usuarios {
+    display: flex;
+    flex-direction: column;
+}
+
+.usuario {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0px;
+    margin-left: 0px;
+    padding: 0 60px; /* Alineación con los encabezados */
+}
+
+.circulo-estado {
+    height: 21px;
+    width: 19px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.circulo-conectado {
+    background-color: rgb(0, 221, 0); /* Verde para conectado */
+}
+
+.circulo-desconectado {
+    background-color: rgb(128, 128, 128); /* Gris para desconectado */
+}
+
+.nombre-usuario, .email-usuario, .tipo-usuario, .opciones-usuario {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    width: 120px; /* Establece un ancho fijo para cada columna */
+    margin-right: 10px; /* Espacio entre columnas */
+    word-wrap: break-word; /* Permite que las palabras se rompan y ajusten en la siguiente línea */
+}
+
+.usuario {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-left: 60px;
+    padding: 0 10px; /* Alineación con los encabezados */
+    flex-wrap: wrap; /* Permite que los elementos de la fila se ajusten en líneas adicionales */
+    min-height: 40px; /* Altura mínima para cada fila de usuario */
+}
+.opciones-usuario {
+    /* Estilos para las opciones, si necesitas un ancho específico, añádelo aquí */
+    max-width: 50px; /* Ejemplo, ajusta según sea necesario */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.icono-basura {
+    /* Aquí agregarías tu icono de basura, puede ser una imagen o un ícono de una fuente de íconos */
+}
+/* En tu archivo CSS */
+
+.pagination {
+    display: flex;
+    align-items: center;
+    padding: 0 290px;
+    background-color: #FFFFFF; /* Fondo blanco */
+    border: 0.5px solid #E1E1E1; /* Borde ligero */
+}
+
+/* Botones 'Anterior' y 'Siguiente' */
+.pagination-button {
+    flex: 0 0 100px; /* Ancho fijo para botones de 'Anterior' y 'Siguiente' */
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 500; /* Medium */
+    cursor: pointer;
+    border: 0.5px solid #E1E1E1; /* Borde de los botones */
+}
+.pagination-button:hover {
+    background-color: #f2f2f2; /* Color de fondo más claro al pasar el cursor */
+    color: #0597C5 /* Color de texto más oscuro para mejor contraste */
+}
+
+/* Botón 'Anterior' */
+.prev {
+    color: #E1DDDD; /* Color gris claro para 'Anterior' */
+}
+
+/* Botón 'Siguiente' */
+.next {
+    color: #0070D8; /* Color azul para 'Siguiente' */
+}
+
+/* Contenedor para los números de página */
+.page-numbers {
+    display: flex;
+    flex-grow: 1; /* Permitir que el contenedor de números crezca */
+    justify-content: center; /* Centrar los números */
+    border-left: 0.5px solid #E1E1E1; /* Borde a la izquierda del contenedor de números */
+    border-right: 0.5px solid #E1E1E1; /* Borde a la derecha del contenedor de números */
+}
+
+/* Estilos para cada número de página */
+.page-link {
+    padding: 0 10px; /* Espaciado horizontal dentro de los números */
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500; /* Medium */
+    line-height: 44px; /* Altura de línea para centrar verticalmente el texto */
+    cursor: pointer;
+    border: 0.5px solid #E1E1E1; /* Borde alrededor de los números */
+}
+.page-link:hover {
+    background-color: #e6e6e6; /* Fondo más claro al pasar el cursor */
+    color: #0597C5; /* Color de texto más oscuro */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+/* Estilo para el número de página activo */
+

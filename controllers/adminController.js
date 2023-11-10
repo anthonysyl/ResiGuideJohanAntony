@@ -2,6 +2,8 @@ const bcrypt = require('bcryptjs');
 const Admin = require('../models/Admin');
 const Conjunto = require('../models/Conjunto');
 const Servicio = require('../models/Servicio');
+const Usuario = require('../models/Usuario'); // Ajusta la ruta según sea necesario
+
 
 const path = require('path');
 
@@ -9,54 +11,82 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   const admin = await Admin.findOne({ where: { email } });
   if (!admin) {
-    return res.render('admin', { message: 'Admin no encontrado.' });
+      return res.render('admin', { message: 'Admin no encontrado.' });
   }
 
   // Correcta verificación de la contraseña
   const validPassword = bcrypt.compareSync(password, admin.password_hash);
   if (!validPassword) {
-    return res.render('admin', { message: 'Contraseña incorrecta.' });
+      return res.render('admin', { message: 'Contraseña incorrecta.' });
   }
   if (!admin.conjunto_id) {
-    return res.render('admin', { message: 'Conjunto no asignado al admin.' });
-}
+      return res.render('admin', { message: 'Conjunto no asignado al admin.' });
+  }
 
-const conjunto = await Conjunto.findByPk(admin.conjunto_id);
-if (!conjunto) {
-    return res.render('admin', { message: 'Conjunto no encontrado.' });
-}
+  const conjunto = await Conjunto.findByPk(admin.conjunto_id);
+  if (!conjunto) {
+      return res.render('admin', { message: 'Conjunto no encontrado.' });
+  }
 
+  // Lógica de paginación
+  const limit = 4; // Número de usuarios por página
+  const page = req.query.page || 1; // Página actual
+  const offset = (page - 1) * limit;
 
-  // Continuar si la contraseña es correcta..
-  
-  const usuarios = await conjunto.getUsuarios();
-  const usuario = usuarios[0];  // Asegúrate de manejar el caso en que usuarios pueda ser una lista vacía.
+  const { count, rows } = await Usuario.findAndCountAll({
+      where: { conjunto_id: conjunto.id },
+      limit: limit,
+      offset: offset
+  });
+
+  const totalPages = Math.ceil(count / limit);
 
   req.session.adminId = admin.id;
   const adminResponse = { ...admin.toJSON(), nombre_conjunto: conjunto.nombre };
-  console.log("Renderizando el panel de control con adminId:", admin.id);
-  res.render('control_panel', { admin: adminResponse, adminId: admin.id});
+
+  res.render('control_panel', {
+      admin: adminResponse,
+      adminId: admin.id,
+      usuarios: rows,
+      currentPage: parseInt(page),
+      totalPages
+  });
 };
 
 const getPanelControl = async (req, res) => {
-  const admin = await Admin.findOne({ where: { id: req.session.adminId } });
-  if (!admin) {
-    return res.render('error', { message: 'Admin no encontrado.' });
-  }
-  
-  const conjunto = await Conjunto.findOne({ where: { id: admin.conjunto_id } });
-  if (!conjunto) {
-    return res.render('error', { message: 'Conjunto no encontrado.' });
-  }
+    const admin = await Admin.findOne({ where: { id: req.session.adminId } });
+    if (!admin) {
+        return res.render('error', { message: 'Admin no encontrado.' });
+    }
+    
+    const conjunto = await Conjunto.findOne({ where: { id: admin.conjunto_id } });
+    if (!conjunto) {
+        return res.render('error', { message: 'Conjunto no encontrado.' });
+    }
 
-  const usuarios = await conjunto.getUsuarios();
+    const limit = 4; // Número de usuarios por página
+    const page = req.query.page || 1; // Página actual
+    const offset = (page - 1) * limit;
 
+    const { count, rows } = await Usuario.findAndCountAll({
+        where: { conjunto_id: conjunto.id },
+        limit: limit,
+        offset: offset
+    });
 
-  const servicios = await Servicio.findAll({ where: { conjunto_id: conjunto.id } });
-  const adminResponse = { ...admin.toJSON(), nombre_conjunto: conjunto.nombre };
+    const totalPages = Math.ceil(count / limit);
 
-  res.render('control_panel', { admin: adminResponse, adminId: admin.id });
-  
+    const servicios = await Servicio.findAll({ where: { conjunto_id: conjunto.id } });
+    const adminResponse = { ...admin.toJSON(), nombre_conjunto: conjunto.nombre };
+
+    res.render('control_panel', { 
+        admin: adminResponse, 
+        adminId: admin.id, 
+        servicios, 
+        usuarios: rows,
+        currentPage: parseInt(page),
+        totalPages 
+    });
 };
 
 const postPanelControl = async (req, res) => {
