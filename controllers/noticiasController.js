@@ -57,13 +57,28 @@ getNoticias = async (req, res) => {
           return res.redirect('/Admin/login.html');
       }
 
-      const noticias = await Noticia.findAll({ where: { conjunto_id: admin.conjunto_id, eliminado: false  } });
-      res.render('noticias', { noticias });
+      // Obtener las noticias actuales
+      const noticias = await Noticia.findAll({ 
+          where: { conjunto_id: admin.conjunto_id, eliminado: false  } 
+      });
+
+      // Obtener el historial de noticias
+      const historial = await HistorialNoticias.findAll({
+          include: [{
+              model: Noticia,
+              required: true,
+              where: { conjunto_id: admin.conjunto_id }
+          }],
+          order: [['fecha', 'DESC']]
+      });
+
+      // Renderizar la vista con ambas listas
+      res.render('noticias', { noticias, historial });
   } catch (error) {
+      console.error("Error al obtener noticias e historial:", error);
       res.status(500).send("Error al obtener noticias");
   }
 };
-
 
 getNoticiasManuales = async (conjuntoId) => {
   try {
@@ -179,31 +194,25 @@ getNoticiasAutomaticas = async (nombreConjunto) => {
     throw error;
   }
 };
-getMesesConCambios = async (req, res) => {
+getHistorialNoticias = async (req, res) => {
   try {
-      const conjuntoId = req.admin.conjunto_id;
+    const conjuntoId = req.admin.conjunto_id; // Asegúrate de que req.admin esté disponible y tenga conjunto_id
 
-      const mesesConCambios = await HistorialNoticias.findAll({
-          attributes: [
-              [sequelize.fn('MONTH', sequelize.col('fecha')), 'mes'],
-              [sequelize.fn('YEAR', sequelize.col('fecha')), 'anio']
-          ],
-          where: {
-              '$Noticia.conjunto_id$': conjuntoId
-          },
-          include: [{
-              model: Noticia,
-              attributes: []
-          }],
-          group: ['mes', 'anio'],
-          order: [['anio', 'DESC'], ['mes', 'DESC']],
-          raw: true
-      });
+    const historial = await HistorialNoticias.findAll({
+      include: [{
+        model: Noticia,
+        required: true,
+        where: { conjunto_id: conjuntoId }
+      }],
+      order: [['fecha', 'DESC']]
+    });
 
-      res.json(mesesConCambios);
+    console.log(historial); // Verifica los datos recuperados
+
+    res.render('noticias', { historial });
   } catch (error) {
-      console.error(error);
-      res.status(500).send('Error interno del servidor');
+    console.error('Error al obtener el historial de noticias:', error);
+    res.status(500).send('Error interno del servidor');
   }
 };
 module.exports = {
@@ -213,5 +222,6 @@ module.exports = {
   editarNoticia,
   eliminarNoticia,
   getNoticiasAutomaticas,
-  getMesesConCambios
+  getHistorialNoticias
+  
 };

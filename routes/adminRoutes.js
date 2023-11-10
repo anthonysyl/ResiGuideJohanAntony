@@ -100,6 +100,7 @@ router.post('/control-panel', authAdminMiddleware, adminController.postPanelCont
 router.get('/delete-user/:id', authAdminMiddleware, adminController.deleteUser);
 
 
+
 router.get('/control_panel', authAdminMiddleware, async (req, res) => {
   try {
       // Aquí, como ejemplo, obtengo el primer usuario y administrador. 

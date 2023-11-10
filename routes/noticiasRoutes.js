@@ -7,7 +7,8 @@ const {
     getNoticiasAutomaticas,
     editarNoticia,
     eliminarNoticia,
-    getMesesConCambios
+    getHistorialNoticias
+
 } = require('../controllers/noticiasController');
 
 const { uploadNoticias } = require('../config/cloudinary');
@@ -18,7 +19,6 @@ const { uploadNoticias } = require('../config/cloudinary');
 // Obtener todas las noticias
 router.get('/', getNoticias);
 
-router.get('/meses-con-cambios', getMesesConCambios);
 
 // Agregar una noticia
 router.post('/agregar', uploadNoticias.single('imagen'), agregarNoticia);
@@ -29,6 +29,7 @@ router.put('/editar-noticia/:id', editarNoticia);
 // Eliminar una noticia por ID
 router.delete('/eliminar-noticia/:id', eliminarNoticia);
 
+router.get('/historial-noticias', getHistorialNoticias);
 // Noticias Manuales
 router.get('/manuales', async (req, res, next) => {
     try {

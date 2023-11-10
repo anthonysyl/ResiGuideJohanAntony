@@ -75,7 +75,21 @@
                 <button class="edit-button" onclick="editarNoticia(this)">Editar</button>
             </div>
         </div>
-    <% }) %>
+        <% }) %>
+    <h2>Historial de Noticias</h2>
+<div>
+    <% if (historial && historial.length > 0) { %>
+        <% historial.forEach(h => { %>
+          <div>
+            <p>Acción: <%= h.accion %></p>
+            <p>Fecha: <%= h.fecha %></p>
+            <!-- Otros campos que quieras mostrar -->
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>No hay historial para mostrar.</p>
+      <% } %>
+
     <script>
         document.querySelector('#formNoticias').addEventListener('submit', function(event) {
             event.preventDefault(); // Evita el envío regular del formulario
