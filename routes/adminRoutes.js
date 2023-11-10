@@ -97,6 +97,8 @@ router.get('/control-panel-data', authAdminMiddleware, async (req, res) => {
 
 // Ruta para actualizar el estado de los servicios
 router.post('/control-panel', authAdminMiddleware, adminController.postPanelControl);
+router.get('/delete-user/:id', authAdminMiddleware, adminController.deleteUser);
+
 
 router.get('/control_panel', authAdminMiddleware, async (req, res) => {
   try {

@@ -672,6 +672,7 @@ footer {
     min-height: 40px; /* Altura mínima para cada fila de usuario */
 }
 .opciones-usuario {
+    
     /* Estilos para las opciones, si necesitas un ancho específico, añádelo aquí */
     max-width: 50px; /* Ejemplo, ajusta según sea necesario */
     overflow: hidden;
@@ -744,5 +745,13 @@ footer {
     color: #0597C5; /* Color de texto más oscuro */
     transition: background-color 0.3s, color 0.3s; /* Transición suave */
 }
-/* Estilo para el número de página activo */
+.btn-delete-user {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-delete-user:focus {
+    outline: none;
+}
 

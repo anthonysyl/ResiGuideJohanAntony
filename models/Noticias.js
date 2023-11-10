@@ -35,6 +35,11 @@ const Noticia = sequelize.define('Noticia', {
             key: 'id'
         }
     },
+    eliminado: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
     fecha_publicacion: {
         type: DataTypes.DATE,
         allowNull: false,

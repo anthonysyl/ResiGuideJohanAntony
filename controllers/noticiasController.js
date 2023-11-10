@@ -2,6 +2,7 @@ const axios = require('axios');
 const Conjunto =require('../models/Conjunto')
 const Noticia = require('../models/Noticias');
 const Admin = require('../models/Admin');
+const HistorialNoticias =require('../models/HistorialNoticias')
 
 
 agregarNoticia = async (req, res) => {
@@ -11,7 +12,7 @@ agregarNoticia = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Admin no encontrado.' });
     }
     // Consultar el número de noticias existentes para el conjunto
-    const cantidadNoticias = await Noticia.count({ where: { conjunto_id: admin.conjunto_id } });
+    const cantidadNoticias = await Noticia.count({ where: { conjunto_id: admin.conjunto_id, eliminado: false  } });
     // Verificar si ya existen 3 noticias
     if (cantidadNoticias >= 3) {
       return res.status(400).json({ success: false, message: 'Has excedido el número máximo de noticias para este conjunto.' });
@@ -33,6 +34,12 @@ agregarNoticia = async (req, res) => {
     };
 
     const noticia = await Noticia.create(noticiaData);
+    await HistorialNoticias.create({
+      noticiaId: noticia.id,
+      accion: 'creada',
+      descripcion: 'Noticia creada',
+      fecha: new Date() // Fecha actual
+  });
 
     res.json({ success: true, message: 'Noticia agregada exitosamente', noticia });
     console.log(req.file);
@@ -50,7 +57,7 @@ getNoticias = async (req, res) => {
           return res.redirect('/Admin/login.html');
       }
 
-      const noticias = await Noticia.findAll({ where: { conjunto_id: admin.conjunto_id } });
+      const noticias = await Noticia.findAll({ where: { conjunto_id: admin.conjunto_id, eliminado: false  } });
       res.render('noticias', { noticias });
   } catch (error) {
       res.status(500).send("Error al obtener noticias");
@@ -62,7 +69,7 @@ getNoticiasManuales = async (conjuntoId) => {
   try {
     // Buscar noticias manuales
     const noticiasManuales = await Noticia.findAll({
-      where: { conjunto_id: conjuntoId },
+      where: { conjunto_id: conjuntoId, eliminado: false  },
       order: [['fecha_publicacion', 'DESC']],
       limit: 3
     });
@@ -80,13 +87,19 @@ editarNoticia = async (req, res) => {
           return res.status(401).send('No autorizado');
       }
 
-      const noticiaExistente = await Noticia.findOne({ where: { id, conjunto_id: admin.conjunto_id } });
+      const noticiaExistente = await Noticia.findOne({ where: { id, conjunto_id: admin.conjunto_id, eliminado: false  } });
       if (!noticiaExistente) {
           return res.status(404).json({ success: false, message: 'Noticia no encontrada' });
       }
 
       const { imagen, titulo, descripcion, contenido } = req.body;
       await Noticia.update({ imagen, titulo, descripcion, contenido }, { where: { id } });
+      await HistorialNoticias.create({
+        noticiaId: id,
+        accion: 'editada',
+        descripcion: 'Noticia editada',
+        fecha: new Date() // Fecha actual
+    });
       res.json({ success: true, message: 'Noticia actualizada' });
   } catch (error) {
       res.status(500).json({ success: false, message: error.message });
@@ -97,7 +110,7 @@ exports.getNoticiasPanel = async (req, res) => {
     // Aquí, obtén las noticias manuales específicas para el conjunto del administrador
     const conjuntoId = req.admin.conjunto_id; // Asegúrate de que req.admin esté disponible
     const noticias = await Noticia.findAll({
-      where: { conjunto_id: conjuntoId }
+      where: { conjunto_id: conjuntoId, eliminado: false  }
     });
 
     res.render('noticias_panel', { noticias });
@@ -108,24 +121,35 @@ exports.getNoticiasPanel = async (req, res) => {
 };
 
 eliminarNoticia = async (req, res) => {
-  try {
-      const { id } = req.params;
-      const admin = await Admin.findByPk(req.session.adminId);
-      if (!admin || !admin.conjunto_id) {
-          return res.status(401).send('No autorizado');
-      }
+    try {
+        const { id } = req.params;
+        const admin = await Admin.findByPk(req.session.adminId);
+        if (!admin || !admin.conjunto_id) {
+            return res.status(401).send('No autorizado');
+        }
 
-      const noticiaExistente = await Noticia.findOne({ where: { id, conjunto_id: admin.conjunto_id } });
-      if (!noticiaExistente) {
-          return res.status(404).json({ success: false, message: 'Noticia no encontrada' });
-      }
+        const noticiaExistente = await Noticia.findOne({ where: { id, conjunto_id: admin.conjunto_id } });
+        if (!noticiaExistente) {
+            return res.status(404).json({ success: false, message: 'Noticia no encontrada' });
+        }
 
-      await Noticia.destroy({ where: { id } });
-      res.json({ success: true, message: 'Noticia eliminada' });
-  } catch (error) {
-      res.status(500).json({ success: false, message: error.message });
-  }
+        // Actualizar el campo 'eliminado' en lugar de eliminar la noticia
+        await Noticia.update({ eliminado: true }, { where: { id } });
+
+        // Registrar en HistorialNoticias
+        await HistorialNoticias.create({
+            noticiaId: id,
+            accion: 'eliminada',
+            descripcion: 'Noticia eliminada',
+            fecha: new Date()
+        });
+
+        res.json({ success: true, message: 'Noticia eliminada' });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
 };
+
 
 getNoticiasAutomaticas = async (nombreConjunto) => {
   try {
@@ -155,11 +179,39 @@ getNoticiasAutomaticas = async (nombreConjunto) => {
     throw error;
   }
 };
+getMesesConCambios = async (req, res) => {
+  try {
+      const conjuntoId = req.admin.conjunto_id;
+
+      const mesesConCambios = await HistorialNoticias.findAll({
+          attributes: [
+              [sequelize.fn('MONTH', sequelize.col('fecha')), 'mes'],
+              [sequelize.fn('YEAR', sequelize.col('fecha')), 'anio']
+          ],
+          where: {
+              '$Noticia.conjunto_id$': conjuntoId
+          },
+          include: [{
+              model: Noticia,
+              attributes: []
+          }],
+          group: ['mes', 'anio'],
+          order: [['anio', 'DESC'], ['mes', 'DESC']],
+          raw: true
+      });
+
+      res.json(mesesConCambios);
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Error interno del servidor');
+  }
+};
 module.exports = {
   agregarNoticia,
   getNoticias,
   getNoticiasManuales,
   editarNoticia,
   eliminarNoticia,
-  getNoticiasAutomaticas
+  getNoticiasAutomaticas,
+  getMesesConCambios
 };

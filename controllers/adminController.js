@@ -52,6 +52,19 @@ const login = async (req, res) => {
       totalPages
   });
 };
+const deleteUser = async (req, res) => {
+  try {
+      const userId = req.params.id;
+      await Usuario.destroy({ where: { id: userId } });
+      // Redirigir o enviar una respuesta adecuada
+      res.redirect('/admin/control-panel');
+  } catch (error) {
+      console.error("Error al eliminar usuario:", error);
+      res.status(500).send("Error interno del servidor");
+  }
+};
+
+
 
 const getPanelControl = async (req, res) => {
     const admin = await Admin.findOne({ where: { id: req.session.adminId } });
@@ -121,4 +134,5 @@ const getServicesPanel = async (req, res) => {
   res.render('services_panel', { admin: adminResponse, servicios });
 };
 
-module.exports = { login, getPanelControl, postPanelControl, getServicesPanel };
+
+module.exports = { login, getPanelControl, postPanelControl, getServicesPanel, deleteUser };

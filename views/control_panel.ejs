@@ -140,9 +140,9 @@
                 <div class="nombre-usuario"><%= usuario.nombre %></div>
                 <div class="email-usuario"><%= usuario.email %></div>
                 <div class="tipo-usuario"><%= usuario.tipo_usuario %></div>
-                <div class="opciones-usuario">
-                    <i class="fas fa-trash"></i> <!-- Ícono de basura de FontAwesome -->
-                </div>
+                <a href="/admin/delete-user/<%= usuario.id %>" class="delete-user">
+                  <i class="fas fa-trash"></i>
+              </a>
             </div>
         <% }) %>
           <!-- Puedes duplicar este bloque para más usuarios de ejemplo -->

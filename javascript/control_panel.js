@@ -312,5 +312,22 @@ $(document).ready(function() {
             }
         });
     });
+    $('.contenido-usuarios').on('click', '.fas.fa-trash', function() {
+        const userId = $(this).closest('.usuario').data('user-id');
+        if (confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
+            $.ajax({
+                url: `/admin/delete-user/${userId}`,
+                type: 'POST',
+                success: function(response) {
+                    // Eliminar el usuario del DOM o recargar la página
+                    $(`.usuario[data-user-id="${userId}"]`).remove();
+                },
+                error: function(error) {
+                    console.error('Error:', error);
+                    alert('Hubo un error al intentar eliminar el usuario.');
+                }
+            });
+        }
+    });
     
 });
