@@ -38,14 +38,15 @@ const inicioController = {
       // Renderiza la vista 'inicio.ejs' y pasa los datos necesarios 
 
       const esPrimerInicioSesion = calculaPrimerInicioSesion(usuario.fecha_registro);
-
+   
       res.render('inicio', {
         usuario: usuario || {},
         servicios,
         noticias,
         userId: usuario.id,
         adminId: admin ? admin.id : null,
-        primerInicioSesion: esPrimerInicioSesion // Añade esta línea
+        primerInicioSesion: esPrimerInicioSesion,
+        sessionTimestamp: req.session.timestamp // Añade esta línea
       });
     } catch (error) {
       // ... manejo de errores ...

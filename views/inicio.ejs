@@ -349,6 +349,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/javascript/inicio.js"></script>
+<script>
+   window.onload = function() {
+        // Obtener la marca de tiempo de la sesión del servidor
+        const sessionTimestamp = '<%= sessionTimestamp %>';
+
+        // Obtener la marca de tiempo almacenada en localStorage
+        const localTimestamp = localStorage.getItem('sessionTimestamp');
+
+        // Verificar si las marcas de tiempo coinciden
+        if (sessionTimestamp !== localTimestamp) {
+            // Si no coinciden, redirigir al inicio de sesión
+            window.location.href = '/logout';
+        }
+
+        // Actualizar la marca de tiempo en localStorage
+        localStorage.setItem('sessionTimestamp', sessionTimestamp);
+    };
+  </script>
 <script> const nombreUsuario = "<%= usuario.nombre %>";
   
   const nombreConjunto = "<%= usuario.Conjunto ? usuario.Conjunto.nombre : '' %>";</script>
@@ -359,48 +377,54 @@
 });</script>
 <script src="/javascript/opecausa.js"></script>
 <script>
+    window.onload = function() {
+      // Asegura que se muestre la primera página al cargar la página
+      cambiarPagina('inicio');
   
-  window.onload = function() {
-    // Asegura que se muestre la primera página al cargar la página
-    cambiarPagina('inicio');
-};
-function mostrarManual() {
-    document.querySelector('.overlay').style.display = 'block';
-    document.querySelector('.contenedor-principal').style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Bloquea el scroll del body
-  }
-
-
-let paginaActual = 1; // Inicia en la primera página
-
-function cambiarPagina(direccion) {
-    let totalPaginas = 3; // Ajusta según el número total de páginas que tengas
-    if (direccion === 'inicio') {
-        paginaActual = 1;
-    } else if (direccion === 'siguiente' && paginaActual < totalPaginas) {
-        paginaActual++;
-    } else if (direccion === 'atras' && paginaActual > 1) {
-        paginaActual--;
+      // Verifica si el manual ya fue mostrado
+      if (!localStorage.getItem('manualMostrado')) {
+          mostrarManual();
+      }
+    };
+  
+    function mostrarManual() {
+      document.querySelector('.overlay').style.display = 'block';
+      document.querySelector('.contenedor-principal').style.display = 'block';
+      document.body.style.overflow = 'hidden'; // Bloquea el scroll del body
     }
   
+    let paginaActual = 1; // Inicia en la primera página
+  
+    function cambiarPagina(direccion) {
+      let totalPaginas = 3; // Ajusta según el número total de páginas que tengas
+      if (direccion === 'inicio') {
+          paginaActual = 1;
+      } else if (direccion === 'siguiente' && paginaActual < totalPaginas) {
+          paginaActual++;
+      } else if (direccion === 'atras' && paginaActual > 1) {
+          paginaActual--;
+      }
+    
       var paginas = document.getElementsByClassName('contenido-manual');
       for (var i = 0; i < paginas.length; i++) {
           paginas[i].style.display = 'none'; // Oculta todas las páginas
       }
       document.getElementById('pagina' + paginaActual).style.display = 'block'; // Muestra la página actual
-  
+    
       // Actualiza la visibilidad de los botones
       document.getElementById('boton-atras').style.display = paginaActual === 1 ? 'none' : 'inline';
       document.getElementById('boton-siguiente').style.display = paginaActual === totalPaginas ? 'none' : 'inline';
       document.getElementById('boton-terminar').style.display = paginaActual === totalPaginas ? 'inline' : 'none';
-  }
+    }
+    
+    function terminarManual() {
+      document.querySelector('.overlay').style.display = 'none';
+      document.querySelector('.contenedor-principal').style.display = 'none';
+      document.body.style.overflow = 'auto'; // Restablece el desplazamiento normal de la página
   
-  function terminarManual() {
-    document.querySelector('.overlay').style.display = 'none';
-    document.querySelector('.contenedor-principal').style.display = 'none';
-    document.body.style.overflow = 'auto'; // Restablece el desplazamiento normal de la página
-}
-</script>
-
+      // Marca el manual como mostrado en localStorage
+      localStorage.setItem('manualMostrado', 'true');
+    }
+  </script>
 </body >
 </html>

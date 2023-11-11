@@ -23,10 +23,24 @@ router.get('/inicio', (req, res) => {
     // Si el usuario no está logeado, redirige al inicio de sesión
     return res.redirect('/login');
   }
+  res.render('inicio', {
+    // Pasar la marca de tiempo de la sesión a la plantilla
+    sessionTimestamp: req.session.timestamp
+});
+  if (!req.session.manualMostrado) {
+    req.session.manualMostrado = true; // Marca el manual como mostrado
+    res.render('inicio', { mostrarManual: true }); // Asumiendo que 'inicio' es una vista renderizable
+  } else {
+    res.render('inicio', { mostrarManual: false });
+  }
 
   // Si el usuario está logeado, muestra la página de inicio
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
   res.sendFile(path.join(__dirname, '../inicio.html'));
 });
+
 
 
 

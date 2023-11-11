@@ -53,8 +53,10 @@ exports.login = async (req, res) => {
 
     // Guarda el ID del usuario en la sesión
     req.session.userId = usuario.id;
-
+    
+    req.session.timestamp = new Date().getTime();
     // Redirige al usuario a la página de inicio
+  
     res.redirect('/inicio');
   } catch (error) {
     console.log(error);
