@@ -19,9 +19,17 @@ const HistorialNoticias = sequelize.define('HistorialNoticias', {
         type: DataTypes.STRING(50), // Ajusta el tamaño según tus necesidades
         allowNull: false
     },
+    titulo: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
     descripcion: {
         type: DataTypes.STRING(255), // Ajusta el tamaño según tus necesidades
         allowNull: true // Cambia a false si quieres que sea obligatorio
+    },
+    contenido: {
+        type: DataTypes.TEXT,
+        allowNull: false
     },
     fecha: {
         type: DataTypes.DATE,

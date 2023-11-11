@@ -2,7 +2,7 @@ const Usuario = require('../models/Usuario');
 const Conjunto = require('../models/Conjunto');
 const Servicio = require('../models/Servicio');
 const HistorialNoticias = require('../models/HistorialNoticias');
-const Noticias = require('../models/Noticias');
+const Noticia = require('../models/Noticias');
 
 const Administrador = require('./Admin');
 
@@ -12,9 +12,9 @@ Conjunto.hasMany(Servicio, { foreignKey: 'conjunto_id' });
 Servicio.belongsTo(Conjunto, { foreignKey: 'conjunto_id', as: 'Conjunto' });
 Administrador.belongsTo(Conjunto, { foreignKey: 'conjunto_id', as: 'ConjuntoAdministrado' });
 Conjunto.hasOne(Administrador, { foreignKey: 'conjunto_id' });
-Noticias.hasMany(HistorialNoticias, { foreignKey: 'noticiaId' });
+Noticia.hasMany(HistorialNoticias, { foreignKey: 'noticiaId' });
 // Cada entrada en HistorialNoticias pertenece a una Noticia
-HistorialNoticias.belongsTo(Noticias, { foreignKey: 'noticiaId' });
+HistorialNoticias.belongsTo(Noticia, { foreignKey: 'noticiaId' });
 
 
 
@@ -25,7 +25,7 @@ module.exports = {
   Conjunto,
   Servicio,
   Administrador,
-  Noticias,
+  Noticia,
   HistorialNoticias
 
 };

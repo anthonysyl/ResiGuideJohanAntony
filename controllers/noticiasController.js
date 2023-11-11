@@ -36,8 +36,10 @@ agregarNoticia = async (req, res) => {
     const noticia = await Noticia.create(noticiaData);
     await HistorialNoticias.create({
       noticiaId: noticia.id,
+      titulo,
       accion: 'creada',
-      descripcion: 'Noticia creada',
+      descripcion,
+      contenido,
       fecha: new Date() // Fecha actual
   });
 
@@ -107,19 +109,27 @@ editarNoticia = async (req, res) => {
           return res.status(404).json({ success: false, message: 'Noticia no encontrada' });
       }
 
-      const { imagen, titulo, descripcion, contenido } = req.body;
-      await Noticia.update({ imagen, titulo, descripcion, contenido }, { where: { id } });
+      const { titulo, descripcion, contenido } = req.body;
+      await Noticia.update({ titulo, descripcion, contenido }, { where: { id } });
+
+      // Obtener la noticia actualizada para usar sus datos en el historial
+      const noticiaActualizada = await Noticia.findByPk(id);
+
       await HistorialNoticias.create({
         noticiaId: id,
+        titulo: noticiaActualizada.titulo,
+        descripcion: noticiaActualizada.descripcion,
+        contenido: noticiaActualizada.contenido, // Asegúrate de incluir el contenido aquí
         accion: 'editada',
-        descripcion: 'Noticia editada',
         fecha: new Date() // Fecha actual
-    });
+      });
+
       res.json({ success: true, message: 'Noticia actualizada' });
   } catch (error) {
       res.status(500).json({ success: false, message: error.message });
   }
-}
+};
+
 exports.getNoticiasPanel = async (req, res) => {
   try {
     // Aquí, obtén las noticias manuales específicas para el conjunto del administrador
@@ -136,35 +146,39 @@ exports.getNoticiasPanel = async (req, res) => {
 };
 
 eliminarNoticia = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const admin = await Admin.findByPk(req.session.adminId);
-        if (!admin || !admin.conjunto_id) {
-            return res.status(401).send('No autorizado');
-        }
+  try {
+      const { id } = req.params;
+      const admin = await Admin.findByPk(req.session.adminId);
+      if (!admin || !admin.conjunto_id) {
+          return res.status(401).send('No autorizado');
+      }
 
-        const noticiaExistente = await Noticia.findOne({ where: { id, conjunto_id: admin.conjunto_id } });
-        if (!noticiaExistente) {
-            return res.status(404).json({ success: false, message: 'Noticia no encontrada' });
-        }
+      const noticiaExistente = await Noticia.findOne({ where: { id, conjunto_id: admin.conjunto_id } });
+      if (!noticiaExistente) {
+          return res.status(404).json({ success: false, message: 'Noticia no encontrada' });
+      }
 
-        // Actualizar el campo 'eliminado' en lugar de eliminar la noticia
-        await Noticia.update({ eliminado: true }, { where: { id } });
+      // Guardar los datos antes de marcar como eliminada
+      const { titulo, descripcion, contenido } = noticiaExistente;
 
-        // Registrar en HistorialNoticias
-        await HistorialNoticias.create({
-            noticiaId: id,
-            accion: 'eliminada',
-            descripcion: 'Noticia eliminada',
-            fecha: new Date()
-        });
+      // Actualizar el campo 'eliminado'
+      await Noticia.update({ eliminado: true }, { where: { id } });
 
-        res.json({ success: true, message: 'Noticia eliminada' });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
-    }
+      // Registrar en HistorialNoticias
+      await HistorialNoticias.create({
+          noticiaId: id,
+          titulo,
+          descripcion,
+          contenido, // Incluir el contenido aquí también
+          accion: 'eliminada',
+          fecha: new Date()
+      });
+
+      res.json({ success: true, message: 'Noticia eliminada' });
+  } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+  }
 };
-
 
 getNoticiasAutomaticas = async (nombreConjunto) => {
   try {

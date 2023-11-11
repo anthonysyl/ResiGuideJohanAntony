@@ -76,20 +76,17 @@
             </div>
         </div>
         <% }) %>
-    <h2>Historial de Noticias</h2>
-<div>
-    <% if (historial && historial.length > 0) { %>
-        <% historial.forEach(h => { %>
-          <div>
-            <p>Acción: <%= h.accion %></p>
-            <p>Fecha: <%= h.fecha %></p>
-            <!-- Otros campos que quieras mostrar -->
-          </div>
-        <% }) %>
-      <% } else { %>
-        <p>No hay historial para mostrar.</p>
-      <% } %>
-
+        <div class="container">
+            <h1>Historial de Noticias</h1>
+            <% historial.forEach(h => { %>
+                <div class="card">
+                    <div class="card-header"><%= h.titulo %></div>
+                    <div class="card-body"><%= h.descripcion %></div>
+                    <div class="card-body"><%= h.contenido %></div>
+                    <div class="card-footer">Acción: <%= h.accion %> - Fecha: <%= h.fecha.toDateString() %></div>
+                </div>
+            <% }) %>
+        </div>
     <script>
         document.querySelector('#formNoticias').addEventListener('submit', function(event) {
             event.preventDefault(); // Evita el envío regular del formulario
