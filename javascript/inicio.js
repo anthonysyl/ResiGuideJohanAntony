@@ -128,18 +128,7 @@ function handleBotResponse(userMessage) {
             addMessage('B. ¿Qué debo hacer si encuentro un problema o error en la aplicación?', 'bot');
             addMessage('C. ¿Que significan los colores de los servicios y del icono de robot de arriba?', 'bot');
             addMessage('Digita la pregunta que deseas saber', 'bot');
-        } else if (hasGreeted) {
-            if (userMessage === 'A' || userMessage.toLowerCase().includes('notificaciones')) {
-                addMessage('Puedes recibir notificaciones sobre eventos importantes en tu conjunto residencial configurando tus preferencias de notificación en la sección correspondiente de la aplicación.', 'bot');
-            } else if (userMessage === 'B' || userMessage.toLowerCase().includes('problema')) {
-                addMessage('Si encuentras algún problema o error en la aplicación, te recomendamos que lo informes al soporte técnico a través de la sección de Ayuda o Contacto. El equipo de soporte estará encantado de ayudarte.', 'bot');
-            } else if (userMessage === 'C' || userMessage.toLowerCase().includes('colores')) {
-                addMessage('Los colores de los servicios representan su estado actual. Por ejemplo, verde puede significar activo, amarillo indica que el servicio se suspenderá pronto, y rojo indica que el servicio está actualmente suspendido. El icono de robot arriba indica el estado del administrador del conjunto: verde conectado, amarillo conectado pero respondiendo a un chat, gris desconectado.', 'bot');
-            } else {
-                addMessage('Lo siento, no entendí la pregunta. Por favor, elige una opción válida (A, B o C) o formula tu pregunta de otra manera.', 'bot');
-            }
-        
-
+    
     } else if (userMessage === '2') {
         commandThreeCount++;
         if (commandThreeCount > 1) { // Si el comando '3' se ha enviado más de dos veces
