@@ -39,29 +39,42 @@
       <!-- Botón para colapsar barra lateral -->
       <button class="collapse-button"><span class="icon"><!-- Icono aquí --></span> Collapse Sidebar</button>
   </div>
-    <div id="panel-label">
+  <div class="controlPanelContainer">
+    <div class="controlPanelLeft">
+      <div id="panel-label">
         <p>Panel de Control</p>
       </div>
-      <h1 id="control-panel-text">Control Panel</h1>
-
-<!-- Texto Bienvenido y Nombre -->
-<p id="welcome-text">
-    Bienvenido <span id="admin-name"><%= admin.nombre %></span>
-</p>
-
-<!-- Texto Conjunto y Nombre del Conjunto -->
-<p id="conjunto-text">
-    Conjunto <span id="conjunto-name"><%= admin.nombre_conjunto %></span>
-</p>
-
-<div class="shape">
-  <div id="notificationArea">
-    <img src="/assets/icons/campana.png" alt="Notificaciones" class="bell-icon">
-    <span id="notificationCount" class="notification-badge">0</span>
-    <div id="notificationDropdown" class="dropdown">
-     
+      <div class="controlPanelTitle">
+        <h1 id="control-panel-text">Control Panel</h1>
+      </div>
+      <div class="welcomeContainer">
+        <p id="welcome-text">
+          Bienvenido <span id="admin-name"><%= admin.nombre %></span>
+        </p>
+        <p id="welcome-text">
+          Conjunto <span id="conjunto-name"><%= admin.nombre_conjunto %></span>
+      </p>
+      </div>
+    </div>
+    <div class="controlPanelRight">
+      <div id="notificationArea">
+        <img src="/assets/icons/campana.png" alt="Notificaciones" class="bell-icon">
+        <span id="notificationCount" class="notification-badge">0</span>
+        <div id="notificationDropdown" class="dropdown"></div>
+      </div>
     </div>
   </div>
+    
+      
+
+<!-- Texto Bienvenido y Nombre -->
+
+
+<!-- Texto Conjunto y Nombre del Conjunto -->
+
+
+
+
   <div class="chat-container">
     <header>
         <!-- Retiramos el ícono del bot ya que no lo necesitas aquí -->
@@ -78,40 +91,41 @@
         </button>
     </div>
 </div>
-    <a href="/services-panel" class="no-underline">
+<div class="shape">
+  <div class="serviceContainer">
+  <a href="/services-panel" class="no-underline">
     <div class="card" style="--card-color: #AF6251; --border-start: #FE1010; --border-end: #AF6251;">
       <div class="icon icon-services"></div>
       <p class="card-text">MANEJO DE SERVICIOS</p>
     </div>
     </a>
+  </div>
     <a href="/noticias" class="no-underline"> 
     <div class="card" style="--card-color: #55A47E; --border-start: #95FFC6; --border-end: #55A47E;">
       <div class="icon icon-news"></div>
       <p class="card-text">NOTICIAS MANUALES</p>
     </div>
     </a>
-
 </div>
 
+    
+
+
     <!-- Aquí irán las Card Views -->
-  </div>
-
-  
-
-
-    </form>
     <div class="seccion-principal">
 
       <!-- Rectángulo Negro (Divisor) -->
       <div class="rectangulo-negro"></div>
   
       <!-- Título de la Sección -->
-      <h2 class="titulo-seccion">Usuarios del conjunto: <%= admin.nombre_conjunto %></h2>
+      
   
       
       
       <div class="caja-usuarios">
-
+        <div class="usuariosTitle">
+          <h2 class="">Usuarios del conjunto: <%= admin.nombre_conjunto %></h2>
+        </div>
         <!-- Encabezados de Usuarios -->
         <div class="encabezados-usuarios">
           <div class="contenedor-filtro">

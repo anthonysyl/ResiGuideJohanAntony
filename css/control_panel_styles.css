@@ -93,7 +93,6 @@ header {
     background-color: #D9D9D9;
     width: 180px;
     height: 39px;
-    position: relative;
     color: #f5f5f5;
     font-size: 16px;
     font-weight: bold;
@@ -103,6 +102,24 @@ header {
     margin-top: 25px; /* Ajusta este valor para cambiar la distancia desde la barra de navegación */
     margin-left: 220px; /* Ajusta este valor para cambiar la distancia desde el lado izquierdo de la pantalla */
   }
+
+.controlPanelContainer{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    border: 1 solid red;
+}
+
+.controlPanelLeft{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.controlPanelRight{
+    display: flex;
+    flex-wrap: wrap;
+}
   #control-panel-text {
     font-family: 'Inter', sans-serif;
     font-weight: bold;
@@ -143,19 +160,29 @@ header {
 
 .shape {
   background-color: #EEEBEB;
-  height: 428px;
+  margin-top: 20px;
+  height: auto;
   border-top: 1px solid #B7B7B7;
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   text-decoration: none;
-
   gap: 30px;
-
   align-items: center;
 }
 
+.serviceContainer{
+    margin-top: 30px;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .card {
+margin-bottom: 10px;
+  margin-top: 5px;
   background-color: var(--card-color);
   height: 271px;
   width: 336px;
@@ -199,6 +226,7 @@ header {
   }
   .no-underline {
     text-decoration: none;
+    
   }
   
   
@@ -561,7 +589,6 @@ footer {
     width: 100%;
     background-color: #E5F5FE;
     padding: 20px 0;
-    margin-top: -20px;
     position: relative; /* Asegura que la posición relativa para los elementos hijos */
 }
 
@@ -572,19 +599,12 @@ footer {
     width: 100%;
 }
 
-.titulo-seccion {
-    font-family: 'Roboto', sans-serif;
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 120px;
-    margin-left: 620px; /* Ajusta este margen según sea necesario */
-    position: absolute; /* Posición relativa para el título */
-    z-index: 10; /* Asegura que el título se muestre encima de otros elementos */
-}
+
 
 .caja-usuarios {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     padding: 20px;
     width: 858px;
     height: 558px;
@@ -592,22 +612,63 @@ footer {
     margin: 80px auto;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    overflow-y: auto;
-    position: relative; /* Posición relativa para la caja */
+    overflow-y: auto; /* Posición relativa para la caja */
     top: -50px; /* Ajusta la caja hacia arriba */
 }
+
+.usuariosTitle{
+    width: 100%;
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+    
+    }
+
+    .usuariosTitle h2{
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    }
+
+
+
 
 .usuario {
     border-bottom: 1px solid #ccc;
     padding: 10px 0;
-}
-.encabezados-usuarios {
     display: flex;
+    align-items: center;
+    
+    justify-content: space-between;
+    margin-top: 0px;
+    margin-left: 0px;
+    padding: 0 60px; 
+}
+
+.usuario i{
+    color: #000;
+}
+
+.encabezados-usuarios {
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-between; /* Distribuye los encabezados uniformemente */
     margin-top: 190px; /* Aumenta este margen para empujar los encabezados hacia abajo */
     padding: 0 42px; /* Espacio en los lados del contenedor */
 }
 
+.tableEncabezado{
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 .encabezado {
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
@@ -626,15 +687,7 @@ footer {
 .contenido-usuarios {
     display: flex;
     flex-direction: column;
-}
-
-.usuario {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 0px;
-    margin-left: 0px;
-    padding: 0 60px; /* Alineación con los encabezados */
+    
 }
 
 .circulo-estado {
@@ -680,9 +733,7 @@ footer {
     white-space: nowrap;
 }
 
-.icono-basura {
-    /* Aquí agregarías tu icono de basura, puede ser una imagen o un ícono de una fuente de íconos */
-}
+
 /* En tu archivo CSS */
 
 .pagination {
