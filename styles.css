@@ -179,6 +179,7 @@ h4 {
 }
 #get-started:hover
 {
+    cursor: pointer;
     background-color: #f04848;
 }
 

@@ -5,7 +5,9 @@
 body {
     margin: 0;
     padding: 0;
-    overflow-y: auto;
+    overflow-y: hidden;
+    overflow-y: scroll;
+
 }
 
 header {
@@ -16,6 +18,21 @@ header {
     background-color: #000;
     color: #fff;
     padding: 0 20px;
+}
+.logout_button{
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: black;
+    width: 150px;
+    height: 30px;
+    border-radius: 15px;
+    margin-left: 990px;
+    background-color: #5ba2ff;
+    outline: hidden;
+    cursor: pointer;
+    
+
 }
 
 #logo {
@@ -563,12 +580,24 @@ header {
 .chat-exit {
     animation-name: slideUpFadeOut;
 }
+.manual-icon{
+    
+    margin-right: -20%;
+    margin-top: 5px;
+    margin-left: 80%;
+    position: fixed;
+    cursor: pointer;
+}
+
+
 .admin {
     right: 0px;
     margin-right: 120px;
     position: fixed;
+    
     z-index: 9999;
 }
+
 
 .admin-status-indicator {
     width: 20px;
@@ -652,4 +681,12 @@ header {
 
 .sidebar a:hover {
     color: #f1f1f1;
+}
+.information-span
+{
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: black;
+    
 }

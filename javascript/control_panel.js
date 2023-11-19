@@ -46,22 +46,25 @@ $(document).ready(function() {
 
     socket.on('userWantsToChat', (data) => {
         console.log("Evento recibido: userWantsToChat", data);
-        
+    
+        // Accede al nombre del usuario desde los datos
+        const userName = data.userName;
+    
         // Incrementar el contador de notificaciones y actualizar el badge.
         notificationCount++;
         const badge = document.getElementById('notificationCount');
         badge.textContent = notificationCount;
         badge.style.display = 'block';
-        
+    
         // Añadir notificación al menú desplegable.
-        addNotificationToDropdown(data);
-        
+        addNotificationToDropdown(data, userName);
+    
         // Almacenar notificación en localStorage.
         const storedNotifications = JSON.parse(localStorage.getItem('notifications') || "[]");
-        storedNotifications.push(data);
+        storedNotifications.push({ ...data, userName: userName });
         localStorage.setItem('notifications', JSON.stringify(storedNotifications));
     });
-
+    
     bellIcon.addEventListener('click', function() {
         toggleDropdown();
     });
@@ -87,15 +90,18 @@ $(document).ready(function() {
         notificationDiv.setAttribute('data-user-id', data.userId);
         notificationDiv.innerHTML = `
             <img src="/assets/icons/change.png" alt="Usuario"> 
-            <span class="notification-text">Un usuario quiere comunicarse contigo!</span>
+            <span class="notification-text">${data.userName} quiere comunicarse contigo!</span>
             <button class="accept">Aceptar</button>
             <button class="deny">Denegar</button>
         `;
         const acceptButton = notificationDiv.querySelector('.accept');
         const denyButton = notificationDiv.querySelector('.deny');
+        
 
          acceptButton.addEventListener('click', function() {
-        acceptChat(data.userId);
+            acceptChat(data.userId, data.userName); // Asegúrate de pasar data.userName
+            document.getElementById('chatUserName').textContent = currentChatUserName
+
        });
 
     denyButton.addEventListener('click', function() {
@@ -156,12 +162,13 @@ $(document).ready(function() {
     }
     
 
-    function acceptChat(userId) {
+    function acceptChat(userId, userName) {
         if (currentChatUserId !== userId) {
             clearChat(userId);
         }
       
         currentChatUserId = userId;
+        currentChatUserName = userName;
         socket.emit('acceptChat', { userId: userId, adminId: adminId });
 
         const chatContainer = document.querySelector('.chat-container');

@@ -21,7 +21,6 @@
           <img src="/assets/icons/botsito.png" alt="Icon">
           <h2><%= admin.nombre %></h2>
           <p><%= admin.nombre_conjunto %></p>
-          
       </div>
       
   
@@ -65,7 +64,12 @@
   <div class="chat-container">
     <header>
         <!-- Retiramos el ícono del bot ya que no lo necesitas aquí -->
-        <span>Chat con el Usuario</span>
+        <span>Chat con el Usuario</span><br>
+        
+        <br><span class ="chatUserName"id="chatUserName"></span> <!-- Nuevo span para el nombre del usuario -->
+
+        </span>
+        <span></span>
         <button id="endChatBtn" class="end-chat-btn">Finalizar</button>
     </header>
     <div class="chat-messages">
@@ -90,7 +94,6 @@
       <p class="card-text">NOTICIAS MANUALES</p>
     </div>
     </a>
-
 </div>
 
     <!-- Aquí irán las Card Views -->
@@ -161,6 +164,7 @@
 
  
     const adminId ='<%= adminId %>';
+  
 
   
     </script>

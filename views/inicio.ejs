@@ -15,23 +15,22 @@
     <ul>
         <li><%= usuario.nombre %></li>
         <li><%= usuario.tipo_usuario %></li>
-        <form action="/logout" method="POST">
-          <button type="submit">Cerrar Sesión</button>
-      </form>
+       
 
     </ul>
 </div>
 
     <header>
         <div id="logo">RESIGUIDE</div>
+        <form action="/logout" method="POST">
+          <button class ="logout_button"type="submit">Cerrar Sesión</button>
+      </form>
         <nav>
-            <ul>
-                <li><a href="service-status">SERVICIOS</a></li>
-                <li><a href="news-section">NOTICIAS</a></li>
-                <li><a href="chatbot-section">COMUNICACIÓN</a></li>
+        
+  
                 <!-- Agrega la información del usuario aquí -->
                
-            </ul>
+
         </nav>
         <div id="menu-icon"></div>
     <div id="sidebar">
@@ -50,12 +49,13 @@
          
   </div>
     </header>
+   
   
     <div class="contenedor-principal">
-      <div class="fondo-manual">
+      <div class="fondo-manual" >
   
           <!-- Contenido de la Primera Página -->
-          <div id="pagina1" class="contenido-manual" style="display: none;">
+          <div id="pagina1" class="contenido-manual" style="display: none ;">
               <h1 class="titulo">Bienvenido a tu inicio como usuario.</h1>
               <p class="texto">
                   Para entender tu inicio como usuario te explicaremos a continuación<br>
@@ -180,6 +180,7 @@
       mediante este icono que persiste en toda la vista del usuario.
   </p>
   
+  
   <div class="iconos-administrador">
       <!-- Primer icono -->
       <div class="icono">
@@ -215,6 +216,11 @@
 
   
     <hr class="custom-hr">
+    <div class="manual-icon" onclick="mostrarManual()">
+      <!-- Utiliza la imagen de tu icono de manual -->
+      <img src="/assets/icons/manual-icon.png" alt="Manual" width="80px" height="80px">
+      <br><span class="information-span">Manual <br>ResiGuide</span>
+  </div>
     <div class="admin">
       <img src="/assets/icons/iconChat.png" alt="Admin">
       <div class="admin-status-indicator"></div>
@@ -286,7 +292,7 @@
 
 <br>
 
-<section class="news-section">
+<section class="news-section"id="news-section">
   <% noticias.forEach(noticia => { %>
     <div class="news-card">
       <img src="<%= noticia.imagenUrl || 'assets/images/body_images/estructura.jpg' %>" alt="<%= noticia.titulo %>">
@@ -297,6 +303,7 @@
     </div>
   <% }); %>
 </section>
+<section id="chatbot_section">
 <div class="chatbot-section">
   <div class="chatbot-main">
       <div class="chatbot-image">
@@ -377,22 +384,22 @@
 });</script>
 <script src="/javascript/opecausa.js"></script>
 <script>
-    window.onload = function() {
-      // Asegura que se muestre la primera página al cargar la página
-      cambiarPagina('inicio');
+window.onload = function() {
+    // Asegura que se muestre la primera página al cargar la página
+    cambiarPagina('inicio');
   
-      // Verifica si el manual ya fue mostrado
-      if (!localStorage.getItem('manualMostrado')) {
-          mostrarManual();
-      }
-    };
-  
-    function mostrarManual() {
-      document.querySelector('.overlay').style.display = 'block';
-      document.querySelector('.contenedor-principal').style.display = 'block';
-      document.body.style.overflow = 'hidden'; // Bloquea el scroll del body
+    // Verifica si el manual ya fue mostrado
+    // No es necesario llamar a mostrarManual aquí
+    if (!localStorage.getItem('manualMostrado')) {
+        // mostrarManual(); Elimina esta línea
     }
-  
+};
+function mostrarManual() {
+  // Muestra el overlay y el contenedor principal
+  document.querySelector('.overlay').style.display = 'block';
+  document.querySelector('.contenedor-principal').style.display = 'block';
+  document.body.style.overflow = 'hidden'; // Bloquea el scroll del body
+}
     let paginaActual = 1; // Inicia en la primera página
   
     function cambiarPagina(direccion) {
