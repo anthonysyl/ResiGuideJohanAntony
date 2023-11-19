@@ -69,8 +69,8 @@
 .texto {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    font-size: 16px;
-    color: #B5B5B5;
+    font-size: 20px;
+    color: #000000;
     animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
     margin-top: 10px;
 }
