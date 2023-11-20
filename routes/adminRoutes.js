@@ -47,17 +47,9 @@ router.use(async (req, res, next) => {
 router.get('/admin', (req, res) => {
     res.render('admin');
 });
-
+router.post('/logout', adminController.Logout);
 router.post('/login', adminController.login);
-router.get('/logout', (req, res) => {
-    req.session.destroy(function(err) {
-      if(err) {
-        console.log(err);
-      } else {
-        res.redirect('/Admin/admin.html');
-      }
-    });
-  });
+
 
 router.get('/control-panel', authAdminMiddleware, adminController.getPanelControl);
 router.get('/control-panel-data', authAdminMiddleware, async (req, res) => {

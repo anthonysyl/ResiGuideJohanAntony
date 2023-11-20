@@ -7,6 +7,7 @@ const Usuario = require('../models/Usuario'); // Ajusta la ruta según sea neces
 
 const path = require('path');
 
+
 const login = async (req, res) => {
   const { email, password } = req.body;
   const admin = await Admin.findOne({ where: { email } });
@@ -27,7 +28,7 @@ const login = async (req, res) => {
   if (!conjunto) {
       return res.render('admin', { message: 'Conjunto no encontrado.' });
   }
-
+  
   // Lógica de paginación
   const limit = 4; // Número de usuarios por página
   const page = req.query.page || 1; // Página actual
@@ -38,6 +39,8 @@ const login = async (req, res) => {
       limit: limit,
       offset: offset
   });
+
+  
 
   const totalPages = Math.ceil(count / limit);
 
@@ -51,6 +54,26 @@ const login = async (req, res) => {
       currentPage: parseInt(page),
       totalPages
   });
+};
+exports.Logout = (req, res) => {
+  if (req.session) {
+    console.log("Intentando cerrar sesión para el admin con ID:", req.session.adminId);
+
+    req.session.destroy(err => {
+      if (err) {
+        console.log("Error al cerrar sesión:", err);
+        res.status(500).send('Error al cerrar la sesión');
+      } else {
+        console.log("Sesión cerrada con éxito.");
+        // Cambia la redirección a /admin para que vuelva al formulario de ingreso
+        res.redirect('/admin');
+      }
+    });
+  } else {
+    console.log("No hay sesión activa para cerrar.");
+    // Redirige al formulario de ingreso en caso de que no haya sesión
+    res.redirect('/admin');
+  }
 };
 const deleteUser = async (req, res) => {
   try {
@@ -135,4 +158,4 @@ const getServicesPanel = async (req, res) => {
 };
 
 
-module.exports = { login, getPanelControl, postPanelControl, getServicesPanel, deleteUser };
+module.exports = { login, getPanelControl, postPanelControl, getServicesPanel, deleteUser};

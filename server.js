@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const session = require('express-session');
-
 const bcrypt = require('bcryptjs');
 const adminRoutes = require('./routes/adminRoutes');
 const sequelize = require('./database');
